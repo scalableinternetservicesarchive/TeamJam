@@ -1,0 +1,13 @@
+<tr>
+  <td><%= link_to "#{student.first_name} #{student.last_name} ", user_path(student)%> </td>
+  <td><%= student.year %> </td>
+  <td><%= student.major %> </td>
+  <td>
+    <% tm = student.find_course_team(current_course) %>
+    <% if !tm %>
+    <%= 'Free' %>
+    <% else %>
+    <%= tm.name %>
+    <% end %>
+  </td>
+</tr>

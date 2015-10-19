@@ -1,0 +1,12 @@
+<% if @error %>
+<p>
+  <%= @error %>
+</p>
+<% end %>
+<%= form_for(:register, url: join_try_course_team_path(@course, @team), method: :post) do |f| %>
+<div class="field">
+<%= f.label :passcode %>
+<%= f.password_field :passcode %>
+</div>
+<%= f.submit 'Submit Passcode' %>
+<% end %>

@@ -1,0 +1,41 @@
+<div class="row col-md-12">
+<div class="pull-left">
+ <div class="page-header">
+   <%= image_tag "itachi.jpg", class: "img-circle", width: "200", height: "200", align: "left" %>
+   <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
+  </div>
+  </div>
+  <br>
+</div>
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#bio">Bio</a></li>
+  <li><a data-toggle="tab" href="#skills">Skills</a></li>
+  <li><a data-toggle="tab" href="#classes">Classes</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="bio" class="tab-pane fade in active">
+    <h3>Bio</h3>
+    <p>some random details about said person, as if you give a shit....you stalker gtfo!</p>
+    <p> Here is the email.. go on .. stalk this person more... <%= @user.email %> </p>
+  </div>
+  <div id="skills" class="tab-pane fade">
+    <p>To Be Done</p>
+  </div>
+  <div id="classes" class="tab-pane fade">
+    <ul>
+     <% @courses.each do |course| %>
+                  <% if @course_team.has_key?(course) %>
+                  <% team = @course_team[course] %>
+                        <li><%= link_to course.name, course %>
+                            <ul>
+                                <li><%= link_to team.name, team %>
+                            </ul>
+                        </li>
+                   <% else %>
+                      <li> <%= link_to course.name, course %></li>
+                 <% end %>
+              <% end %>
+    </ul>
+  </div>
+</div>

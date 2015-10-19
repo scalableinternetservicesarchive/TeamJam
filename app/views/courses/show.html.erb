@@ -1,0 +1,33 @@
+<!-- <h1>Courses#show</h1>
+<p>Find me in app/views/courses/show.html.erb</p> -->
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#classmates">Classmates</a></li>
+  <li><a data-toggle="tab" href="#teams">Teams</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="classmates" class="tab-pane fade in active">
+    <table class="table">
+      <tr>
+        <th> Name </th>
+        <th> Year </th>
+        <th> Major </th>
+        <th> Team </th>
+     </tr>
+      <%= render partial: "student", collection: @course.students, locals: {current_course: @course} %>
+    </table>
+  </div>
+  <div id="teams" class="tab-pane fade">
+    <%= render :partial => "teams/team", :collection => @course.teams, locals: {user_course_team: @user_course_team} %>
+    <% if @user_course_team == false %>
+    <div class="pull-left">
+    <%= link_to 'Create a Team', new_course_team_path(@course) , class: "btn btn-primary"%>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+

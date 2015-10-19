@@ -1,0 +1,33 @@
+<div class="row col-md-12">
+  <div class="row col-md-5">
+<div class="panel panel-default">
+  <div class="panel-heading"><%= team.name %></div>
+  <div class="panel-body">
+  <ul>
+    <% team.students.each do |student| %>
+      <li><%= "#{student.first_name} #{student.last_name} "%> </li>
+    <% end %>
+  </ul>
+  </div>
+  <div class="panel-footer clearfix">
+    <div class="pull-left">
+    <% if team == user_course_team %>
+      <%= link_to 'Leave Team', leave_course_team_path(team.course, team), method: :delete, data: {confirm: 'Are you sure'}, class: "btn btn-danger btn-sm" %>
+    <% elsif team.students.count < team.course.max_members.to_i %>
+        <% if user_course_team == false %>
+          <%= link_to 'Join Team', join_course_team_path(team.course, team),  class: "btn btn-primary btn-sm" %>
+        <% else %>
+          <%= link_to 'Switch Team', join_course_team_path(team.course, team),  class: "btn btn-danger btn-sm" %>
+        <% end %>
+    <% end %>
+      </div>
+  </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+
