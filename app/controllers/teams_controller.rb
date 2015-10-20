@@ -16,8 +16,12 @@ class TeamsController < ApplicationController
     @course = Course.find(params[:course_id])
     @team = Team.find(params[:id])
     TeamMembership.where(team_id: @team.id, user_id: current_user.id).destroy_all
-    if @team.students.count == 0
+    if current_user.id == @team.team_owner_id
+      if @team.students.count == 0
             @team.destroy
+      else
+        @team.team_owner_id = @team.students.first.id
+      end
     end
     redirect_to :back
   end
@@ -25,6 +29,7 @@ class TeamsController < ApplicationController
   def create
     @course = Course.find(params[:course_id])
     @team = Team.new(team_params)
+    @team.team_owner_id = current_user.id
     @team.course = @course
     if @team.save
       #create membership for the student

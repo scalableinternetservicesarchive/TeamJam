@@ -14,7 +14,7 @@
         <th> Major </th>
         <th> Team </th>
      </tr>
-      <%= render partial: "student", collection: @course.students, locals: {current_course: @course, show_team: true} %>
+      <%= render partial: "student", collection: @course.students, locals: {current_course: @course, show_team: true, current_team_owner_id: false } %>
     </table>
   </div>
   <div id="teams" class="tab-pane fade">

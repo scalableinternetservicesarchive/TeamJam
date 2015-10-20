@@ -1,5 +1,10 @@
 <tr>
-  <td><%= link_to "#{student.first_name} #{student.last_name} ", user_path(student)%> </td>
+  <td>
+    <%= link_to "#{student.first_name} #{student.last_name} ", user_path(student)%>
+    <% if (show_team == false) && (student.id == current_team_owner_id)%>
+    <span class="label label-warning">Owner</span>
+    <% end %>
+  </td>
   <td><%= student.year %> </td>
   <td><%= student.major %> </td>
   <% if show_team %>

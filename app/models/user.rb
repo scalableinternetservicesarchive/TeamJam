@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   
   acts_as_messageable
 
-  def mailboxer_name
+  def name
     "#{self.first_name} #{self.last_name}"
   end
 
