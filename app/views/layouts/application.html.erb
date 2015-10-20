@@ -15,6 +15,7 @@
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
         	<% if user_signed_in? %>
 						<ul class="nav navbar-nav navbar-right">
+                <li><%= link_to "Inbox", mailbox_inbox_path %></li>
               <li> <%= link_to 'My Profile', user_path(current_user) %> </li>
               <li> <%= link_to 'Join a Class', {:controller => '/join_classes', :action => 'index'} %> </li>
               <li> <%= link_to 'Edit Account', edit_user_registration_path %></li>
@@ -32,9 +33,9 @@
                         Your Classes
                 </li>
               <% if user_signed_in? %>
-                <% @courses.each do |course| %>
-                  <% if @course_team.has_key?(course) %>
-                  <% team = @course_team[course] %>
+                <% @courses_app.each do |course| %>
+                  <% if @course_team_app.has_key?(course) %>
+                  <% team = @course_team_app[course] %>
                         <li><%= link_to course.name, course %>
                             <ul>
                                 <li><%= link_to team.name, team %>

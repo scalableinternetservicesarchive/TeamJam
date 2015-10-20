@@ -4,6 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :get_user_info
+  helper_method :mailbox
+
+  private
+
+  def mailbox
+    @mailbox ||= current_user.mailbox
+  end
 
   protected
 
@@ -18,14 +25,14 @@ class ApplicationController < ActionController::Base
   end
   def get_user_info
     if user_signed_in?
-    @courses = current_user.courses
-    @teams = current_user.teams
-    @course_team = Hash.new
+    @courses_app = current_user.courses
+    @teams_app = current_user.teams
+    @course_team_app = Hash.new
 
-    @courses.each do |course|
-      @teams.each do |team|
+    @courses_app.each do |course|
+      @teams_app.each do |team|
         if team.course == course
-          @course_team[course] = team
+          @course_team_app[course] = team
         end
       end
   end

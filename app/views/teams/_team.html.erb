@@ -4,9 +4,14 @@
   <div class="panel-heading"><%= team.name %></div>
   <div class="panel-body">
   <ul>
-    <% team.students.each do |student| %>
-      <li><%= "#{student.first_name} #{student.last_name} "%> </li>
-    <% end %>
+     <table class="table">
+      <tr>
+        <th> Name </th>
+        <th> Year </th>
+        <th> Major </th>
+     </tr>
+    <%= render partial: "courses/student", collection: team.students, locals: {current_course: false, show_team: false} %>
+     </table>
   </ul>
   </div>
   <div class="panel-footer clearfix">
