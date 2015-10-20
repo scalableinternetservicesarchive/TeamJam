@@ -1,6 +1,4 @@
-<h1>JoinClasses#index</h1>
-<p>Find me in app/views/join_classes/index.html.erb</p>
-
+Select from these courses
 <%= form_for(:all_courses, url: {controller: :join_classes, action: :join_courses}, method: :post) do |f| %>
 <% @all_course.each do |course| %>
 <% if !current_user.courses.include?(course) %>
