@@ -16,7 +16,8 @@
         	<% if user_signed_in? %>
 						<ul class="nav navbar-nav navbar-right">
               <li> <%= link_to 'My Profile', user_path(current_user) %> </li>
-               <li> <%= link_to 'Join a Class', {:controller => 'join_classes', :action => 'index'} %> </li>
+              <li> <%= link_to 'Join a Class', {:controller => '/join_classes', :action => 'index'} %> </li>
+              <li> <%= link_to 'Edit Account', edit_user_registration_path %></li>
                <li> <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
 						</ul>
           <% end %>

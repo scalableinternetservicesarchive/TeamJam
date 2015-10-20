@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     additional_params = [:first_name, :last_name, :sid, :major, :year]
     devise_parameter_sanitizer.for(:sign_up).concat(additional_params)
+    devise_parameter_sanitizer.for(:account_update).concat(additional_params)
   end
   def get_user_info
     if user_signed_in?

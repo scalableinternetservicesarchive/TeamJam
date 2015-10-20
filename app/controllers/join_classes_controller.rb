@@ -1,6 +1,6 @@
 class JoinClassesController < ApplicationController
   def index
-    @courses = Course.all
+    @all_course = Course.all
   end
 
   def join_courses
