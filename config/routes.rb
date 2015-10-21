@@ -2,6 +2,11 @@ Rails.application.routes.draw do
 
 
 
+
+  get 'skills/edit', as: :edit_skills
+
+  post 'skills/update', as: :update_skills
+
   get 'join_classes/index'
   post 'join_classes/join_courses'
 
@@ -16,6 +21,8 @@ Rails.application.routes.draw do
       post :untrash
     end
   end
+
+
 
 
   devise_for :users

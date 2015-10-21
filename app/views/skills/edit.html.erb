@@ -1,0 +1,8 @@
+<% rating_array = [['n00b',0],['Some Experience',1],['Experienced',2],['Pro',3]] %>
+<%= form_for(:skillset, url: update_skills_path) do |f| %>
+<% @skills.each do |sk| %>
+<%= f.label sk.name %>
+<%= f.select(sk.id, rating_array) %>
+<% end %>
+<%= f.submit 'Submit' %>
+<% end %>

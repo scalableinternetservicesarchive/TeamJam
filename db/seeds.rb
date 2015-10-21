@@ -21,6 +21,13 @@ teams = Team.create([
 ["C++", "Python", "C", "Java", "iOS", "Android", "JavaScript", "Backend", "Frontend"].each do |sk|
   Skill.create(name: sk)
 end
+
+not sure how to add skills .... it could be scale(Expert, Proficient, Experienced, Some Experience, n00b)
+okay scale it is, but now how to combine individual skills to get team skill? And how does the instructor select the
+minimum skill requirement ?
+
+
+
 =end
 # create associations
 #user = User.first
