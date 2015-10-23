@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.3'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+# Use mysql2 as the database for Active Record
+gem 'mysql2', '~> 0.3.13'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -17,6 +19,9 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'devise', '~> 3.5.2'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'
 gem 'mailboxer', '~> 0.13.0'
+
+# db transfer
+gem 'yaml_db', github: 'jetthoughts/yaml_db', ref: 'fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba'
 
 
 
@@ -48,4 +53,3 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-

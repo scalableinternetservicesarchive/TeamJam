@@ -1,0 +1,261 @@
+
+---
+courses:
+  columns:
+  - id
+  - name
+  - description
+  - max_members
+  - created_at
+  - updated_at
+  records:
+  - - 1
+    - CS143
+    - Database Systems
+    - 2
+    - 2015-10-23 21:46:38.000000000 Z
+    - 2015-10-23 21:46:38.000000000 Z
+  - - 2
+    - CS188
+    - Scalable Internet Services
+    - 4
+    - 2015-10-23 21:46:38.000000000 Z
+    - 2015-10-23 21:46:38.000000000 Z
+  - - 3
+    - CS118
+    - Networking
+    - 2
+    - 2015-10-23 21:46:38.000000000 Z
+    - 2015-10-23 21:46:38.000000000 Z
+  - - 4
+    - CS174A
+    - Computer Graphics
+    - 5
+    - 2015-10-23 21:46:38.000000000 Z
+    - 2015-10-23 21:46:38.000000000 Z
+  - - 5
+    - CS130
+    - Software Engineering
+    - 4
+    - 2015-10-23 21:46:38.000000000 Z
+    - 2015-10-23 21:46:38.000000000 Z
+
+---
+enrollments:
+  columns:
+  - id
+  - course_id
+  - user_id
+  - time_committment
+  - start_date
+  - finish_date
+  - created_at
+  - updated_at
+  records:
+  - - 1
+    - 2
+    - 1
+    -
+    -
+    -
+    - 2015-10-23 21:46:51.000000000 Z
+    - 2015-10-23 21:46:51.000000000 Z
+  - - 2
+    - 2
+    - 2
+    -
+    -
+    -
+    - 2015-10-23 21:48:48.000000000 Z
+    - 2015-10-23 21:48:48.000000000 Z
+
+---
+mailboxer_notifications:
+  columns:
+  - id
+  - type
+  - body
+  - subject
+  - sender_id
+  - sender_type
+  - conversation_id
+  - draft
+  - notification_code
+  - notified_object_id
+  - notified_object_type
+  - attachment
+  - updated_at
+  - created_at
+  - global
+  - expires
+  records:
+  - - 1
+    -
+    - Leo Luo has expressed interest in joining your team TeamUp !
+    - OFFER
+    - 2
+    - User
+    -
+    - false
+    - '1'
+    -
+    -
+    - '1'
+    - 2015-10-23 21:49:14.000000000 Z
+    - 2015-10-23 21:49:14.000000000 Z
+    - false
+    -
+  - - 2
+    -
+    - " You were accepted to the team TeamUp"
+    - SUCCESS
+    -
+    -
+    -
+    - false
+    - '5'
+    -
+    -
+    -
+    - 2015-10-23 21:49:29.000000000 Z
+    - 2015-10-23 21:49:29.000000000 Z
+    - false
+    -
+
+---
+mailboxer_receipts:
+  columns:
+  - id
+  - receiver_id
+  - receiver_type
+  - notification_id
+  - is_read
+  - trashed
+  - deleted
+  - mailbox_type
+  - created_at
+  - updated_at
+  records:
+  - - 1
+    - 1
+    - User
+    - 1
+    - false
+    - false
+    - false
+    -
+    - 2015-10-23 21:49:14.000000000 Z
+    - 2015-10-23 21:49:14.000000000 Z
+  - - 2
+    - 2
+    - User
+    - 2
+    - false
+    - false
+    - false
+    -
+    - 2015-10-23 21:49:29.000000000 Z
+    - 2015-10-23 21:49:29.000000000 Z
+
+---
+team_memberships:
+  columns:
+  - id
+  - user_id
+  - team_id
+  - feedback
+  - created_at
+  - updated_at
+  records:
+  - - 1
+    - 1
+    - 1
+    -
+    - 2015-10-23 21:47:14.000000000 Z
+    - 2015-10-23 21:47:14.000000000 Z
+  - - 2
+    - 2
+    - 1
+    -
+    - 2015-10-23 21:49:29.000000000 Z
+    - 2015-10-23 21:49:29.000000000 Z
+
+---
+teams:
+  columns:
+  - id
+  - course_id
+  - name
+  - description
+  - created_at
+  - updated_at
+  - passcode
+  - team_owner_id
+  records:
+  - - 1
+    - 2
+    - TeamUp
+    - ''
+    - 2015-10-23 21:47:14.000000000 Z
+    - 2015-10-23 21:47:14.000000000 Z
+    - join or die
+    - 1
+
+---
+users:
+  columns:
+  - id
+  - email
+  - encrypted_password
+  - reset_password_token
+  - reset_password_sent_at
+  - remember_created_at
+  - sign_in_count
+  - current_sign_in_at
+  - last_sign_in_at
+  - current_sign_in_ip
+  - last_sign_in_ip
+  - created_at
+  - updated_at
+  - first_name
+  - last_name
+  - sid
+  - major
+  - year
+  records:
+  - - 1
+    - nickliuyanzhe@gmail.com
+    - "$2a$10$ECQvEaDvdaORhl1cp5/Rvul2SJgfN48N7yxq1SeIFf0ixj7BiFlaS"
+    -
+    -
+    -
+    - 2
+    - 2015-10-23 21:49:25.000000000 Z
+    - 2015-10-23 21:44:42.000000000 Z
+    - "::1"
+    - "::1"
+    - 2015-10-23 21:44:42.000000000 Z
+    - 2015-10-23 21:49:25.000000000 Z
+    - Yanzhe
+    - Liu
+    - 504153440
+    - CS
+    - 4
+  - - 2
+    - leoluo@gmail.com
+    - "$2a$10$453CUno4hzW4UFzT9Quv3ehG3lDgNN8UVZQohF6swybW5CTl8SgnC"
+    -
+    -
+    -
+    - 1
+    - 2015-10-23 21:48:41.000000000 Z
+    - 2015-10-23 21:48:41.000000000 Z
+    - "::1"
+    - "::1"
+    - 2015-10-23 21:48:41.000000000 Z
+    - 2015-10-23 21:48:41.000000000 Z
+    - Leo
+    - Luo
+    - 123456789
+    - CS
+    - 4
