@@ -49,11 +49,17 @@ class TeamsController < ApplicationController
     #user1.notify("DENY","SORRY BUT YOU WERE DENIED",nil,true,2,false,user2)
      @course = Course.find(params[:course_id])
     @team = Team.find(params[:id])
-    #@owner = User.find_by_id(@team.team_owner_id)
-    @team.students.each do |student|
-      student.notify("OFFER", "#{current_user.first_name} #{current_user.last_name} has expressed interest in joining your team !")
-    end
-    flash[:notice] = "The teams members were notified of your interest!"
+    @owner = User.find_by_id(@team.team_owner_id)
+    recp = @owner.notify("OFFER","asdf",nil,true,1,false,current_user)
+    notif = @owner.mailbox.notifications.where(id: recp.notification_id).first
+    notif.attachment = @team.id
+    notif.body =  "#{current_user.first_name} #{current_user.last_name} has expressed interest in joining your team #{@team.name} !"
+    notif.save
+   # @team.students.each do |student|
+   #   student.notify("OFFER", "#{current_user.first_name} #{current_user.last_name} has expressed interest in joining your team !")
+    #end
+
+    flash[:notice] = "The team owner was notified of your interest!"
     redirect_to :back
   end
 

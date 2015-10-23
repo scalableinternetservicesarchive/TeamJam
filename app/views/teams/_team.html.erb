@@ -10,7 +10,7 @@
         <th> Year </th>
         <th> Major </th>
      </tr>
-    <%= render partial: "courses/student", collection: team.students, locals: {current_course: false, show_team: false, current_team_owner_id: team.team_owner_id} %>
+    <%= render partial: "courses/student", collection: team.students, locals: {current_course: false, show_team: false, current_team_owner_id: team.team_owner_id, current_team: false} %>
      </table>
   </ul>
   </div>
@@ -20,7 +20,7 @@
       <%= link_to 'Leave Team', leave_course_team_path(team.course, team), method: :delete, data: {confirm: 'Are you sure'}, class: "btn btn-danger btn-sm" %>
       <% else %>
       <%= link_to 'Express Interest', express_interest_course_team_path(team.course, team), method: :post, class: "btn btn-primary btn-sm", id: "express_interest" %>
-    <% if team.students.count < team.course.max_members.to_i %>
+      <% if team.students.count < team.course.max_members.to_i %>
         <% if user_course_team == false %>
           <%= link_to 'Join Team', join_course_team_path(team.course, team),  class: "btn btn-primary btn-sm" %>
         <% else %>
@@ -28,6 +28,7 @@
         <% end %>
     <% end %>
       <% end %>
+      
       </div>
   </div>
     </div>

@@ -1,12 +1,15 @@
 Rails.application.routes.draw do
 
 
+  post 'users/invite'
+  
   get 'skills/edit', as: :edit_skills
 
   post 'skills/update', as: :update_skills
 
   get 'join_classes/index'
   post 'join_classes/join_courses'
+  
 
   get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
   get "mailbox/sent" => "mailbox#sent", as: :mailbox_sent
@@ -29,7 +32,7 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
-  resources :users, :only => [:show, :edit]
+resources :users, :only => [:show, :edit]
 
    authenticated :user do
      root "home#index", as: "authenticated_root"

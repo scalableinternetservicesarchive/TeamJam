@@ -9,6 +9,19 @@ class CoursesController < ApplicationController
   def edit
   end
 
+  def invite
+    @user = User.find(params[:id])
+    @team = Team.find_by_id(params[:team_id])
+    # make notif
+    recp = @user.notify("INVITE","asdf",nil,true,1,false,current_user)
+    notif = @user.mailbox.notifications.where(id: recp.notification_id).first
+    notif.attachment = @team.id
+    notif.body =  "#{current_user.first_name} #{current_user.last_name} has invited you to join his team #{@team.name}!"
+    notif.save
+    flash[:notice] = "#{@user.first_name} was notified of your interest!"
+    redirect_to :back
+  end
+
   def show
     @course = Course.find(params[:id])
     @user_course_team = current_user.find_course_team(@course)

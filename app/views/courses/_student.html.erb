@@ -15,6 +15,9 @@
     <% else %>
     <%= tm.name %>
     <% end %>
+    <% if current_team != false && student.id != current_user.id %>
+    <%= link_to 'Invite', users_invite_path(id: student.id, team_id: current_team.id), method: :post %>
+    <% end %>
   </td>
   <% end %>
 </tr>

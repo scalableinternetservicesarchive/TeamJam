@@ -1,5 +1,19 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+
+  def invite
+    @user = User.find(params[:id])
+    @team = Team.find_by_id(params[:team_id])
+    # make notif
+    recp = @user.notify("INVITE","asdf",nil,true,3,false,current_user)
+    notif = @user.mailbox.notifications.where(id: recp.notification_id).first
+    notif.attachment = @team.id
+    notif.body =  "#{current_user.first_name} #{current_user.last_name} has invited you to join his team #{@team.name}!"
+    notif.save
+    flash[:notice] = "#{@user.first_name} was notified of your interest!"
+    redirect_to :back
+  end
+
   def show
     @user = User.find(params[:id])
     @courses = @user.courses
