@@ -44,6 +44,19 @@ class TeamsController < ApplicationController
   def edit
   end
 
+  def express_interest
+    #find team owner(or everyone in the team), send a notification from the current user to them
+    #user1.notify("DENY","SORRY BUT YOU WERE DENIED",nil,true,2,false,user2)
+     @course = Course.find(params[:course_id])
+    @team = Team.find(params[:id])
+    #@owner = User.find_by_id(@team.team_owner_id)
+    @team.students.each do |student|
+      student.notify("OFFER", "#{current_user.first_name} #{current_user.last_name} has expressed interest in joining your team !")
+    end
+    flash[:notice] = "The teams members were notified of your interest!"
+    redirect_to :back
+  end
+
   def join
     @course = Course.find(params[:course_id])
     @team = Team.find(params[:id])

@@ -15,6 +15,7 @@
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
         	<% if user_signed_in? %>
 						<ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "Notifications", notifications_path %></li>
                 <li><%= link_to "Inbox", mailbox_inbox_path %></li>
               <li> <%= link_to 'My Profile', user_path(current_user) %> </li>
               <li> <%= link_to 'Join a Class', {:controller => '/join_classes', :action => 'index'} %> </li>

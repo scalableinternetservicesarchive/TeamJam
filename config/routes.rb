@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
 
-
-
   get 'skills/edit', as: :edit_skills
 
   post 'skills/update', as: :update_skills
@@ -23,7 +21,12 @@ Rails.application.routes.draw do
   end
 
 
-
+  resources :notifications, :only => [:index] do
+  member do
+    post :accept
+    post :deny
+  end
+  end
 
   devise_for :users
   resources :users, :only => [:show, :edit]
@@ -36,6 +39,7 @@ Rails.application.routes.draw do
     resources :teams do
       get 'join', on: :member
       post 'join_try', on: :member
+      post 'express_interest', on: :member
       delete 'leave', on: :member
     end
   end

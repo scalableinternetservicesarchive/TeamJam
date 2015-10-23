@@ -1,0 +1,11 @@
+<li>
+  <%= notification.subject %><br>
+  <%= notification.body %> <br>
+  <% if notification.notification_code.to_i == 1 %>
+  <%= button_to 'Accept', accept_notification_path(notification) %>
+  <%= button_to 'DENY', deny_notification_path(notification) %>
+  <% elsif notification.notification_code.to_i == 3 %>
+   <%= button_to 'Accept', accept_notification_path(notification) %>
+  <%= button_to 'Reject', deny_notification_path(notification) %>
+  <% end %>
+</li>
