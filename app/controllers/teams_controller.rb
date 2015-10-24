@@ -20,7 +20,8 @@ class TeamsController < ApplicationController
       if @team.students.count == 0
             @team.destroy
       else
-        @team.team_owner_id = @team.students.first.id
+        @team.team_owner_id = @team.students.last.id
+        @team.save
       end
     end
     redirect_to :back
