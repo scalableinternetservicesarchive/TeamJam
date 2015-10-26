@@ -23,7 +23,13 @@ class UsersController < ApplicationController
     @skills = Skill.all
     @user_skill_rating = Hash.new
     @skills.each do |sk|
-      @user_skill_rating[sk] = SkillRating.where(user_id: @user.id, skill_id: sk.id).first.rating
+      arr = SkillRating.where(user_id: @user.id, skill_id: sk.id)
+      if arr.count == 0
+        SkillRating.create(user_id: @user.id, skill_id: sk.id, rating: 0)
+         @user_skill_rating[sk] = 0
+      else
+        @user_skill_rating[sk] = arr.first.rating
+      end
     end
     @courses.each do |course|
       @teams.each do |team|

@@ -1,9 +1,11 @@
 class SkillsController < ApplicationController
+  #require 'ostruct'
   def edit
     @skills = Skill.all
-    @user_skill_rating = Hash.new
+    @skillsett = Hash.new
     @skills.each do |sk|
-      @user_skill_rating[sk] = SkillRating.where(user_id: current_user.id, skill_id: sk.id).first.rating
+      iid = sk.id
+      @skillsett[sk.id] = SkillRating.where(user_id: current_user.id, skill_id: sk.id).first.rating
     end
   end
 
