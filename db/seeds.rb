@@ -6,9 +6,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+=begin
 courses = Course.create([
     {name: 'CS143', description: "Database Systems", max_members: 2 }, {name: 'CS188', description: "Scalable Internet Services", max_members: 4 },{name: 'CS118', description: "Networking", max_members: 2 }, {name: 'CS174A', description: "Computer Graphics", max_members: 5 }, {name: 'CS130', description: "Software Engineering", max_members: 4 }
   ])
+<<<<<<< HEAD
+=end
+
+
 =begin
 courses = Course.all
 teams = Team.create([
@@ -18,6 +23,7 @@ teams = Team.create([
   {name: 'DashDash', description: "Complete Autocomplete Unix Shell", course_id: courses[4].id}
   ])
 =end
+
 
 ["C++", "Python", "C", "Java", "iOS", "Android", "JavaScript", "Backend", "Frontend"].each do |sk|
   Skill.create(name: sk)
