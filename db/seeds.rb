@@ -24,11 +24,10 @@ teams = Team.create([
   ])
 =end
 
-=begin
+
 ["C++", "Python", "C", "Java", "iOS", "Android", "JavaScript", "Backend", "Frontend"].each do |sk|
   Skill.create(name: sk)
 end
-=end
 
 # create associations
 #user = User.first
