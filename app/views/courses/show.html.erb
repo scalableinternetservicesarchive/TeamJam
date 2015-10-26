@@ -7,6 +7,13 @@
 
 <div class="tab-content">
   <div id="classmates" class="tab-pane fade in active">
+    <h5>Order by </h5>
+   <div class="btn-group">
+    <% Skill.all.each do |skill| %>
+    <%= link_to skill.name, course_path(@course,order_skill: skill.id) , class: "btn btn-sm btn-default" %>
+    <% end %>
+     <br><br><br>
+    </div>
     <table class="table">
       <tr>
         <th> Name </th>
@@ -14,7 +21,7 @@
         <th> Major </th>
         <th> Team </th>
      </tr>
-      <%= render partial: "student", collection: @course.students, locals: {current_course: @course, show_team: true, current_team_owner_id: false , current_team: @user_course_team} %>
+      <%= render partial: "student", collection: @ordered_students, locals: {current_course: @course, show_team: true, current_team_owner_id: false , current_team: @user_course_team} %>
     </table>
   </div>
   <div id="teams" class="tab-pane fade">

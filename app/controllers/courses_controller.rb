@@ -25,6 +25,13 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @user_course_team = current_user.find_course_team(@course)
+    @ordered_students = @course.students
+    if(params[:order_skill].present?)
+      students_ids = @ordered_students.collect{ |st| st.id }
+      id = params[:order_skill]
+      ratings = SkillRating.where(skill_id: id).where("user_id IN (?)", students_ids).order(rating: :desc)
+      @ordered_students = ratings.collect{|r| User.find(r.user_id)}
+    end
    # @user_team_ships = TeamMembership.where(user_id: current_user.id)
    # @user_teams = @user_team_ships.collect {|ship| ship.team}
    # @user_course_team = false
