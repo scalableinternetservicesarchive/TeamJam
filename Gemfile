@@ -19,7 +19,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'devise', '~> 3.5.2'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'
 gem 'mailboxer', '~> 0.13.0'
-
+gem 'paperclip', '~> 4.3', '>= 4.3.1'
 # db transfer
 gem 'yaml_db', github: 'jetthoughts/yaml_db', ref: 'fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba'
 

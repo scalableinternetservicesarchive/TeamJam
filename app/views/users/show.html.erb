@@ -23,7 +23,7 @@ $(function(){
 <div class="row col-md-12">
 <div class="pull-left">
  <div class="page-header">
-   <%= image_tag "itachi.jpg", class: "img-circle", width: "200", height: "200", align: "left" %>
+   <%= image_tag @user.prof_pic.url, class: "img-circle", width: "200", height: "200", align: "left" %>
    <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
   </div>
   </div>

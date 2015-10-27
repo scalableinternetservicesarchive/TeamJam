@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151024035738) do
+ActiveRecord::Schema.define(version: 20151027095431) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -145,6 +145,10 @@ ActiveRecord::Schema.define(version: 20151024035738) do
     t.integer  "sid",                    limit: 4
     t.string   "major",                  limit: 255
     t.integer  "year",                   limit: 4
+    t.string   "prof_pic_file_name",     limit: 255
+    t.string   "prof_pic_content_type",  limit: 255
+    t.integer  "prof_pic_file_size",     limit: 4
+    t.datetime "prof_pic_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

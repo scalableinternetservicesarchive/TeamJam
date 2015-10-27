@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    additional_params = [:first_name, :last_name, :sid, :major, :year]
+    additional_params = [:first_name, :last_name, :sid, :major, :year, :prof_pic]
     devise_parameter_sanitizer.for(:sign_up).concat(additional_params)
     devise_parameter_sanitizer.for(:account_update).concat(additional_params)
   end
