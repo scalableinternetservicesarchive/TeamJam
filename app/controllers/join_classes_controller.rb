@@ -5,7 +5,7 @@ class JoinClassesController < ApplicationController
 
   def join_courses
     params[:all_courses].each do |course, id|
-        Enrollment.create(course_id: id.to_i, user_id: current_user.id)
+      Enrollment.create(course_id: id.to_i, user_id: current_user.id, time_commitment: 2)
     end
     redirect_to root_path
   end

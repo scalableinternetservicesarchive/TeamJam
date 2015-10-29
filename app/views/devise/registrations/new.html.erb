@@ -34,6 +34,12 @@
     <%= f.label :last_name, 'Last Name' %><br />
     <%= f.text_field :last_name, autofocus: true %>
   </div>
+
+<div class="field">
+    <%= f.label :github, 'Github Url' %><br />
+    <%= f.url_field :github, autofocus: true %>
+  </div>
+
   <div class="field">
     <%= f.label :sid %><br />
     <%= f.text_field :sid, autofocus: true %>

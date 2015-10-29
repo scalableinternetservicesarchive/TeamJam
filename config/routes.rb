@@ -2,14 +2,14 @@ Rails.application.routes.draw do
 
 
   post 'users/invite'
-  
+
   get 'skills/edit', as: :edit_skills
 
   post 'skills/update', as: :update_skills
 
   get 'join_classes/index'
   post 'join_classes/join_courses'
-  
+
 
   get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
   get "mailbox/sent" => "mailbox#sent", as: :mailbox_sent
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   resources :notifications, :only => [:index] do
   member do
     post :accept
-    post :deny
+    post :reject
   end
   end
 
@@ -39,6 +39,7 @@ resources :users, :only => [:show, :edit]
 	end
 
   resources :courses do
+    post 'edit_time_commitment', on: :member
     resources :teams do
       get 'join', on: :member
       post 'join_try', on: :member

@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def invite
     @user = User.find(params[:id])
+    puts("inviting #{@user.first_name}")
     @team = Team.find_by_id(params[:team_id])
     # make notif
     recp = @user.notify("INVITE","asdf",nil,true,3,false,current_user)

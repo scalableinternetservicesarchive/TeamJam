@@ -30,15 +30,15 @@ class NotificationsController < ApplicationController
   end
 
   def reject
-    notif = current_user.mailbox.notifications.where(id: params[:id])
+    notif = current_user.mailbox.notifications.where(id: params[:id]).first
     sender = notif.sender
     team = Team.find_by_id(notif.attachment.to_i) #team should exist, check that too
-    if notif.notification_code.to_i == 2 #reject students offer to join your team
+    if notif.notification_code.to_i == 1 #reject students offer to join your team
      # current_user.notify("DENYING","#{sender.first} was denied permission to join your team #{team.name}",nil,true,6,false,nil)
       sender.notify("DENIED", "You were rejected from the team #{team.name}",nil,true,6,false,nil)
       flash[:notice] = "#{sender.first_name} was denied permission to join your team #{team.name}"
 
-    elsif notif.notification_code.to_i == 4 # reject teams invitation to join
+    elsif notif.notification_code.to_i == 3 # reject teams invitation to join
       sender.notify("DENIED","#{current_user.first_name} has rejected your invitation  to join team #{team.name}",nil,true,5,false,nil)
       flash[:notice] = "You rejected invitation to join the team #{team.name}"
     end

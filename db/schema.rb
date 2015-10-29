@@ -11,14 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151027095431) do
+ActiveRecord::Schema.define(version: 20151029062617) do
+
+  create_table "course_skillsets", force: :cascade do |t|
+    t.integer  "course_id",  limit: 4
+    t.integer  "skill_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "min_rating", limit: 4
+  end
+
+  add_index "course_skillsets", ["course_id"], name: "index_course_skillsets_on_course_id", using: :btree
+  add_index "course_skillsets", ["skill_id"], name: "index_course_skillsets_on_skill_id", using: :btree
 
   create_table "courses", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "description", limit: 255
-    t.integer  "max_members", limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "name",                limit: 255
+    t.string   "description",         limit: 255
+    t.integer  "max_members",         limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.integer  "min_time_commitment", limit: 4
   end
 
   create_table "enrollments", force: :cascade do |t|
@@ -29,6 +41,7 @@ ActiveRecord::Schema.define(version: 20151027095431) do
     t.datetime "finish_date"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.integer  "time_commitment",  limit: 4
   end
 
   add_index "enrollments", ["course_id"], name: "index_enrollments_on_course_id", using: :btree
@@ -149,11 +162,14 @@ ActiveRecord::Schema.define(version: 20151027095431) do
     t.string   "prof_pic_content_type",  limit: 255
     t.integer  "prof_pic_file_size",     limit: 4
     t.datetime "prof_pic_updated_at"
+    t.string   "github",                 limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "course_skillsets", "courses"
+  add_foreign_key "course_skillsets", "skills"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "users"
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
