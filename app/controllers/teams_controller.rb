@@ -6,6 +6,10 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     @course = @team.course
+    #TODO: change database setting so min_time_commitment initialized as 0
+    if @course.min_time_commitment == nil
+      @course.min_time_commitment = 0
+    end
   end
 
   def new

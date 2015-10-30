@@ -29,15 +29,25 @@ axes: [
  <% end %>
        { axis: "<%= sk.name %>", value: <%= rating %>},
     <% end %>
-{axis: "Time", value: <%=@course.min_time_commitment/5  %> }
+{axis: "Time", value: <%= @course.min_time_commitment/5  %> }
 ]
 }
 ]
 <% end %>
 <%= javascript_include_tag 'skills_chart', 'data-turbolinks-track' => true %>
-<div class="chart-container"></div>
-     <script>
-RadarChart.draw(".chart-container", data);
- </script>
+<div class="teamInfo">
+  <h1>Team: <%= @team.name %></h1>
+  <p>Description: <%= @team.description %></p>
+  <p>Members:
+    <ul><% @team.students.each do |student| %>
+      <li>
+        <%= student.first_name%> <%= student.last_name%>
+      </li>
+      <% end %>
+    </ul>
+  </p>
+  <div class="chart-container">
+     <script>RadarChart.draw(".chart-container", data);</script>
   <br>
+  </div>
 </div>
