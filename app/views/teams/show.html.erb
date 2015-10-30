@@ -1,31 +1,43 @@
-<!-- <h1>Teams#show</h1>
-<p>Find me in app/views/teams/show.html.erb</p> -->
-<h1><%= @team.name %> </h1>
-
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#description">Team Description</a></li>
-  <li><a data-toggle="tab" href="#members">Team Members</a></li>
-</ul>
-
-
-<div class="tab-content">
-  <div id="description" class="tab-pane fade in active">
-    <ul>
-      <li>Description: <%= @team.description %></li>
-      <li>Capacity: <%= @team.course.max_members %></li>
-      <li>Required Skillset: </li>
-    </ul>
-
-  </div>
-  <div id="members" class="tab-pane fade">
-    <table class="table">
-      <tr>
-        <th> Name </th>
-        <th> Year </th>
-        <th> Major </th>
-     </tr>
-      <%= render partial: "courses/student", collection: @team.students, locals: {current_course: @course, show_team: false, current_team_owner_id: @team.team_owner_id , current_team: true} %>
-    </table>
-  </div>
-
+<%= javascript_tag do %>
+var data = [
+  <% @team.students.each do |st| %>
+  {
+classname: '<%= st.first_name %>',
+axes: [
+  <%  st.skills.each do |sk| %>
+  <% #if  @course.skills.include?(sk) %>
+  <% rating = SkillRating.where(user_id: st.id, skill_id: sk.id).first.rating %>
+  <% if sk.name == "C++" %>
+          { axis: "<%= sk.name %>", value: <%= rating %>, xOffset: 13 ,  yOffset: -1},
+  <% else %>
+          { axis: "<%= sk.name %>", value: <%= rating %>},
+  <% end %>
+<% #end %>
+<% end %>
+{axis: "Time", value: <%= st.enrollments.where(course_id: @course.id, user_id: st.id).first.time_commitment/5%>}
+]
+    },
+<% end %>
+ {
+    classname: 'class',
+      axes: [
+<% Skill.all.each do |sk| %>
+<% if(@course.skills.include?(sk)) %>
+<% rating = CourseSkillset.where(course_id: @course.id, skill_id: sk.id).first.min_rating %>
+<% else %>
+<% rating = 0 %>
+ <% end %>
+       { axis: "<%= sk.name %>", value: <%= rating %>},
+    <% end %>
+{axis: "Time", value: <%=@course.min_time_commitment/5  %> }
+]
+}
+]
+<% end %>
+<%= javascript_include_tag 'skills_chart', 'data-turbolinks-track' => true %>
+<div class="chart-container"></div>
+     <script>
+RadarChart.draw(".chart-container", data);
+ </script>
+  <br>
 </div>

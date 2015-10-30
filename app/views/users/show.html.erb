@@ -1,25 +1,22 @@
 <%= javascript_tag do %>
-$(function(){
-  $('#chart').radarChart({
-    size: [500, 400],
-    step: 1,
-    title: "",
-    values: {
-    <% @user_skill_rating.each do |sk,rating| %>
-      <% if rating + 1 != 0 %>
-      <% if sk.name != "C++" %>
-      <%= " #{sk.name}: #{ rating + 1}, " %>
-      <% else %>
-       <%= " Cpp: #{ rating + 1}, " %>
-      <% end %>
-      <% end %>
+var data = [
+  {
+    className: 'user',
+    axes: [
+      <% @user_skill_rating.each do |sk,rating| %>
+      <% if sk.name == "C++" %>
+{axis: "<%= sk.name %>", value: <%= rating %>, xOffset: 13 ,  yOffset: -1},
+<% else %>
+      {axis: "<%= sk.name %>", value: <%= rating %>},
+        <% end %>
+
 <% end %>
-    },
-    showAxisLabels: true
-  });
-});
+    ]
+  }
+]
 <% end %>
-<%= javascript_include_tag 'users', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'skills_chart', 'data-turbolinks-track' => true %>
+
 <div class="row col-md-12">
 <div class="pull-left">
  <div class="page-header">
@@ -27,7 +24,10 @@ $(function(){
    <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
   </div>
   </div>
-  <div id="chart" class="pull-right"></div>
+  <div class="chart-container pull-right"></div>
+     <script>
+RadarChart.draw(".chart-container", data);
+</script>
   <br>
 </div>
 <ul class="nav nav-tabs">
