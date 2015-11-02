@@ -11,15 +11,21 @@
   <header class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-inner">
       <div class="container">
-        <div id="logo" class="navbar-brand"><%= link_to "Team Up", root_path %></div>
+        <div id="logo" class="navbar-brand">
+          <%= link_to(root_path) do %>
+          <span style="color:white">Team<span style="color:red">JAM </span></span>
+          <% end %>
+        </div>
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
         	<% if user_signed_in? %>
 						<ul class="nav navbar-nav navbar-right">
               <% num_notif = (current_user.mailbox.notifications.select{|n| !n.is_deleted?(current_user)}).count %>
-             <li><%= link_to "Notifications", notifications_path %>
+              <li><%= link_to(notifications_path) do %>
+                Notifications
                <% if num_notif > 0 %>
                <span class="label label-danger"><%= num_notif %></span>
               <% end %>
+                <% end %>
                </li>
                 <li><%= link_to "Inbox", mailbox_inbox_path %></li>
               <li> <%= link_to 'My Profile', user_path(current_user) %> </li>
