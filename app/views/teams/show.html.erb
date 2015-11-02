@@ -35,19 +35,59 @@ axes: [
 ]
 <% end %>
 <%= javascript_include_tag 'skills_chart', 'data-turbolinks-track' => true %>
-<div class="teamInfo">
-  <h1>Team: <%= @team.name %></h1>
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#info">Info</a></li>
+  <li><a data-toggle="tab" href="#skills">Skills</a></li>
+  <% if @team.students.include?(current_user) %>
+  <li><a data-toggle="tab" href="#message">Message</a></li>
+  <% end %>
+</ul>
+
+<div class="tab-content">
+  <div id="info" class="tab-pane fade in active">
+    <h1>Team: <%= @team.name %></h1>
   <p>Description: <%= @team.description %></p>
   <p>Members:
     <ul><% @team.students.each do |student| %>
       <li>
-        <%= student.first_name%> <%= student.last_name%>
+        <%= link_to "#{student.first_name} #{student.last_name} ", user_path(student)%>
       </li>
       <% end %>
     </ul>
   </p>
-  <div class="chart-container">
+  </div>
+  <div id="skills" class="tab-pane fade">
+    <div class="chart-container">
      <script>RadarChart.draw(".chart-container", data);</script>
   <br>
   </div>
+  </div>
+  <div id="message" class="tab-pane fade">
+    <% if @team.students.include?(current_user) %>
+<div class= "col-md-7">
+  <%= form_for :conversation, url: :conversations, html: { class: "" } do |f| %>
+    <div class="form-group">
+      <%= f.label :recipients %>
+      <%= f.select(:recipients, (@team.students.select{|p| p.id!=current_user.id}).collect {|p| [ p.first_name, p.id ]}, {}, { multiple: true , class: "chosen-select form-control" })%>
+    </div>
+    <div class="form-group">
+      <%= f.label :subject %>
+      <%= f.text_field :subject, placeholder: "Subject", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :message %>
+      <%= f.text_area :body, class: 'form-control',placeholder: "Type your message here", rows: 4  %>
+    </div>
+
+    <%= f.submit "Send Message", class: "btn btn-success" %>
+
+<% end %>
 </div>
+<% end %>
+  </div>
+</div>
+
+
+
+
+

@@ -27,7 +27,13 @@
               <% end %>
                 <% end %>
                </li>
-                <li><%= link_to "Inbox", mailbox_inbox_path %></li>
+              <li><%= link_to mailbox_inbox_path do %>
+                Messages 
+                <% if unread_messages_count > 0 %>
+                <span class="label label-danger"><%=unread_messages_count%></span>
+                <% end %>
+                <% end %>
+              </li>
               <li> <%= link_to 'My Profile', user_path(current_user) %> </li>
               <li> <%= link_to 'Join a Class', {:controller => '/join_classes', :action => 'index'} %> </li>
               <li> <%= link_to 'Edit Account', edit_user_registration_path %></li>
