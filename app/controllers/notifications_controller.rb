@@ -15,6 +15,11 @@ class NotificationsController < ApplicationController
     team = Team.find_by_id(notif.attachment.to_i) #team should exist, check that too
       if notif.notification_code.to_i == 1  #accept students offer to join team, you are the owner
          if (team.students.count < team.course.max_members) && (sender.find_course_team(team.course) == false )
+           team.students.each { |st|
+             if st.id.to_i != team.team_owner_id.to_i
+             st.notify("SUCCESS", " #{sender.first_name} was successfully added to your team #{team.name}",nil,true,5,false,nil)
+             end
+             }
         TeamMembership.create(team_id: team.id, user_id: sender.id)
         #current_user.notify("SUCCESS","#{sender.first} was successfully added to your team #{team.name}",nil,true,5,false,nil)
            flash[:notice] = "#{sender.first_name} was successfully added to your team #{team.name}"
@@ -24,10 +29,13 @@ class NotificationsController < ApplicationController
            end
       elsif notif.notification_code.to_i == 3 #accept team owners invitation to join his team
            if (team.students.count < team.course.max_members) && (current_user.find_course_team(team.course) == false )
+             team.students.each { |st|
+             st.notify( "SUCCESS", "#{current_user.first_name} has accepted the invitation  to join team #{team.name}",nil,true,5,false,nil )
+             }
         TeamMembership.create(team_id: team.id, user_id: current_user.id)
        # current_user.notify("SUCCESS","You were successfully added to the team #{team.name}",nil,true,5,false,nil)
          flash[:notice] ="You were successfully added to the team #{team.name}"
-        sender.notify("SUCCESS","#{current_user.first_name} has accepted your invitation  to join team #{team.name}",nil,true,5,false,nil)
+             #sender.notify("SUCCESS","#{current_user.first_name} has accepted the invitation  to join team #{team.name}",nil,true,5,false,nil)
              else
              flash[:notice] = "Team was full or you are already in another team"
            end
