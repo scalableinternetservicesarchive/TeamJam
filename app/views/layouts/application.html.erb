@@ -15,7 +15,12 @@
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
         	<% if user_signed_in? %>
 						<ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Notifications", notifications_path %></li>
+              <% num_notif = (current_user.mailbox.notifications.select{|n| !n.is_deleted?(current_user)}).count %>
+             <li><%= link_to "Notifications", notifications_path %>
+               <% if num_notif > 0 %>
+               <span class="label label-danger"><%= num_notif %></span>
+              <% end %>
+               </li>
                 <li><%= link_to "Inbox", mailbox_inbox_path %></li>
               <li> <%= link_to 'My Profile', user_path(current_user) %> </li>
               <li> <%= link_to 'Join a Class', {:controller => '/join_classes', :action => 'index'} %> </li>

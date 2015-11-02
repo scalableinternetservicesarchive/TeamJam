@@ -1,11 +1,31 @@
-<li>
-  <%= notification.subject %><br>
-  <%= notification.body %> <br>
+<% if !notification.is_deleted?(current_user) %>
+<div class="row "%>
+  <div class= "col-md-5"%>
+  <% if notification.notification_code.to_i == 5 %>
+<div class="panel panel-success">
+  <% elsif notification.notification_code.to_i == 6 %>
+  <div class="panel panel-warning">
+    <% else %>
+   <div class="panel panel-default">
+     <% end %>
+  <div class="panel-heading"> <%= notification.subject %></div>
+  <div class="panel-body">
+  <%= notification.body %>
+   </div>
+   <div class="panel-footer">
   <% if notification.notification_code.to_i == 1 %>
-  <%= button_to 'Accept', accept_notification_path(notification) %>
-  <%= button_to 'DENY', reject_notification_path(notification) %>
+     <div class="row ">
+     <%= button_to 'Accept', accept_notification_path(notification), class: "btn btn-success" %>
+     <%= button_to 'DENY', reject_notification_path(notification), class: "btn btn-danger" %>
+     </div>
   <% elsif notification.notification_code.to_i == 3 %>
-   <%= button_to 'Accept', accept_notification_path(notification) %>
-  <%= button_to 'Reject', reject_notification_path(notification) %>
+   <%= button_to 'Accept', accept_notification_path(notification), class: "btn btn-success" %>
+     <%= button_to 'Reject', reject_notification_path(notification), class: "btn btn-danger" %>
+     <% else %>
+     <%= link_to 'Mark as Read', mark_as_read_notification_path(notification), method: :delete, class: "btn btn-success btn-sm"%>
   <% end %>
-</li>
+   </div>
+</div>
+    </div>
+  </div>
+<% end %>

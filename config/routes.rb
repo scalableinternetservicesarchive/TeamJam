@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   member do
     post :accept
     post :reject
+    delete :mark_as_read
   end
   end
 
