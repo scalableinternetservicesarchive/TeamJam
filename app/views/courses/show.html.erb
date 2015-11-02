@@ -22,8 +22,10 @@
     <%= link_to skill.name, course_path(@course,order_skill: skill.id) , class: "btn btn-sm btn-default" %>
     <% end %>
      <%= link_to 'Time', course_path(@course,order_skill: -1) , class: "btn btn-sm btn-default" %>
+     <%= link_to 'OverallRating', course_path(@course,order_skill: -2) , class: "btn btn-sm btn-default" %>
      <br><br><br>
     </div>
+    
     <table class="table">
       <tr>
         <th> Name </th>
