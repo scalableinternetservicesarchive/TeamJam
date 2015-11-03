@@ -49,7 +49,8 @@ class CoursesController < ApplicationController
           ratings = SkillRating.where(skill_id: id).where("user_id IN (?)", students_ids).order(rating: :desc) #order by individual skills
       end
       if id.to_i == -2
-          @ordered_student = Course.find(params[:id]).students.sort{|a, b| sorted_by_overall_rating(a, b, params[:id])}.reverse!
+          course_id = params[:id]
+          @ordered_student = Course.find(course_id).students.sort_by{ |a| a.overall_rating(course_id)}
       else
           @ordered_students = ratings.collect{|r| User.find(r.user_id)}
       end
