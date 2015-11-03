@@ -6,20 +6,20 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-=begin
+
 courses = Course.create([
     {name: 'CS143', description: "Database Systems", max_members: 2 }, {name: 'CS188', description: "Scalable Internet Services", max_members: 4 },{name: 'CS118', description: "Networking", max_members: 2 }, {name: 'CS174A', description: "Computer Graphics", max_members: 5 }, {name: 'CS130', description: "Software Engineering", max_members: 4 }
   ])
-CourseSkillset.create(course_id: 1, skill_id: 1, min_rating: 2)
-CourseSkillset.create(course_id: 2, skill_id: 7, min_rating: 1)
-CourseSkillset.create(course_id: 2, skill_id: 8, min_rating: 1)
-CourseSkillset.create(course_id: 2, skill_id: 9, min_rating: 1)
-CourseSkillset.create(course_id: 3, skill_id: 2, min_rating: 2)
-
-=end
+CourseSkillset.create(course_id: 1, skill_id: 1, min_rating: 2, weight: 0.2)
+CourseSkillset.create(course_id: 2, skill_id: 7, min_rating: 1, weight: 0.3)
+CourseSkillset.create(course_id: 2, skill_id: 8, min_rating: 1, weight: 0.1)
+CourseSkillset.create(course_id: 2, skill_id: 9, min_rating: 1, weight: 0.2)
+CourseSkillset.create(course_id: 3, skill_id: 2, min_rating: 2, weight: 0.5)
 
 
-=begin
+
+
+
 courses = Course.all
 teams = Team.create([
   {name: 'TeamUp', description: "Automatic Team Selector", course_id: courses[1].id},
@@ -27,12 +27,7 @@ teams = Team.create([
   {name: 'HuMATH', description: "Calculator for HuManities students", course_id: courses[3].id},
   {name: 'DashDash', description: "Complete Autocomplete Unix Shell", course_id: courses[4].id}
   ])
-=end
 
-
-["C++", "Python", "C", "Java", "iOS", "Android", "JavaScript", "Backend", "Frontend"].each do |sk|
-  Skill.create(name: sk)
-end
 
 # create associations
 #user = User.first

@@ -16,9 +16,10 @@ ActiveRecord::Schema.define(version: 20151102054758) do
   create_table "course_skillsets", force: :cascade do |t|
     t.integer  "course_id",  limit: 4
     t.integer  "skill_id",   limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.integer  "min_rating", limit: 4
+    t.float    "weight",     limit: 24
   end
 
   add_index "course_skillsets", ["course_id"], name: "index_course_skillsets_on_course_id", using: :btree

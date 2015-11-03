@@ -32,4 +32,17 @@ class User < ActiveRecord::Base
      end
     return false
   end
+
+  def overall_rating(current_course_id)  #course.skill_set and self.skill_rating with same skill_id
+    # overall_rate = 0
+    skill_set = CourseSkillset.select("skill_id", "weight").where("course_id = ?", current_course_id)
+    # self.skill_ratings.each do |sk_rate|
+    #     skill_weight = 
+    #     overall_rate += sk_rate.rating.to_f * sk_rate.weight
+    # end
+    overall_rate = self.skill_ratings.select { |rating| skill_set.select { |skill| skill.skill_id == rating.skill_id }.present?  }.inject(0) { |sum, rating| sum = sum + rating.rating.to_f * skill_set.select { |skill| skill.skill_id == rating.skill_id }.first.weight }
+    return overall_rate
+  end
+
+
 end
