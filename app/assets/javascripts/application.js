@@ -17,6 +17,3 @@
 //= require turbolinks
 //= require_tree .
 
-$('#express_interest').on('click',function() {
-    $(this).prop("disabled",true);
-});

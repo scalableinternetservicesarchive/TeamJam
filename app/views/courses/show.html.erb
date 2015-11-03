@@ -1,13 +1,25 @@
 <!-- <h1>Courses#show</h1>
 <p>Find me in app/views/courses/show.html.erb</p> -->
 
-<h1><%= @course.name %> </h1>
+<div class="row">
+    <div class="col-md-4">
+    <h1><%= @course.name %> </h1>
+          <p><small><%= @course.description %></small> </p>
+      <p> Max members per Team: <%= @course.max_members %> </p>
+      <p> Minimum time commitment expected: <%= @course.min_time_commitment %> </p>
+      <% if !@enrolled %>
+      <%= link_to 'Join Class', join_course_path(@course), method: :post, class: "btn btn-primary", id: "joiner" %>
+      <% end %>
+  </div>
+</div>
+<% if @enrolled %>
 <div class="row">
   <h5 class="col-md-4"><%= "Your time commitment: #{@time} hrs/wk" %><h5>
   <%= form_tag(edit_time_commitment_course_path(@course), class:"col-md-8 pull-left" ) do %>
 <%= number_field_tag(:time, in: 1..20, step: 1) %>
 <%= submit_tag("Update Time Commitment") %>
-<% end%>
+<% end %>
+<% end %>
 </div>
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#classmates">Classmates</a></li>
@@ -25,7 +37,7 @@
      <%= link_to 'OverallRating', course_path(@course,order_skill: -2) , class: "btn btn-sm btn-default" %>
      <br><br><br>
     </div>
-    
+
     <table class="table">
       <tr>
         <th> Name </th>
@@ -36,7 +48,9 @@
       <%= render partial: "student", collection: @ordered_students, locals: {current_course: @course, show_team: true, current_team_owner_id: false , current_team: @user_course_team} %>
     </table>
   </div>
+
   <div id="teams" class="tab-pane fade">
+    <% if @enrolled %>
     <%= render :partial => "teams/team", :collection => @course.teams, locals: {user_course_team: @user_course_team} %>
     <% if @user_course_team == false %>
     <div class="pull-left">
@@ -44,4 +58,7 @@
     </div>
     <% end %>
   </div>
+  <% else %>
+  <h3> Enroll to view teams </h3>
+  <% end %>
 </div>

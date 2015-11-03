@@ -4,6 +4,17 @@ class CoursesController < ApplicationController
   end
 
   def new
+    @course = Course.new
+  end
+
+  def create
+    @course = Course.new(course_params)
+    if @course.save
+      flash[:notice] = "Course successfully created!"
+      redirect_to course_path(@course)
+    else
+      render 'new'
+    end
   end
 
   def edit
@@ -18,6 +29,13 @@ class CoursesController < ApplicationController
     else
       flash[:notice] = "Bad Time value supplied"
     end
+    redirect_to :back
+  end
+
+  def join
+    @course = Course.find(params[:id])
+    Enrollment.create(course_id: @course.id.to_i, user_id: current_user.id, time_commitment: 2)
+    flash[:notice] = "You were successfully added to the course"
     redirect_to :back
   end
 
@@ -36,10 +54,13 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
+    @enrolled = false
+    if current_user.courses.include?(@course)
+    @enrolled = true
     @user_course_team = current_user.find_course_team(@course)
     @time = current_user.enrollments.where(course_id: @course.id).first.time_commitment
-    @ordered_students = @course.students
-
+    end
+      @ordered_students = @course.students
     if(params[:order_skill].present?)
       students_ids = @ordered_students.collect{ |st| st.id }
       id = params[:order_skill]
@@ -49,11 +70,14 @@ class CoursesController < ApplicationController
           ratings = SkillRating.where(skill_id: id).where("user_id IN (?)", students_ids).order(rating: :desc) #order by individual skills
       end
       if id.to_i == -2
-          @ordered_students = Course.find(params[:id]).students.sort_by{|obj| obj.overall_rating(params[:id])}.reverse!  
+          @ordered_students = Course.find(params[:id]).students.sort_by{|obj| obj.overall_rating(params[:id])}.reverse!
       else
           @ordered_students = ratings.collect{|r| User.find(r.user_id)}
       end
     end
   end
 
+  def course_params
+    params.require(:course).permit(:name, :description, :max_members, :min_time_commitment)
+  end
 end
