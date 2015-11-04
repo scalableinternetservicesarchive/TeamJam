@@ -10,6 +10,7 @@
       <% @course.skills.each do |sk| %>
       <span class="label label-default"> <%= sk.name %> </span> &nbsp;
       <% end %>
+      <p> </p>
       <% if !@enrolled %>
       <p>
       <%= link_to 'Join Class', join_course_path(@course), method: :post, class: "btn btn-primary", id: "joiner" %>
