@@ -5,11 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
-
+=begin
 courses = Course.create([
     {name: 'CS143', description: "Database Systems", max_members: 2 }, {name: 'CS188', description: "Scalable Internet Services", max_members: 4 },{name: 'CS118', description: "Networking", max_members: 2 }, {name: 'CS174A', description: "Computer Graphics", max_members: 5 }, {name: 'CS130', description: "Software Engineering", max_members: 4 }
   ])
+=end
 CourseSkillset.create(course_id: 1, skill_id: 1, min_rating: 2, weight: 0.2)
 CourseSkillset.create(course_id: 2, skill_id: 7, min_rating: 1, weight: 0.3)
 CourseSkillset.create(course_id: 2, skill_id: 8, min_rating: 1, weight: 0.1)

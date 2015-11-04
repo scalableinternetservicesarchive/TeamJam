@@ -42,6 +42,7 @@ resources :users, :only => [:show, :edit]
   resources :courses do
     post 'edit_time_commitment', on: :member
     post 'join', on: :member
+    post 'leave', on: :member
     resources :teams do
       get 'join', on: :member
       post 'join_try', on: :member

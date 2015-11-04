@@ -28,14 +28,15 @@
                 <% end %>
                </li>
               <li><%= link_to mailbox_inbox_path do %>
-                Messages 
+                Messages
                 <% if unread_messages_count > 0 %>
                 <span class="label label-danger"><%=unread_messages_count%></span>
                 <% end %>
                 <% end %>
               </li>
               <li> <%= link_to 'My Profile', user_path(current_user) %> </li>
-              <li> <%= link_to 'Join a Class', {:controller => '/join_classes', :action => 'index'} %> </li>
+              <li> <%= link_to 'Create Course', new_course_path %> </li>
+              <li> <%= link_to 'Join Course', {:controller => '/join_classes', :action => 'index'} %> </li>
               <li> <%= link_to 'Edit Account', edit_user_registration_path %></li>
                <li> <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
 						</ul>

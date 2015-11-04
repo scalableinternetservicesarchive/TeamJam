@@ -4,12 +4,20 @@ class CoursesController < ApplicationController
   end
 
   def new
+     @skills = Skill.all
     @course = Course.new
   end
 
   def create
     @course = Course.new(course_params)
+    @course.instructor_id = current_user.id
     if @course.save
+      params[:skillset].each do |id, rating|
+        puts rating.to_i
+        if rating.to_i > 0
+       CourseSkillset.create(course_id: @course.id, skill_id: id.to_i, min_rating: rating.to_i)
+        end
+    end
       flash[:notice] = "Course successfully created!"
       redirect_to course_path(@course)
     else
@@ -36,6 +44,13 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     Enrollment.create(course_id: @course.id.to_i, user_id: current_user.id, time_commitment: 2)
     flash[:notice] = "You were successfully added to the course"
+    redirect_to :back
+  end
+
+  def leave
+    @course = Course.find(params[:id])
+    Enrollment.where(course_id: @course.id.to_i, user_id: current_user.id).first.destroy
+    flash[:notice] = "You were removed from the course"
     redirect_to :back
   end
 

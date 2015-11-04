@@ -2,7 +2,7 @@ Select from these courses
 <%= form_for(:all_courses, url: {controller: :join_classes, action: :join_courses}, method: :post) do |f| %>
 <% @all_course.each do |course| %>
 <% if !current_user.courses.include?(course) %>
-<%= course.name %>
+<%= link_to course.name, course_path(course) %>
 <%= f.check_box course.name.to_sym, {}, course.id , false%>
 </br>
 <% end %>

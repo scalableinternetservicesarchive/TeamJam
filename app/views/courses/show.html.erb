@@ -5,10 +5,23 @@
     <div class="col-md-4">
     <h1><%= @course.name %> </h1>
           <p><small><%= @course.description %></small> </p>
-      <p> Max members per Team: <%= @course.max_members %> </p>
-      <p> Minimum time commitment expected: <%= @course.min_time_commitment %> </p>
+       <span class="label label-default"> <%= @course.max_members %> per team </span> &nbsp;
+      <span class="label label-default"> <%= @course.min_time_commitment %> hrs/wk </span> &nbsp;
+      <% @course.skills.each do |sk| %>
+      <span class="label label-default"> <%= sk.name %> </span> &nbsp;
+      <% end %>
       <% if !@enrolled %>
+      <p>
       <%= link_to 'Join Class', join_course_path(@course), method: :post, class: "btn btn-primary", id: "joiner" %>
+      </p>
+      <% else %>
+      <% if @user_course_team == false %>
+        <p>
+          <%= link_to 'Leave Class', leave_course_path(@course), method: :post, class: "btn btn-primary", id: "leaver" %>
+      </p>
+      <% else %>
+      <p><small> Leave your team to leave the course </small></p>
+      <% end %>
       <% end %>
   </div>
 </div>
@@ -37,7 +50,7 @@
      <%= link_to 'OverallRating', course_path(@course,order_skill: -2) , class: "btn btn-sm btn-default" %>
      <br><br><br>
     </div>
-
+      <% if @enrolled %>
     <table class="table">
       <tr>
         <th> Name </th>
@@ -45,8 +58,13 @@
         <th> Major </th>
         <th> Team </th>
      </tr>
+
       <%= render partial: "student", collection: @ordered_students, locals: {current_course: @course, show_team: true, current_team_owner_id: false , current_team: @user_course_team} %>
+
     </table>
+<% else %>
+        <h3> Enroll to view students </h3>
+      <% end %>
   </div>
 
   <div id="teams" class="tab-pane fade">
