@@ -1,9 +1,16 @@
-Select from these courses
+<h2>Check all the courses you wish to join</h2>
 <%= form_for(:all_courses, url: {controller: :join_classes, action: :join_courses}, method: :post) do |f| %>
 <% @all_course.each do |course| %>
 <% if !current_user.courses.include?(course) %>
-<%= link_to course.name, course_path(course) %>
-<%= f.check_box course.name.to_sym, {}, course.id , false%>
+<h3><%= link_to course.name, course_path(course) %></h3>
+
+          <p><small><%= course.description %></small> </p>
+       <span class="label label-default"> <%= course.max_members %> per team </span> &nbsp;
+      <span class="label label-default"> <%= course.min_time_commitment %> hrs/wk </span> &nbsp;
+      <% course.skills.each do |sk| %>
+      <span class="label label-default"> <%= sk.name %> </span> &nbsp;
+      <% end %>
+<h3><%= f.check_box course.name.to_sym, {}, course.id , false%> </h3>
 </br>
 <% end %>
 <% end %>
