@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151102054758) do
+ActiveRecord::Schema.define(version: 20151105060728) do
 
   create_table "course_skillsets", force: :cascade do |t|
     t.integer  "course_id",  limit: 4
@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(version: 20151102054758) do
     t.datetime "updated_at",                  null: false
     t.string   "passcode",      limit: 255
     t.integer  "team_owner_id", limit: 4
+    t.string   "github",        limit: 255
   end
 
   add_index "teams", ["course_id"], name: "index_teams_on_course_id", using: :btree

@@ -3,6 +3,12 @@ class TeamsController < ApplicationController
   def index
   end
 
+  def add_github
+     @team = Team.find(params[:id])
+    @team.github = params[:github]
+    @team.save
+    redirect_to team_path(@team)
+  end
   def show
     @team = Team.find(params[:id])
     @course = @team.course
@@ -21,8 +27,14 @@ class TeamsController < ApplicationController
     @course = Course.find(params[:course_id])
     @team = Team.find(params[:id])
     TeamMembership.where(team_id: @team.id, user_id: current_user.id).destroy_all
+    num_left = @team.students.count
+    if num_left > 0
+    @team.students.each { |st|
+          st.notify( "TREACHERY", "#{current_user.first_name} has left your team #{@team.name}",nil,true,7,false,nil )
+             }
+    end
     if current_user.id == @team.team_owner_id
-      if @team.students.count == 0
+      if num_left == 0
             @team.destroy
       else
         @team.team_owner_id = @team.students.last.id

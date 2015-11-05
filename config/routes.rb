@@ -47,6 +47,7 @@ resources :users, :only => [:show, :edit]
       get 'join', on: :member
       post 'join_try', on: :member
       post 'express_interest', on: :member
+      post 'add_github', on: :member
       delete 'leave', on: :member
     end
   end

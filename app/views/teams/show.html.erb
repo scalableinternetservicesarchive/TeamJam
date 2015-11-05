@@ -51,10 +51,25 @@ axes: [
     <ul><% @team.students.each do |student| %>
       <li>
         <%= link_to "#{student.first_name} #{student.last_name} ", user_path(student)%>
+         ,
+        <%=  mail_to student.email %>
       </li>
       <% end %>
     </ul>
   </p>
+  <% if @team.github %>
+  <%= link_to 'Click for team Github ', @team.github  %>
+  <% end %>
+  <div class="row" %>
+  <%= form_tag(add_github_course_team_path(@course, @team), class:"col-md-8 pull-left" ) do %>
+  <%= url_field_tag(:github) %>
+  <% if @team.github %>
+  <%= submit_tag("Update Team Github URL") %>
+  <% else %>
+  <%= submit_tag("Add Team Github URL") %>
+  <% end %>
+  <% end %>
+  </div>
   </div>
   <div id="skills" class="tab-pane fade">
     <div class="chart-container">
