@@ -8,8 +8,9 @@
   </clients>
 
   <!-- Server side setup -->
+  <!-- IMPORTANT: CHANGE HOST TO YOUR TSUNG HOST -->
   <servers>
-    <server host="ec2-54-148-61-114.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-11-115-132.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -58,7 +59,8 @@
   </options>
 
   <sessions>
-    <session name="http-example" probability="100" type="ts_http">
+    <!-- User login -->
+    <session name="user_login" probability="100" type="ts_http">
 
       <!-- start out at the dashboard. -->
       <request>
@@ -74,10 +76,10 @@
 
       <request subst="true">
         <http
-          url='/users/log_in'
+          url='/users/sign_in'
           version='1.1'
           method='POST'
-          contents='user%5Bemail%5D=user%%_random_user_id%%%40email.comuser%5Bpassword%5D=password%%_random_user_id%%&amp;user%5Bremember_me%5D=0&amp;commit=Log+in'>
+          contents='user%5Bemail%5D=user%%_random_user_id%%%40email.com&amp;user%5Bpassword%5D=password%%_random_user_id%%&amp;user%5Bremember_me%5D=0&amp;commit=Log+in'>
         </http>
       </request>
     
