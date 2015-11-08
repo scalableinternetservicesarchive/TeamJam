@@ -3,6 +3,14 @@ class NotificationsController < ApplicationController
     @notifications = current_user.mailbox.notifications
   end
 
+  def rate
+    notif = current_user.mailbox.notifications.where(id: params[:id]).first
+    notif.mark_as_deleted(current_user)
+    @user = User.find(params[:user_id])
+    flash[:notice] = "#{@user.first_name}'s ratings were updated based on your feedback!"
+    redirect_to :back
+  end
+
   def mark_as_read
     notif = current_user.mailbox.notifications.where(id: params[:id]).first
     notif.mark_as_deleted(current_user)

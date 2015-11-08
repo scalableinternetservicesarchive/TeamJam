@@ -28,12 +28,17 @@ Rails.application.routes.draw do
   member do
     post :accept
     post :reject
+    post :rate
     delete :mark_as_read
   end
   end
 
   devise_for :users
-resources :users, :only => [:show, :edit]
+resources :users, :only => [:show, :edit] do
+  member do
+    post :rate
+  end
+end
 
    authenticated :user do
      root "home#index", as: "authenticated_root"

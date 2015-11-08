@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151105060728) do
+ActiveRecord::Schema.define(version: 20151108055531) do
 
   create_table "course_skillsets", force: :cascade do |t|
     t.integer  "course_id",  limit: 4
     t.integer  "skill_id",   limit: 4
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
-    t.integer  "min_rating", limit: 4
+    t.float    "min_rating", limit: 53
     t.float    "weight",     limit: 24
   end
 
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20151105060728) do
     t.datetime "updated_at",                      null: false
     t.integer  "min_time_commitment", limit: 4
     t.integer  "instructor_id",       limit: 4
+    t.datetime "start_date"
+    t.datetime "end_date"
   end
 
   create_table "enrollments", force: :cascade do |t|
@@ -105,9 +107,9 @@ ActiveRecord::Schema.define(version: 20151105060728) do
   create_table "skill_ratings", force: :cascade do |t|
     t.integer  "skill_id",   limit: 4
     t.integer  "user_id",    limit: 4
-    t.integer  "rating",     limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.float    "rating",     limit: 53
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   add_index "skill_ratings", ["skill_id"], name: "index_skill_ratings_on_skill_id", using: :btree
@@ -174,6 +176,7 @@ ActiveRecord::Schema.define(version: 20151105060728) do
     t.datetime "prof_pic_updated_at"
     t.string   "github",                 limit: 255
     t.boolean  "prof",                               default: false
+    t.float    "dependability",          limit: 53
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

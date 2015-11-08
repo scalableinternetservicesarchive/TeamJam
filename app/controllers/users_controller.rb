@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
+
+
   def invite
     @user = User.find(params[:id])
     puts("inviting #{@user.first_name}")

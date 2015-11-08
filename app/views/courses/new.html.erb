@@ -28,6 +28,14 @@
     <%= f.label :min_time_commitment, 'Minimum Time Commitment' %><br />
     <%= f.number_field(:min_time_commitment, in: 1..20, step: 1) %>
   </div>
+ <div class="form-group">
+   <%= f.label :start_date, 'Start Date' %><br />
+   <%= f.date_select :start_date %>
+  </div>
+ <div class="form-group">
+   <%= f.label :end_date, 'Start Date' %><br />
+   <%= f.date_select :end_date %>
+  </div>
   <%= f.label :skillset %>
   <div class="row">
 
