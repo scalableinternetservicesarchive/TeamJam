@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108055531) do
+ActiveRecord::Schema.define(version: 20151108083720) do
 
   create_table "course_skillsets", force: :cascade do |t|
     t.integer  "course_id",  limit: 4
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20151108055531) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.float    "min_rating", limit: 53
-    t.float    "weight",     limit: 24
   end
 
   add_index "course_skillsets", ["course_id"], name: "index_course_skillsets_on_course_id", using: :btree
