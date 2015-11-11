@@ -18,12 +18,13 @@
       <% else %>
       <% if @user_course_team == false %>
         <p>
-          <%= link_to 'Leave Class', leave_course_path(@course), method: :post, class: "btn btn-primary", id: "leaver" %>
+          <%= link_to 'Leave Class', leave_course_path(@course), method: :post, class: "btn btn-danger", id: "leaver" %>
       </p>
       <% else %>
       <p><small> Leave your team to leave the course </small></p>
       <% end %>
       <% end %>
+      <%= link_to 'Rate Teammates', rate_members_course_path(@course), method: :post, class: "btn btn-success", id: "rater" %>
   </div>
 </div>
 <% if @enrolled %>

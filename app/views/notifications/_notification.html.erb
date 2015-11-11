@@ -17,9 +17,16 @@
    <% rating_array = [['n00b',0],['Some Experience',1],['Experienced',2],['Pro',3]] %>
     <%= form_for(:skillset, url: {controller: 'notifications', action: 'rate', id: notification.id, user_id: notification.sender.id}) do |f| %>
     <% course.skills.each do |sk| %>
+    <p>
       <%= f.label sk.name %>
       <%= f.select sk.id.to_i, rating_array %>
+    </p>
      <% end %>
+    <p>
+    <%= f.label :dependability, 'Dependability' %>
+    <%= f.number_field(:dependability, in: 1..10, step: 1) %>
+      <b>Out of 10 points</b>
+    </p>
     <%= f.submit 'Submit' , class: "btn btn-success"%>
 <% end %>
     <% end %>

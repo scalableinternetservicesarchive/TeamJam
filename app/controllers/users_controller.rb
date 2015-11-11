@@ -25,13 +25,16 @@ class UsersController < ApplicationController
 
     @skills = Skill.all
     @user_skill_rating = Hash.new
+    @user_skill_reviews = Hash.new
     @skills.each do |sk|
       arr = SkillRating.where(user_id: @user.id, skill_id: sk.id)
       if arr.count == 0
-        SkillRating.create(user_id: @user.id, skill_id: sk.id, rating: 0)
+        SkillRating.create(user_id: @user.id, skill_id: sk.id, rating: 0, reviews: 0)
          @user_skill_rating[sk] = 0
+        @user_skill_reviews[sk] = 0
       else
-        @user_skill_rating[sk] = arr.first.rating
+        @user_skill_rating[sk] = arr.first.rating.round()
+        @user_skill_reviews[sk] = arr.first.reviews
       end
     end
     @courses.each do |course|

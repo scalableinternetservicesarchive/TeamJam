@@ -2,12 +2,6 @@ class TeamsController < ApplicationController
   before_action :authenticate_user!
   def index
   end
-
-  def send_rating_notif
-  @team.students.each { |st|
-          st.notify( "TREACHERY", "#{current_user.first_name} has left your team #{@team.name}",nil,true,7,false,nil )
-             }
-  end
   
   def add_github
      @team = Team.find(params[:id])

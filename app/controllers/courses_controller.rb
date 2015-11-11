@@ -3,6 +3,13 @@ class CoursesController < ApplicationController
   def index
   end
 
+  def rate_members
+    course = Course.find(params[:id])
+    Team.where(course_id: course.id).each {|t| t.send_rating_notif}
+    flash[:notice] = "All students were asked to rate their teammates"
+    redirect_to :back
+  end
+
   def new
      @skills = Skill.all
     @course = Course.new
@@ -70,6 +77,13 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find(params[:id])
     @enrolled = false
+    @instr = false
+    inst = User.find_by_id(@course.instructor_id.to_i)
+    if inst
+      if inst.id == current_user.id
+        @instr = true
+      end
+    end
     if current_user.courses.include?(@course)
     @enrolled = true
     @user_course_team = current_user.find_course_team(@course)

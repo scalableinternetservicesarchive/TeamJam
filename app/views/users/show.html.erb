@@ -5,9 +5,9 @@ var data = [
     axes: [
       <% @user_skill_rating.each do |sk,rating| %>
       <% if sk.name == "C++" %>
-{axis: "<%= sk.name %>", value: <%= rating %>, xOffset: 13 ,  yOffset: -1},
+{axis: "<%= "#{sk.name}(#{@user_skill_reviews[sk]})" %>", value: <%= rating %>, xOffset: 13 ,  yOffset: -1},
 <% else %>
-      {axis: "<%= sk.name %>", value: <%= rating %>},
+      {axis: "<%= "#{sk.name}(#{@user_skill_reviews[sk]})" %>", value: <%= rating %>},
         <% end %>
 
 <% end %>
@@ -22,6 +22,8 @@ var data = [
  <div class="page-header">
    <%= image_tag @user.prof_pic.url, class: "img-circle", width: "150", height: "150", align: "left" %>
    <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
+   <h3>Dependability: <%= "#{@user.dependability}" %><small> based on <%= pluralize @user.reviews, 'Review' %> </small>
+   </h3>
   </div>
   </div>
   <div class="chart-container pull-right"></div>
@@ -48,7 +50,7 @@ RadarChart.draw(".chart-container", data);
     <p>
     <ul>
       <% @user_skill_rating.each do |sk,rating| %>
-      <li> <%= "#{sk.name}: #{ SkillRating.rating_name(rating.to_i) }" %></li>
+      <li> <%= "#{sk.name}: #{ SkillRating.rating_name(rating.to_i)} (based on #{pluralize(@user_skill_reviews[sk], 'Review')})" %></li>
       <% end %>
     </ul>
     </p>

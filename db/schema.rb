@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108083720) do
+ActiveRecord::Schema.define(version: 20151111110928) do
 
   create_table "course_skillsets", force: :cascade do |t|
     t.integer  "course_id",  limit: 4
@@ -107,8 +107,9 @@ ActiveRecord::Schema.define(version: 20151108083720) do
     t.integer  "skill_id",   limit: 4
     t.integer  "user_id",    limit: 4
     t.float    "rating",     limit: 53
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "reviews",    limit: 4,  default: 0
   end
 
   add_index "skill_ratings", ["skill_id"], name: "index_skill_ratings_on_skill_id", using: :btree
@@ -175,7 +176,8 @@ ActiveRecord::Schema.define(version: 20151108083720) do
     t.datetime "prof_pic_updated_at"
     t.string   "github",                 limit: 255
     t.boolean  "prof",                               default: false
-    t.float    "dependability",          limit: 53
+    t.float    "dependability",          limit: 53,  default: 10.0
+    t.integer  "reviews",                limit: 4,   default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

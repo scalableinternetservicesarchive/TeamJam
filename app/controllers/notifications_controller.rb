@@ -2,11 +2,32 @@ class NotificationsController < ApplicationController
   def index
     @notifications = current_user.mailbox.notifications
   end
+  
+  def is_number? string
+  true if Float(string) rescue false
+end
 
   def rate
+    alpha = 0.25
     notif = current_user.mailbox.notifications.where(id: params[:id]).first
     notif.mark_as_deleted(current_user)
     @user = User.find(params[:user_id])
+    params[:skillset].each do |id, rating|
+      if is_number?(id)
+       @sr = SkillRating.where(skill_id: id.to_i, user_id: @user.id).first
+      @sr.rating  = @sr.rating*(1-alpha) + rating.to_i*alpha
+        @sr.reviews = @sr.reviews + 1
+      @sr.save
+       else
+         if @user.dependability == 0
+         @user.dependability = rating.to_i
+         else
+            @user.dependability =  @user.dependability*(1-alpha) + alpha*rating.to_i
+         end
+         @user.reviews = @user.reviews + 1
+         @user.save
+       end
+      end
     flash[:notice] = "#{@user.first_name}'s ratings were updated based on your feedback!"
     redirect_to :back
   end

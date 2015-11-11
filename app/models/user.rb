@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
 
   def overall_rating(current_course_id)  #course.skill_set and self.skill_rating with same skill_id
     # overall_rate = 0
+    course = Course.find(current_course_id)
     skill_id_set = CourseSkillset.select("skill_id").where("course_id = ?", current_course_id).order(skill_id: :asc).map{|c| c.skill_id}
     min_ratings = CourseSkillset.select("min_rating").where("course_id = ?", current_course_id).order(skill_id: :asc).map{|c| c.min_rating}
     self_ratings = SkillRating.where(:user_id=>self.id).order(skill_id: :asc)
@@ -48,6 +49,10 @@ class User < ActiveRecord::Base
       end
     end
 
+    time_commit = Enrollment.where(course_id: current_course_id, user_id: self.id).first.time_commitment
+    user_ratings.push(time_commit)
+    min_ratings.push(course.min_time_commitment)
+
     user_ratings_matrix = Matrix.diagonal(*user_ratings)
     min_ratings_matrix = Matrix.diagonal(*min_ratings)
 
@@ -58,7 +63,7 @@ class User < ActiveRecord::Base
     results = user_ratings_matrix * min_ratings_factor_matrix
 
     overall = 0
-    
+
     results.column(0) do |c|
       overall += c
     end

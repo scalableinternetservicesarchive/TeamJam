@@ -6,7 +6,7 @@ class Team < ActiveRecord::Base
   validates :passcode, presence: true
 
   def send_rating_notif
-    if team.course.skills.count > 0
+    if self.course.skills.count > 0
     self.students.each { |st|
       self.students.each { |other_st|
         if other_st.id != st.id
