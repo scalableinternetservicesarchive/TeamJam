@@ -38,17 +38,17 @@
   </div>
   <%= f.label :skillset %>
   <div class="row">
-
-  <div class="form-group col-md-4" style="overflow-y: scroll;height: 200px;border: solid" >
-    <%= fields_for(:skillset) do |field| %>
-    <% @skills.each do |sk| %>
-    <p>
-    <%= field.label sk.name %>
-    <%= field.select sk.id.to_i, rating_array  %>
-    </p>
-    <% end %>
-    <% end %>
-      </div>
+    <div class="form-group col-md-4" style="overflow-y: scroll;height: 200px;border: solid" >
+      <%= fields_for(:skillset) do |field| %>
+        <% Skill.all.each do |sk| %>
+          <p>
+          <%= field.label sk.name %>
+          <%= field.select sk.id.to_i, rating_array  %>
+          </p>
+        <% end %>
+      <% end %>
+    </div>
   </div>
+  
 <%= f.submit 'Create' %>
 <% end %>
