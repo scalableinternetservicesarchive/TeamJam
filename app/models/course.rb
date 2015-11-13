@@ -7,13 +7,5 @@ class Course < ActiveRecord::Base
   has_one :instructor, :class_name => 'User', :foreign_key => 'instructor_id'
 end
 
-  def self.sorted_by_overall_rating(stuA, stuB, current_course_id)
-    if stuA.overall_rating(current_course_id) < stuB.overall_rating(current_course_id)
-      return -1
-    elsif stuA.overall_rating(current_course_id) == stuB.overall_rating(current_course_id)
-      return 0
-    else
-      return 1
-    end
-  end
+  
 
