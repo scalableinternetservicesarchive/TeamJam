@@ -2,7 +2,7 @@ class TeamsController < ApplicationController
   before_action :authenticate_user!
   def index
   end
-  
+
   def add_github
      @team = Team.find(params[:id])
     @team.github = params[:github]
