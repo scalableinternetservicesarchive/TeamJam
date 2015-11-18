@@ -1,7 +1,5 @@
 class CoursesController < ApplicationController
   before_action :authenticate_user!
-  def index
-  end
 
   def rate_members
     course = Course.find(params[:id])
@@ -108,5 +106,9 @@ class CoursesController < ApplicationController
 
   def course_params
     params.require(:course).permit(:name, :description, :max_members, :min_time_commitment, :start_date, :end_date)
+  end
+
+  def search
+
   end
 end

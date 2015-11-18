@@ -7,7 +7,8 @@ class Course < ActiveRecord::Base
   has_one :instructor, :class_name => 'User', :foreign_key => 'instructor_id'
   validates :min_time_commitment, presence: true
   validates :max_members, presence: true
+  validates :name, presence: true
 end
 
-  
+
 
