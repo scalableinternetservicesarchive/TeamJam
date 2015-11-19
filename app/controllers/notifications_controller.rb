@@ -1,6 +1,8 @@
 class NotificationsController < ApplicationController
   def index
-    @notifications = current_user.mailbox.notifications
+    if stale?(current_user.mailbox.notifications.all)
+      @notifications = current_user.mailbox.notifications
+    end
   end
 
   def is_number? string
