@@ -74,7 +74,8 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-    fresh_when([@course, @course.students, @course.teams, @course.course_skillsets])
+    # client-side caching for course show page is too complicated.
+    # fresh_when([@course, @course.students, @course.team_memberships, @course.teams, @course.course_skillsets])
     @enrolled = false
     @instr = false
     inst = User.find_by_id(@course.instructor_id.to_i)
