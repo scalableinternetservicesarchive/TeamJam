@@ -4,7 +4,7 @@ class TeamsController < ApplicationController
   end
 
   def add_github
-     @team = Team.find(params[:id])
+    @team = Team.find(params[:id])
     @team.github = params[:github]
     @team.save
     redirect_to team_path(@team)

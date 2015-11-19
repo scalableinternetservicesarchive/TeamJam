@@ -74,7 +74,7 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-    fresh_when([@course, @course.students])
+    fresh_when([@course, @course.students, @course.teams, @course.course_skillsets])
     @enrolled = false
     @instr = false
     inst = User.find_by_id(@course.instructor_id.to_i)
