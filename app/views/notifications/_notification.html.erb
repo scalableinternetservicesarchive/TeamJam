@@ -1,4 +1,5 @@
-<% if !notification.is_deleted?(current_user) %>
+
+<% cache("#{notification.id}-#{notification.updated_at}") do %>
 <div class="row "%>
   <div class= "col-md-5"%>
   <% if notification.notification_code.to_i == 5 %>

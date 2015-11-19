@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <% cache("#{current_user.mailbox.notifications.count}-#{unread_messages_count}") do %>
   <header class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-inner">
       <div class="container">
@@ -19,7 +19,7 @@
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
         	<% if user_signed_in? %>
 						<ul class="nav navbar-nav navbar-right">
-              <% num_notif = (current_user.mailbox.notifications.select{|n| !n.is_deleted?(current_user)}).count %>
+              <% num_notif = current_user.mailbox.notifications.count %>
               <li><%= link_to(notifications_path) do %>
                 Notifications
                <% if num_notif > 0 %>
@@ -45,16 +45,28 @@
       </div>
     </div>
   </header>
+  <% end %>
    <div id="wrapper">
  <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
+     <% if user_signed_in? %>
+    <% cache(cache_key_course_team) do %>
+              <ul class="sidebar-nav">
                <li class="sidebar-brand">
                         Your Classes
                 </li>
-              <% if user_signed_in? %>
-                <% @courses_app.each do |course| %>
-                  <% if @course_team_app.has_key?(course) %>
-                  <% team = @course_team_app[course] %>
+              <% courses_app = current_user.courses %>
+             <% teams_app = current_user.teams %>
+             <% course_team_app = Hash.new %>
+             <% courses_app.each do |course| %>
+                <% teams_app.each do |team|  %>
+                 <%  if team.course == course  %>
+                 <%  course_team_app[course] =  team  %>
+                 <%  end  %>
+              <%  end  %>
+             <% end  %>
+                <% courses_app.each do |course| %>
+                  <% if course_team_app.has_key?(course) %>
+                  <% team = course_team_app[course] %>
                         <li><%= link_to course.name, course %>
                             <ul>
                                 <li><%= link_to team.name, team %>
@@ -66,6 +78,7 @@
               <% end %>
            <% end %>
       </ul>
+   <% end %>
   </div>
 
  <div id="page-content-wrapper">

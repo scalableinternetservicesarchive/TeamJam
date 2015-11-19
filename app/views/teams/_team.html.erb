@@ -1,3 +1,4 @@
+<% cache(cache_key_team(team, user_course_team)) do %>
 <div class="row col-md-12">
   <div class="row col-md-5">
     <% diff = team.course.max_members - team.students.count   %>
@@ -44,6 +45,7 @@
     </div>
 </div>
 </div>
+<% end %>
 
 
 

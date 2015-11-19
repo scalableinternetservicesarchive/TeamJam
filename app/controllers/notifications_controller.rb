@@ -2,7 +2,7 @@ class NotificationsController < ApplicationController
   def index
     @notifications = current_user.mailbox.notifications
   end
-  
+
   def is_number? string
   true if Float(string) rescue false
 end
@@ -29,12 +29,13 @@ end
        end
       end
     flash[:notice] = "#{@user.first_name}'s ratings were updated based on your feedback!"
+    notif.destroy
     redirect_to :back
   end
 
   def mark_as_read
     notif = current_user.mailbox.notifications.where(id: params[:id]).first
-    notif.mark_as_deleted(current_user)
+    notif.destroy
     redirect_to :back
   end
 
@@ -69,7 +70,8 @@ end
              flash[:notice] = "Team was full or you are already in another team"
            end
         end
-    notif.mark_as_deleted(current_user)
+    #notif.mark_as_deleted(current_user)
+    notif.destroy
      redirect_to :back
   end
 
@@ -86,7 +88,8 @@ end
       sender.notify("DENIED","#{current_user.first_name} has rejected your invitation  to join team #{team.name}",nil,true,6,false,nil)
       flash[:notice] = "You rejected invitation to join the team #{team.name}"
     end
-    notif.mark_as_deleted(current_user)
+    #notif.mark_as_deleted(current_user)
+    notif.destroy
     redirect_to :back
   end
 end

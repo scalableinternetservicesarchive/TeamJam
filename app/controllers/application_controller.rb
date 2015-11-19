@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   #protect_from_forgery with: :exception
   protect_from_forgery :except => :create
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :get_user_info
+  #before_action :get_user_info
   helper_method :mailbox
 
   private
@@ -27,19 +27,5 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up).concat(additional_params)
     devise_parameter_sanitizer.for(:account_update).concat(additional_params)
   end
-  def get_user_info
-    if user_signed_in?
-    @courses_app = current_user.courses
-    @teams_app = current_user.teams
-    @course_team_app = Hash.new
-
-    @courses_app.each do |course|
-      @teams_app.each do |team|
-        if team.course == course
-          @course_team_app[course] = team
-        end
-      end
-  end
-  end
-end
+ 
 end
