@@ -12,6 +12,8 @@ class TeamsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     @course = @team.course
+    # client side caching
+    fresh_when([@team, @team.students, SkillRating.all])
     #TODO: change database setting so min_time_commitment initialized as 0
     if @course.min_time_commitment == nil
       @course.min_time_commitment = 0
@@ -20,7 +22,7 @@ class TeamsController < ApplicationController
 
   def new
     @course = params[:course_id]
-    @team = Team.new(:course_id => params[:course_id])
+    @team = Team.new(:course_id => params[:course_id]) if stale?(@course)
   end
 
   def leave

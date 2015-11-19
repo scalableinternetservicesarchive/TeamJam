@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    fresh_when([@user, @user.skill_ratings, @user.skills, @user.courses, @user.teams])
     @courses = @user.courses
     @teams = @user.teams
     @course_team = Hash.new
