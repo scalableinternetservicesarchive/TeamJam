@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <% cache("#{current_user.mailbox.notifications.count}-#{unread_messages_count}") do %>
+  <% #cache("#{current_user.mailbox.notifications.count}-#{unread_messages_count}") do %>
   <header class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-inner">
       <div class="container">
@@ -45,11 +45,11 @@
       </div>
     </div>
   </header>
-  <% end %>
+  <% #end %>
    <div id="wrapper">
  <div id="sidebar-wrapper">
      <% if user_signed_in? %>
-    <% cache(cache_key_course_team) do %>
+    <% #cache(cache_key_course_team) do %>
               <ul class="sidebar-nav">
                <li class="sidebar-brand">
                         Your Classes
@@ -78,7 +78,7 @@
               <% end %>
            <% end %>
       </ul>
-   <% end %>
+   <% #end %>
   </div>
 
  <div id="page-content-wrapper">
