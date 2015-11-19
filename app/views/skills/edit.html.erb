@@ -1,8 +1,15 @@
 <% rating_array = [['n00b',0],['Some Experience',1],['Experienced',2],['Pro',3]] %>
+ <div class="row">
+    <div class="form-group col-md-4" style="overflow-y: scroll;height: 500px;border: solid" >
+      <br>
 <%= form_for(:skillset, url: update_skills_path) do |f| %>
 <% @skills.each do |sk| %>
+      <p>
 <%= f.label sk.name %>
 <%= f.select sk.id.to_i, rating_array, :selected => @skillsett[sk.id] %>
+      </p>
 <% end %>
 <%= f.submit 'Submit' %>
 <% end %>
+   </div>
+   </div>
