@@ -9,7 +9,7 @@ end
 
   def rate
     alpha = 0.25
-    notif = current_user.mailbox.notifications.where(id: params[:id]).first
+    notif = current_user.mailbox.notifications.find(params[:id])
     notif.mark_as_deleted(current_user)
     @user = User.find(params[:user_id])
     params[:skillset].each do |id, rating|

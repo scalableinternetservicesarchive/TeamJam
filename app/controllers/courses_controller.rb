@@ -89,17 +89,17 @@ class CoursesController < ApplicationController
     end
       @ordered_students = @course.students
     if(params[:order_skill].present?)
-      students_ids = @ordered_students.collect{ |st| st.id }
+      students_ids = @ordered_students.pluck(:id)
       id = params[:order_skill]
       if id.to_i == -1 #order by time commitment
-          ratings = Enrollment.where(course_id: @course.id).order(time_commitment: :desc)
+        ratings = Enrollment.includes(:student).where(course_id: @course.id).order(time_commitment: :desc)
       elsif id.to_i != -2
-          ratings = SkillRating.where(skill_id: id).where("user_id IN (?)", students_ids).order(rating: :desc) #order by individual skills
+          ratings = SkillRating.includes(:student).where(skill_id: id).where("user_id IN (?)", students_ids).order(rating: :desc) #order by individual skills
       end
       if id.to_i == -2
-          @ordered_students = Course.find(params[:id]).students.sort_by{|obj| obj.overall_rating(params[:id])}.reverse!
+        @ordered_students = @course.students.sort_by{|obj| -1*obj.overall_rating(params[:id])}
       else
-          @ordered_students = ratings.collect{|r| User.find(r.user_id)}
+        @ordered_students = ratings.collect{|r| r.student}
       end
     end
   end
