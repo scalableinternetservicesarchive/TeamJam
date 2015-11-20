@@ -1,6 +1,7 @@
 class JoinClassesController < ApplicationController
   def index
     @all_course = Course.all
+    fresh_when([@all_course, current_user.courses])
   end
 
   def join_courses

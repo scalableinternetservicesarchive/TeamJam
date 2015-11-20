@@ -2,7 +2,7 @@ class ConversationsController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    
+
   end
 
   def create
@@ -14,8 +14,10 @@ class ConversationsController < ApplicationController
 
   def show
     @receipts = conversation.receipts_for(current_user)
+     conversation.mark_as_read(current_user)
+    fresh_when(@receipts)
     # mark conversation as read
-    conversation.mark_as_read(current_user)
+
   end
 
    def trash
@@ -27,7 +29,7 @@ class ConversationsController < ApplicationController
     conversation.untrash(current_user)
     redirect_to mailbox_inbox_path
   end
-  
+
   def reply
     current_user.reply_to_conversation(conversation, message_params[:body])
     flash[:notice] = "Your reply message was successfully sent!"

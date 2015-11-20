@@ -1,8 +1,7 @@
 class NotificationsController < ApplicationController
   def index
-    if stale?(current_user.mailbox.notifications.all)
-      @notifications = current_user.mailbox.notifications
-    end
+     @notifications = current_user.mailbox.notifications
+     fresh_when([@notifications])
   end
 
   def is_number? string

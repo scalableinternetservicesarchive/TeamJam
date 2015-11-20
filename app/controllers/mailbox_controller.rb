@@ -3,6 +3,8 @@ class MailboxController < ApplicationController
 
   def inbox
     @inbox = mailbox.inbox
+    count =  mailbox.inbox(:unread => true).count(:id, :distinct => true)
+    fresh_when([@inbox, count])
     @active = :inbox
   end
 
