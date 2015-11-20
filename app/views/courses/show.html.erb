@@ -28,11 +28,9 @@
 </div>
 <% if @enrolled %>
 <div class="row">
-  <h5 class="col-md-4"><%= "Your time commitment: #{@time} hrs/wk" %><h5>
-  <%= form_tag(edit_time_commitment_course_path(@course), class:"col-md-8 pull-left" ) do %>
-<%= number_field_tag(:time, in: 1..20, step: 1) %>
-<%= submit_tag("Update Time Commitment") %>
-<% end %>
+  <h5 id="tc"><%= "Your time commitment: #{@time} hrs/wk" %></h5>
+  <h5><%= link_to ' Update', course_change_time_commitment_path(@course), remote: true %></h5>
+   <div id="update-form" style="display:none;"></div>
 <% end %>
 </div>
 <ul class="nav nav-tabs">

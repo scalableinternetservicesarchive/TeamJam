@@ -13,6 +13,14 @@ class CoursesController < ApplicationController
     @course = Course.new
   end
 
+  def change_time_commitment
+    @course = Course.find(params[:course_id])
+    respond_to do |format|
+    format.html
+    format.js
+  end
+  end
+
   def create
     @course = Course.new(course_params)
     @course.instructor_id = current_user.id
@@ -42,7 +50,12 @@ class CoursesController < ApplicationController
     else
       flash[:notice] = "Bad Time value supplied"
     end
-    redirect_to :back
+    @time = params[:time]
+      respond_to do |format|
+    format.html
+    format.js
+  end
+   # redirect_to :back
   end
 
   def join

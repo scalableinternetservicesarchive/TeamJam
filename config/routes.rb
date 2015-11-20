@@ -48,7 +48,8 @@ end
     post 'edit_time_commitment', on: :member
     post 'join', on: :member
     post 'leave', on: :member
-    post 'rate_members', on: :member 
+    post 'rate_members', on: :member
+    get 'change_time_commitment'
     resources :teams do
       get 'join', on: :member
       post 'join_try', on: :member
