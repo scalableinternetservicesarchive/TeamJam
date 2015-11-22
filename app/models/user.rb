@@ -26,7 +26,8 @@ class User < ActiveRecord::Base
   end
 
   def find_course_team(current_course)
-     self.teams.each do |tm|
+    
+     self.teams.each do |tm| 
        if tm.course == current_course
          return tm
        end

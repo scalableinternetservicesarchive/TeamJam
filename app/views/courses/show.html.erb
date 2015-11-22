@@ -6,9 +6,11 @@
           <p><small><%= @course.description %></small> </p>
        <span class="label label-default"> <%= @course.max_members %> per team </span> &nbsp;
       <span class="label label-default"> <%= @course.min_time_commitment %> hrs/wk </span> &nbsp;
+      <% logger.debug("c_skills_start") %>
       <% @course.skills.each do |sk| %>
       <span class="label label-default"> <%= sk.name %> </span> &nbsp;
       <% end %>
+      <% logger.debug("c_skills_end") %>
       <p> </p>
       <% if !@enrolled %>
       <p>

@@ -73,21 +73,23 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.find(params[:id])
+    @course = Course.includes(:skills).find(params[:id])
     @enrolled = false
-    @instr = false
-    inst = User.find_by_id(@course.instructor_id.to_i)
-    if inst
-      if inst.id == current_user.id
-        @instr = true
-      end
-    end
+    #@instr = false
+    #inst = User.find_by_id(@course.instructor_id.to_i)
+    #if inst
+     # if inst.id == current_user.id
+      #  @instr = true
+      #end
+    #end
     if current_user.courses.include?(@course)
     @enrolled = true
     @user_course_team = current_user.find_course_team(@course)
     @time = current_user.enrollments.where(course_id: @course.id).first.time_commitment
     end
-      @ordered_students = @course.students
+
+    @ordered_students = @course.students
+
     if(params[:order_skill].present?)
       students_ids = @ordered_students.pluck(:id)
       id = params[:order_skill]
@@ -108,7 +110,4 @@ class CoursesController < ApplicationController
     params.require(:course).permit(:name, :description, :max_members, :min_time_commitment, :start_date, :end_date)
   end
 
-  def search
-
-  end
 end
