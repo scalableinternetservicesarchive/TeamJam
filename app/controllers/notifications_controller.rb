@@ -45,11 +45,13 @@ end
     team = Team.find_by_id(notif.attachment.to_i) #team should exist, check that too
       if notif.notification_code.to_i == 1  #accept students offer to join team, you are the owner
          if (team.students.count < team.course.max_members) && (sender.find_course_team(team.course) == false )
+          logger.debug("notify teammates begin")
            team.students.each { |st|
              if st.id.to_i != team.team_owner_id.to_i
              st.notify("SUCCESS", " #{sender.first_name} was successfully added to your team #{team.name}",nil,true,5,false,nil)
              end
              }
+          logger.debug("notify teammates END")
         TeamMembership.create(team_id: team.id, user_id: sender.id)
         #current_user.notify("SUCCESS","#{sender.first} was successfully added to your team #{team.name}",nil,true,5,false,nil)
            flash[:notice] = "#{sender.first_name} was successfully added to your team #{team.name}"

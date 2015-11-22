@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
-
-
   def invite
     @user = User.find(params[:id])
     puts("inviting #{@user.first_name}")
@@ -18,7 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:id])  #
     @courses = @user.courses
     @teams = @user.teams
     @course_team = Hash.new
@@ -31,7 +29,7 @@ class UsersController < ApplicationController
       if arr.count == 0
         SkillRating.create(user_id: @user.id, skill_id: sk.id, rating: 0, reviews: 0)
          @user_skill_rating[sk] = 0
-        @user_skill_reviews[sk] = 0
+         @user_skill_reviews[sk] = 0
       else
         @user_skill_rating[sk] = arr.first.rating.round()
         @user_skill_reviews[sk] = arr.first.reviews
@@ -43,7 +41,7 @@ class UsersController < ApplicationController
           @course_team[course] = team
         end
       end
-  end
+    end
   end
 
 end

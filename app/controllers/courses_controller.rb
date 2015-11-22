@@ -30,9 +30,6 @@ class CoursesController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def edit_time_commitment
     course = Course.find(params[:id])
     enroll = Enrollment.where(user_id: current_user.id, course_id: course.id).first
@@ -83,9 +80,9 @@ class CoursesController < ApplicationController
       #end
     #end
     if current_user.courses.include?(@course)
-    @enrolled = true
-    @user_course_team = current_user.find_course_team(@course)
-    @time = current_user.enrollments.where(course_id: @course.id).first.time_commitment
+      @enrolled = true
+      @user_course_team = current_user.find_course_team(@course)
+      @time = current_user.enrollments.where(course_id: @course.id).first.time_commitment
     end
 
     @ordered_students = @course.students

@@ -9,6 +9,7 @@ class TeamsController < ApplicationController
     @team.save
     redirect_to team_path(@team)
   end
+
   def show
     @team = Team.find(params[:id])
     @course = @team.course
@@ -65,7 +66,7 @@ class TeamsController < ApplicationController
   def express_interest
     #find team owner(or everyone in the team), send a notification from the current user to them
     #user1.notify("DENY","SORRY BUT YOU WERE DENIED",nil,true,2,false,user2)
-     @course = Course.find(params[:course_id])
+    @course = Course.find(params[:course_id])
     @team = Team.find(params[:id])
     @owner = User.find_by_id(@team.team_owner_id)
     recp = @owner.notify("OFFER","asdf",nil,true,1,false,current_user)
