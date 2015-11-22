@@ -2,8 +2,9 @@ class CoursesController < ApplicationController
   before_action :authenticate_user!
 
   def rate_members
-    course = Course.find(params[:id])
-    Team.where(course_id: course.id).each {|t| t.send_rating_notif}
+    course = Course.includes(:teams).find(params[:id])   #
+    course.teams.each {|t| t.send_rating_notif}
+    #Team.where(course_id: course.id).each {|t| t.send_rating_notif}
     flash[:notice] = "All students were asked to rate their teammates"
     redirect_to :back
   end
