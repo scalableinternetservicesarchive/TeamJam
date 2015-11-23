@@ -60,7 +60,7 @@
 
   <sessions>
     <!-- User signin and update profile -->
-    <session name="user_signin" probability="95" type="ts_http">
+    <session name="user_signin" probability="40" type="ts_http">
 
       <!-- start out at the dashboard. -->
       <request>
@@ -139,7 +139,7 @@
 
     </session>
 
-    <session name="user_joincourse" probability="5" type="ts_http">
+    <session name="user_joincourse" probability="20" type="ts_http">
 
       <!-- start out at the dashboard. -->
       <request>
@@ -196,10 +196,114 @@
         </http>
       </request>-->
 
-      <!-- join course -->
+      <setdynvars sourcetype="random_number" start="1" end="15">
+        <var name="random_courseid" />
+      </setdynvars>
 
+      <!-- view all courses that can join-->
+      <request>
+        <http url='/join_classes/index' version='1.1' method='GET'></http>
+      </request>
 
+      <thinktime value="2" random="true"></thinktime>
 
+      <!-- go to course page-->
+      <request>
+        <http url='/courses/%%_random_courseid%%' version='1.1' method='GET'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- join course-->
+      <request>
+        <http url='/courses/%%_random_courseid%%/join' version='1.1' method='POST'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- view classmates -->
+      <request>
+        <http url='/courses/%%_random_courseid%%#classmates' version='1.1' method='POST'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- view teams -->
+      <request>
+        <http url='/courses/%%_random_courseid%%#teams' version='1.1' method='POST'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+    </session>
+
+    <session name="user_createteam" probability="5" type="ts_http">
+
+      <!-- start out at the dashboard. -->
+      <request>
+        <http url='/' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait for up to 2 seconds, user is looking at posts -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <setdynvars sourcetype="random_number" start="1000" end="9999999">
+        <var name="random_user_id" />
+      </setdynvars>
+
+      <setdynvars sourcetype="random_number" start="100000000" end="999999999">
+        <var name="random_user_id_update" />
+      </setdynvars>
+
+      <!-- signin -->
+      <request subst="true">
+        <http
+          url='/users/sign_in'
+          version='1.1'
+          method='POST'
+          contents='user%5Bemail%5D=user%%_random_user_id%%%40email.com&amp;
+          user%5Bpassword%5D=password%%_random_user_id%%&amp;
+          user%5Bremember_me%5D=0&amp;commit=Log+in'>
+        </http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <setdynvars sourcetype="random_number" start="1" end="15">
+        <var name="random_courseid" />
+      </setdynvars>
+
+      <!-- view all courses that can join-->
+      <request>
+        <http url='/join_classes/index' version='1.1' method='GET'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- go to course page-->
+      <request>
+        <http url='/courses/%%_random_courseid%%' version='1.1' method='GET'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- join course-->
+      <request>
+        <http url='/courses/%%_random_courseid%%/join' version='1.1' method='POST'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request subst="true">
+        <http
+          url='/courses/%%_random_courseid%%/teams'
+          version='1.1'
+          method='POST'
+          contents='team%5Bname%5D=team%%_random_courseid%%by%%_random_user_id%%&amp;
+          team%5Bdescription%5D=course%%_random_courseid%%&amp;
+          team%5Bpasscode%5D=0&amp;commit=Create+Team'>
+        </http>
+      </request>
     </session>
 
   </sessions>
