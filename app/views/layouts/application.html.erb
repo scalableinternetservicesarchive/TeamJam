@@ -58,7 +58,7 @@
              <% teams_app = current_user.teams %>
              <% course_team_app = Hash.new %>
              <% courses_app.each do |course| %>
-                <% teams_app.each do |team|  %>
+                <% teams_app.includes(:course).each do |team|  %>
                  <%  if team.course == course  %>
                  <%  course_team_app[course] =  team  %>
                  <%  end  %>

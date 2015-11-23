@@ -1,6 +1,6 @@
 <%= javascript_tag do %>
 var data = [
-  <% @team.students.each do |st| %>
+  <% @team.students.includes(:skills).each do |st| %>
   {
 classname: '<%= st.first_name %>',
 axes: [
