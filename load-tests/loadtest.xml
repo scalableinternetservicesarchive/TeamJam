@@ -10,7 +10,7 @@
   <!-- Server side setup -->
   <!-- IMPORTANT: CHANGE HOST TO YOUR TSUNG HOST -->
   <servers>
-    <server host="ec2-52-34-77-31.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-33-250-16.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -115,9 +115,9 @@
 
       <!-- edit profile: send form-->
       <request subst="true">
-        <http 
-          url='/users/edit' 
-          version='1.1' 
+        <http
+          url='/users/edit'
+          version='1.1'
           method='POST'
           contents='user%5Bemail%5D=useremail%%_random_user_id_update%%%40email.com&amp;
           user%5Bfirst_name%5D=userfirst%%_random_user_id_update%%&amp;
@@ -176,9 +176,9 @@
 
       <thinktime value="2" random="true"></thinktime>
 
-      <!-- create course 
+      <!-- create course
       <request subst="true">
-        <http 
+        <http
           url='/courses'
           version='1.1'
           method='POST'
