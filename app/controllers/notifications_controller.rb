@@ -14,11 +14,11 @@ end
     @user = User.find(params[:user_id])
     params[:skillset].each do |id, rating|
       if is_number?(id)
-       @sr = SkillRating.where(skill_id: id.to_i, user_id: @user.id).first
-      @sr.rating  = @sr.rating*(1-alpha) + rating.to_i*alpha
+        @sr = SkillRating.where(skill_id: id.to_i, user_id: @user.id).first
+        @sr.rating  = @sr.rating*(1-alpha) + rating.to_i*alpha
         @sr.reviews = @sr.reviews + 1
-      @sr.save
-       else
+        @sr.save
+      else
          if @user.dependability == 0
          @user.dependability = rating.to_i
          else
@@ -45,13 +45,13 @@ end
     team = Team.find_by_id(notif.attachment.to_i) #team should exist, check that too
       if notif.notification_code.to_i == 1  #accept students offer to join team, you are the owner
          if (team.students.count < team.course.max_members) && (sender.find_course_team(team.course) == false )
-          logger.debug("notify teammates begin")
+
            team.students.each { |st|
              if st.id.to_i != team.team_owner_id.to_i
-             st.notify("SUCCESS", " #{sender.first_name} was successfully added to your team #{team.name}",nil,true,5,false,nil)
+                st.notify("SUCCESS", " #{sender.first_name} was successfully added to your team #{team.name}",nil,true,5,false,nil)
              end
              }
-          logger.debug("notify teammates END")
+
         TeamMembership.create(team_id: team.id, user_id: sender.id)
         #current_user.notify("SUCCESS","#{sender.first} was successfully added to your team #{team.name}",nil,true,5,false,nil)
            flash[:notice] = "#{sender.first_name} was successfully added to your team #{team.name}"
@@ -63,7 +63,7 @@ end
            if (team.students.count < team.course.max_members) && (current_user.find_course_team(team.course) == false )
              team.students.each { |st|
              st.notify( "SUCCESS", "#{current_user.first_name} has accepted the invitation  to join team #{team.name}",nil,true,5,false,nil )
-             }
+             }           
         TeamMembership.create(team_id: team.id, user_id: current_user.id)
        # current_user.notify("SUCCESS","You were successfully added to the team #{team.name}",nil,true,5,false,nil)
          flash[:notice] ="You were successfully added to the team #{team.name}"
