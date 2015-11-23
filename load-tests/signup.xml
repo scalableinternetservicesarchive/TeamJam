@@ -9,7 +9,7 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="ec2-52-27-46-220.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-33-50-192.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -20,7 +20,7 @@
     <arrivalphase phase="2" duration="60" unit="second">
       <users arrivalrate="1.5" unit="second"></users>
     </arrivalphase>
-    <arrivalphase phase="3" duration="60" unit="second">
+    <!--- <arrivalphase phase="3" duration="60" unit="second">
       <users arrivalrate="2" unit="second"></users>
     </arrivalphase>
     <arrivalphase phase="4" duration="60" unit="second">
@@ -28,7 +28,7 @@
     </arrivalphase>
     <arrivalphase phase="5" duration="60" unit="second">
       <users arrivalrate="16" unit="second"></users>
-    </arrivalphase>
+    </arrivalphase> -->
   </load>
 
   <options>
@@ -107,6 +107,17 @@
           >
         </http>
       </request>
+
+      <!-- Join Course -->
+      <request subst="true">
+        <http
+          url='/join_classes/join_courses'
+          version='1.1'
+          method='POST'
+          contents='all_courses%5Babc%5D=13&amp;
+          commit=Join+Courses'></http>
+      </request>
+
     </session>
   </sessions>
 </tsung>
