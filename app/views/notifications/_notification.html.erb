@@ -13,7 +13,7 @@
   <div class="panel-body">
   <%= notification.body %>
     <% if notification.notification_code.to_i == 10 %>
-    <% course = (Team.find_by_id(notification.attachment.to_i)).course.includes %>
+    <% course = (Team.includes(course: :skills).find_by_id(notification.attachment.to_i)).course %>
     <%= course.name %>
    <% rating_array = [['n00b',0],['Some Experience',1],['Experienced',2],['Pro',3]] %>
     <%= form_for(:skillset, url: {controller: 'notifications', action: 'rate', id: notification.id, user_id: notification.sender.id}) do |f| %>
