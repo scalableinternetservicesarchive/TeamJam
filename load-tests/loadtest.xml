@@ -59,6 +59,81 @@
   </options>
 
   <sessions>
+    <session name="user_signup" probability="3" type="ts_http">
+
+      <!-- User goes to Home page -->
+      <request>
+        <http url='/' version='1.1' method='GET'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- User sign up -->
+      <request>
+        <http url='/users/sign_up' version='1.1' method='GET'></http>
+      </request>
+
+      <setdynvars sourcetype="eval"
+            code='fun({Pid,DynVars})-> [[13, 10]] end.'>
+        <var name="nl" />
+      </setdynvars>
+
+      <setdynvars sourcetype="random_number" start="1" end="9999999">
+        <var name="random_user_number" />
+      </setdynvars>
+
+      <setdynvars sourcetype="random_number" start="1" end="9999999">
+        <var name="random_boundary_number" />
+      </setdynvars>
+
+      <request subst="true">
+        <http
+          url='/users'
+          version='1.1'
+          method='POST'
+          content_type='multipart/form-data; boundary=----WebKitFormBoundary%%_random_boundary_number%%'
+          contents='------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%
+          Content-Disposition: form-data; name="user[email]"%%_nl%%
+          %%_nl%%
+          user%%_random_user_number%%@gmail.com%%_nl%%
+          ------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%
+          Content-Disposition: form-data; name="user[password]"%%_nl%%
+          %%_nl%%
+          11111111%%_nl%%
+          ------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%
+          Content-Disposition: form-data; name="user[password_confirmation]"%%_nl%%
+          %%_nl%%
+          11111111%%_nl%%
+          ------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%
+          Content-Disposition: form-data; name="user[first_name]"%%_nl%%
+          %%_nl%%
+          %%_random_user_number%%first%%_nl%%
+          ------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%
+          Content-Disposition: form-data; name="user[last_name]"%%_nl%%
+          %%_nl%%
+          %%_random_user_number%%last%%_nl%%
+          ------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%
+          Content-Disposition: form-data; name="user[github]"%%_nl%%
+          %%_nl%%
+          https://github.com/user%%_random_user_number%%%%_nl%%
+          ------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%
+          Content-Disposition: form-data; name="commit"%%_nl%%
+          %%_nl%%
+          Sign up%%_nl%%
+          ------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%%%_nl%%
+          '
+          >
+        </http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request subst="true">
+        <http url='/users/sign_out' version='1.1' method='GET'></http>
+      </request>
+
+    </session>
+
     <!-- User signin and update profile -->
     <session name="user_signin" probability="40" type="ts_http">
 
