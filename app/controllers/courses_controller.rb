@@ -71,7 +71,7 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.includes(:skills).find(params[:id])
+    @course = Course.includes(:skills).includes(teams: :students).find(params[:id])
     @enrolled = false
     #@instr = false
     #inst = User.find_by_id(@course.instructor_id.to_i)
