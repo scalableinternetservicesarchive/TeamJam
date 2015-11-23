@@ -16,6 +16,8 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+gem "bullet", :group => "development"
+
 gem 'devise', '~> 3.5.2'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'
 gem 'mailboxer', '~> 0.13.0'

@@ -18,9 +18,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])  #
     @courses = @user.courses
-    logger.debug("debug start")
     @teams = @user.teams.includes(:course)
-    logger.debug("debug end")
     @course_team = Hash.new
 
     @skills = Skill.all
