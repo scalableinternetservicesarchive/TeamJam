@@ -9,7 +9,7 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="ec2-54-148-61-114.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-25-37-116.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -57,94 +57,93 @@
     </option>
   </options>
 
+  <!-- ================================================= -->
+  <!--                     Sessions Weight               -->
+  <!-- [login-logout]                 1                  -->
+  <!-- [visit-homepage]               10                 -->
+  <!-- [visit-recipe]                 20                 -->
+  <!-- [visit-masterpiece]            5                  -->
+  <!-- [visit-user-profile]           5                  -->
+  <!-- [visit-search-index]           1                  -->
+  <!-- [search-by-name]               5                  -->
+  <!-- [search-by-tag]                4                  -->
+  <!-- [search-by-user]               1                  -->
+  <!-- [create-delete-recipe]         1                  -->
+  <!-- [create-delete-masterpiece]    1                  -->
+  <!-- [like-recipe]                  2                  -->
+  <!-- [bookmark-recipe]              2                  -->
+  <!-- [like-masterpiece]             1                  -->
+  <!-- ================================================= -->
+
   <sessions>
-    <session name="http-example" probability="100" type="ts_http">
+    <!-- ================================================= -->
+    <!--                      SESSION                      -->
+    <!--                    login-logout                   -->
+    <!-- ================================================= -->
+    <!-- 1. set up current user randomly -->
+    <!-- 2. login -->
+    <!-- 3. log out -->
+    <!-- ================================================= -->
+    <session name="login-logout" weight="1" type="ts_http">
 
-      <!-- start out at the dashboard. -->
-      <request>
-        <http url='/' version='1.1' method='GET'></http>
-      </request>
-
-      <!-- wait for up to 2 seconds, user is looking at posts -->
-      <thinktime value="2" random="true"></thinktime>
-
-      <!-- visit the New Community form, as a user would do.  -->
-      <request>
-        <http url='/communities/new' version='1.1' method='GET'></http>
-      </request>
-
-      <!-- wait for up to 2 seconds, user is filling out new community form -->
-      <thinktime value="2" random="true"></thinktime>
-
-      <!-- create a random number to make a unique community name -->
-      <setdynvars sourcetype="random_number" start="1000" end="9999999">
-        <var name="random_community_name" />
+      <!-- 1. set up current user randomly -->
+      <!-- [sample value] - current_user_id: 1 -->
+      <setdynvars sourcetype="random_number" start="1" end="500">
+        <var name="current_user_id" />
       </setdynvars>
 
-      <!-- post to /communities to create a community.
-           remember the url of the created community so we can delete it later -->
+      <setdynvars sourcetype="random_number" start="1" end="9999999">
+        <var name="random_boundary_number" />
+      </setdynvars>
+
+      <!-- Sign Up User -->
       <request subst="true">
-        <dyn_variable name="created_community_url" re="[Ll]ocation: (http://.*)\r"/>
-        <dyn_variable name="created_community_id" re="[Ll]ocation: http://.*/communities/(.*)\r"/>
         <http
-          url='/communities'
+          url='/users'
           version='1.1'
           method='POST'
-          contents='community%5Bname%5D=community_name_%%_random_community_name%%&amp;commit=Create+Community'>
+          contents='user%5bemail%5d=user%%_current_user_id%%%40gmail%2Ecom&amp;
+          user%5bpassword%5d=88888888&amp;
+          user%5bpassword_confirmation%5d=88888888&amp;
+          commit=Sign+up'>
         </http>
       </request>
 
-      <!-- visit the new submission form, as a user would do.  -->
       <request>
-        <http url='/submissions/new' version='1.1' method='GET'></http>
+        <http url='/users/sign_out' version='1.1' method='DELETE'></http>
       </request>
 
-      <!-- wait for up to 2 seconds, user is fillinf in new submission form -->
+      <!-- repeat step [2,3] 10 times -->
+      <for from="1" to="10" incr="1" var="counter">
+
+      <!-- 2. login -->
+      <!-- go to users/sign_in page -->
+      <!-- [sample value] - authenticity_token: ... -->
+      <request>
+        <dyn_variable name="authenticity_token" ></dyn_variable>
+        <http url="/users/sign_in" version="1.1" method="GET"></http>
+      </request>
+
       <thinktime value="2" random="true"></thinktime>
 
-      <!-- create a new submission in the community we just created -->
-      <setdynvars sourcetype="random_number" start="1000" end="9999999">
-        <var name="random_submission_name" />
-      </setdynvars>
+      <if var="authenticity_token" neq="">
+      <!-- log in using username and password -->
+      <!-- [sample value] - login: user_1 -->
+      <!-- [sample value] - password: 88888888 -->
+      <!-- [sample value] - authenticity_token: ... -->
+      <!-- [sample value] - remember_me: 0 -->
+
 
       <request subst="true">
-        <dyn_variable name="created_submission_url" re="[Ll]ocation: (http://.*)\r"/>
-        <dyn_variable name="created_submission_id" re="[Ll]ocation: http://.*/submissions/(.*)\r"/>
-        <http
-          url='/submissions'
-          version='1.1'
-          method='POST'
-          contents='submission%5Btitle%5D=link_%%_random_submission_name%%&amp;submission%5Burl%5D=http%3A%2F%2Fwww.article.com%2F%%_random_submission_name%%&amp;submission%5Bcommunity_id%5D=%%_created_community_id%%&amp;commit=Create+Submission'>
-        </http>
+        <http url="/users/sign_in" method="POST" version="1.1"
+          content_type="application/x-www-form-urlencoded"
+          contents="utf8=%E2%9C%93&amp;authenticity_token=%%_authenticity_token%%&amp;user%5Blogin%5D=user_%%_current_user_id%%@gmail.com&amp;user%5Bpassword%5D=88888888&amp;user%5Bremember_me%5D=0&amp;commit=Log+in"/>
       </request>
 
-      <!-- wait for up to 2 seconds, user decides to delete submission -->
       <thinktime value="2" random="true"></thinktime>
 
-      <!-- delete the submission we just created -->
-      <request subst="true">
-        <http url="%%_created_submission_url%%" method="DELETE">
-        </http>
-      </request>
-
-      <!-- wait for up to 2 seconds, user decides to delete community -->
-      <thinktime value="2" random="true"></thinktime>
-
-      <!-- Uncomment the following to debug print your dynamic variables  --> 
-      <!--
-      <setdynvars sourcetype="eval" code="fun( {Pid, DynVars} ) ->
-        io:format([126, $p, 126, $n, 126, $n], [DynVars]),
-        ok end.">
-        <var name="dump" />
-      </setdynvars>
-      -->
-
-      <!-- delete the community we created -->
-
-      <request subst="true">
-        <http url="%%_created_community_url%%" method="DELETE">
-        </http>
-      </request>
+      </if>
+      </for>
 
     </session>
   </sessions>

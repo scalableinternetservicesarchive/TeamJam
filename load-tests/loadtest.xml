@@ -58,6 +58,24 @@
     </option>
   </options>
 
+  <!-- ================================================= -->
+  <!--                     Sessions Weight               -->
+  <!-- [login-logout]                 1                  -->
+  <!-- [visit-homepage]               10                 -->
+  <!-- [visit-recipe]                 20                 -->
+  <!-- [visit-masterpiece]            5                  -->
+  <!-- [visit-user-profile]           5                  -->
+  <!-- [visit-search-index]           1                  -->
+  <!-- [search-by-name]               5                  -->
+  <!-- [search-by-tag]                4                  -->
+  <!-- [search-by-user]               1                  -->
+  <!-- [create-delete-recipe]         1                  -->
+  <!-- [create-delete-masterpiece]    1                  -->
+  <!-- [like-recipe]                  2                  -->
+  <!-- [bookmark-recipe]              2                  -->
+  <!-- [like-masterpiece]             1                  -->
+  <!-- ================================================= -->
+  
   <sessions>
     <session name="user_signup" probability="3" type="ts_http">
 
