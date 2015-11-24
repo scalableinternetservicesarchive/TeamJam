@@ -6,7 +6,8 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body> 	
+<% if user_signed_in? %>
   <% cache("#{current_user.mailbox.notifications.count}-#{unread_messages_count}") do %>
   <header class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-inner">
@@ -46,6 +47,7 @@
     </div>
   </header>
   <% end %>
+ <% end %>
    <div id="wrapper">
  <div id="sidebar-wrapper">
      <% if user_signed_in? %>
