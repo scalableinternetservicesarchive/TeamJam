@@ -58,8 +58,25 @@
     </option>
   </options>
 
+  <!-- ================================================= -->
+  <!--                     Sessions Weight               -->
+  <!-- [user_signup]                  3                  -->
+  <!-- [user_signin]                  40                 -->
+  <!-- [user_createcourse]            1                  -->
+  <!-- [user_joincourse]              30                 -->
+  <!-- [user_creatteam]               15                 -->
+  <!-- [invite]                       10                 -->
+  <!-- ================================================= -->
+
   <sessions>
-    
+    <!-- ================================================= -->
+    <!--                      SESSION                      -->
+    <!--                    user_signup                    -->
+    <!-- ================================================= -->
+    <!-- 1. signup -->
+    <!-- 2. log out -->
+    <!-- ================================================= -->
+
     <session name="user_signup" probability="3" type="ts_http">
 
       <request>
@@ -132,6 +149,15 @@
       </request>
 
     </session>
+
+    <!-- ================================================= -->
+    <!--                      SESSION                      -->
+    <!--                    user_signin                    -->
+    <!-- ================================================= -->
+    <!-- 1. signin -->
+    <!-- 2. update forfile -->
+    <!-- 3. log out -->
+    <!-- ================================================= -->
 
     <!-- User signin and update profile -->
     <session name="user_signin" probability="40" type="ts_http">
@@ -213,6 +239,15 @@
 
     </session>
 
+    <!-- ================================================= -->
+    <!--                      SESSION                      -->
+    <!--                    user_createcourse              -->
+    <!-- ================================================= -->
+    <!-- 1. signin -->
+    <!-- 2. create course -->
+    <!-- 3. log out -->
+    <!-- ================================================= -->
+
     <session name="user_createcourse" probability="1" type="ts_http">
       <!-- start out at the dashboard. -->
       <request>
@@ -276,7 +311,18 @@
 
     </session>
 
-    <session name="user_joincourse" probability="20" type="ts_http">
+    <!-- ================================================= -->
+    <!--                      SESSION                      -->
+    <!--                    user_joincourse                -->
+    <!-- ================================================= -->
+    <!-- 1. signin -->
+    <!-- 2. view course -->
+    <!-- 3. join course -->
+    <!-- 4. view course info -->
+    <!-- 5. log out -->
+    <!-- ================================================= -->
+
+    <session name="user_joincourse" probability="30" type="ts_http">
 
       <!-- start out at the dashboard. -->
       <request>
@@ -368,7 +414,18 @@
 
     </session>
 
-    <session name="user_createteam" probability="5" type="ts_http">
+    <!-- ================================================= -->
+    <!--                      SESSION                      -->
+    <!--                    user_createteam                -->
+    <!-- ================================================= -->
+    <!-- 1. signin -->
+    <!-- 2. view course -->
+    <!-- 3. join course -->
+    <!-- 4. create team -->
+    <!-- 5. log out -->
+    <!-- ================================================= -->
+
+    <session name="user_createteam" probability="15" type="ts_http">
 
       <!-- start out at the dashboard. -->
       <request>
@@ -444,7 +501,14 @@
 
     </session>
 
-    <session name="invite" probability="20" type="ts_http">
+    <!-- ================================================= -->
+    <!--                      SESSION                      -->
+    <!--                       invite                      -->
+    <!-- ================================================= -->
+    <!-- 1. invite -->
+    <!-- ================================================= -->
+
+    <session name="invite" probability="10" type="ts_http">
 
       <!-- start out at the dashboard. -->
       <request>
