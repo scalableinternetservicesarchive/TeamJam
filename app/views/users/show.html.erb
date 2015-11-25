@@ -22,7 +22,7 @@ var data = [
  <div class="page-header">
    <%= image_tag @user.prof_pic.url, class: "img-circle", width: "150", height: "150", align: "left" %>
    <h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
-   <h3>Dependability: <%= "#{@user.dependability}" %><small> based on <%= pluralize @user.reviews, 'Review' %> </small>
+   <h3>Dependability: <%= "#{@user.dependability.round(2)}" %><small> based on <%= pluralize @user.reviews, 'Review' %> </small>
    </h3>
   </div>
   </div>
