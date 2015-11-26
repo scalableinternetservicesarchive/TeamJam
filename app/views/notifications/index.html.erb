@@ -1,4 +1,5 @@
 <div style="overflow-y: scroll;height: 500px;" >
-<%= render partial: "notification", collection: current_user.mailbox.notifications %>
+  <%= will_paginate @notifications %>
+<%= render partial: "notification", collection: @notifications %>
  </div>
 

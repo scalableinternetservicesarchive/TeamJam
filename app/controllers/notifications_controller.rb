@@ -1,6 +1,6 @@
 class NotificationsController < ApplicationController
   def index
-    @notifications = current_user.mailbox.notifications
+    @notifications = current_user.mailbox.notifications.paginate(:page => params[:page], :per_page => 10)
   end
 
   def is_number? string

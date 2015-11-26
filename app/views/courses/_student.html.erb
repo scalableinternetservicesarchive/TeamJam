@@ -1,5 +1,5 @@
 
-<tr>
+<tr class="st">
   <% #cache(cache_key_for_student_row(student, current_course, show_team, current_team, current_team_owner_id)) do %>
   <td>
     <%= link_to "#{student.first_name} #{student.last_name} ", user_path(student)%>
@@ -18,7 +18,9 @@
     <%= link_to tm.name, tm %>
     <% end %>
     <% if current_team != false && student.id != current_user.id && (tm == false || tm.id != current_team.id)%>
-    <%= link_to 'Invite', users_invite_path(id: student.id, team_id: current_team.id), method: :post %>
+    <%= link_to users_invite_path(id: student.id, team_id: current_team.id), method: :post, class: "inv", style: "display: none;" do %>
+    <span class="label label-default"> Invite </span>
+    <% end %>
     <% end %>
   </td>
   <% end %>
