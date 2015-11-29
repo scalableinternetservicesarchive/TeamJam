@@ -18,7 +18,7 @@ class CoursesController < ApplicationController
     respond_to do |format|
     format.html
     format.js
-  end
+    end
   end
 
   def create
@@ -45,11 +45,11 @@ class CoursesController < ApplicationController
     course = Course.find(params[:id])
     enroll = Enrollment.where(user_id: current_user.id, course_id: course.id).first
     enroll.time_commitment = params[:time].to_i
-    if enroll.save
-      flash[:notice] = "Time Commitment updated successfully"
-    else
-      flash[:notice] = "Bad Time value supplied"
-    end
+    #if enroll.save
+      #flash[:notice] = "Time Commitment updated successfully"
+  #  else
+    #  flash[:notice] = "Bad Time value supplied"
+ #   end
     @time = params[:time]
       respond_to do |format|
     format.html
@@ -87,7 +87,7 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-    @teams = @course.teams.paginate(:page => params[:page], :per_page => 1)
+    @teams = @course.teams.paginate(:page => params[:page], :per_page => 10)
     @enrolled = false
     @instr = false
     inst = User.find_by_id(@course.instructor_id.to_i)
@@ -101,7 +101,7 @@ class CoursesController < ApplicationController
     @user_course_team = current_user.find_course_team(@course)
     @time = current_user.enrollments.where(course_id: @course.id).first.time_commitment
     end
-    @ordered_students = @course.students.paginate(:page => params[:page], :per_page => 3)
+    @ordered_students = @course.students.paginate(:page => params[:page], :per_page => 30)
     if(params[:order_skill].present?)
       students_ids = @ordered_students.collect{ |st| st.id }
       id = params[:order_skill]
@@ -111,9 +111,9 @@ class CoursesController < ApplicationController
           ratings = SkillRating.where(skill_id: id).where("user_id IN (?)", students_ids).order(rating: :desc) #order by individual skills
       end
       if id.to_i == -2
-        @ordered_students = @course.students.sort_by{|obj| obj.overall_rating(params[:id])}.reverse!.paginate(:page => params[:page], :per_page => 1)
+        @ordered_students = @course.students.sort_by{|obj| obj.overall_rating(params[:id])}.reverse!.paginate(:page => params[:page], :per_page => 30)
       else
-          @ordered_students = ratings.collect{|r| User.find(r.user_id)}.paginate(:page => params[:page], :per_page => 1)
+          @ordered_students = ratings.collect{|r| User.find(r.user_id)}.paginate(:page => params[:page], :per_page => 30)
       end
     end
   end

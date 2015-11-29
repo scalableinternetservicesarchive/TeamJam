@@ -3,10 +3,18 @@
 <%= javascript_tag do %>
 $(document).ready(function(){
 //alert("fuck");
+$("#up_hd").hover(function(){
+  $("#up_lnk").show();
+}, function(){
+$("#up_lnk").hide();
+});
 $(".st").hover(function(){
   $(this).find(".inv").show();
 }, function(){
 $(this).find(".inv").hide();
+});
+$(".st-name").hover(function(){
+  $(this).parent().find(".trigger").trigger('click');
 });
 $(".tem").hover(function(){
   $(this).find("#express_interest").show();
@@ -27,10 +35,22 @@ $("#teams .pagination a").attr("href",function(n,v) {
  //$('#teams .pagination a').click(function() {
   //alert("fuck");
 //});
+$('.popover-markup > .trigger').popover({
+    html : true,
+    title: function() {
+      return $(this).parent().find('.head').html();
+    },
+    content: function() {
+      return $(this).parent().find('.content').html();
+    },
+    container: 'body'
+});
+
 });
 
 
 <% end %>
+
 <div class="row">
     <div class="col-md-4">
     <h1><%= @course.name %> </h1>
@@ -56,11 +76,15 @@ $("#teams .pagination a").attr("href",function(n,v) {
       <% end %>
       <%= link_to 'Rate Teammates', rate_members_course_path(@course), method: :post, class: "btn btn-success", id: "rater" %>
   </div>
+
 </div>
 <% if @enrolled %>
 <div class="row">
-  <h5 id="tc"><%= "Your time commitment: #{@time} hrs/wk" %></h5>
-  <h5><%= link_to ' Update', course_change_time_commitment_path(@course), remote: true %></h5>
+  <h5>
+    <span id="up_hd">
+  <span id="tc"><%= "Your time commitment: #{@time} hrs/wk" %></span>
+  <%= link_to ' Update', course_change_time_commitment_path(@course), id: "up_lnk", remote: true, style: "display: none;" %>    </span>
+ </h5>
    <div id="update-form" style="display:none;"></div>
 <% end %>
 </div>
@@ -100,7 +124,7 @@ $("#teams .pagination a").attr("href",function(n,v) {
 
   <div id="teams" class="tab-pane fade">
     <% if @enrolled %>
-    <%= render :partial => "teams/team", :collection => @teams, locals: {user_course_team: @user_course_team} %>
+    <%= render :partial => "teams/team", :collection => @teams, locals: {current_course: @course, user_course_team: @user_course_team} %>
     <%= will_paginate @teams %>
     <% if @user_course_team == false %>
     <div class="pull-left">

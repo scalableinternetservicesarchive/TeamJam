@@ -2,7 +2,18 @@
 <tr class="st">
   <% #cache(cache_key_for_student_row(student, current_course, show_team, current_team, current_team_owner_id)) do %>
   <td>
-    <%= link_to "#{student.first_name} #{student.last_name} ", user_path(student)%>
+    <%= link_to "#{student.first_name} #{student.last_name} ", user_path(student), class: "st-name"%>
+    <% if show_team %>
+       <div class="popover-markup">
+      <%= link_to '', show_skills_user_path(student, course_id: current_course.id), remote: true, class: "trigger", data: { placement: "auto" }%>
+  <div class="head hide">
+   <%= "#{student.first_name} #{student.last_name}" %>
+   </div>
+         <% end %>
+  <div class="content hide">
+    <div class="chart-container-<%=student.id%>" ></div>
+  </div>
+</div>
     <% if (show_team == false) && (student.id == current_team_owner_id)%>
     <span class="label label-warning">Owner</span>
     <% end %>

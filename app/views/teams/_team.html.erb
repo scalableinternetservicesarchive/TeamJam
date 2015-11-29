@@ -1,6 +1,6 @@
 <% #cache(cache_key_team(team, user_course_team)) do %>
-<div class="row col-md-12 tem">
-  <div class="row col-md-5">
+<div class="row col-md-12">
+  <div class="row col-md-5 tem">
     <% diff = team.course.max_members - team.students.count   %>
     <% if diff == 0 %>
     <% full = true %>
@@ -21,7 +21,7 @@
         <th> Year </th>
         <th> Major </th>
      </tr>
-    <%= render partial: "courses/student", collection: team.students, locals: {current_course: false, show_team: false, current_team_owner_id: team.team_owner_id, current_team: false} %>
+       <%= render partial: "courses/student", collection: team.students, locals: {current_course: team.course, show_team: false, current_team_owner_id: team.team_owner_id, current_team: false} %>
      </table>
   </ul>
   </div>

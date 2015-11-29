@@ -34,9 +34,13 @@ end
   end
 
   def mark_as_read
-    notif = current_user.mailbox.notifications.where(id: params[:id]).first
+   notif = current_user.mailbox.notifications.where(id: params[:id]).first
+    @notif_id = params[:id]
     notif.destroy
-    redirect_to :back
+     respond_to do |format|
+    format.html
+    format.js
+  end
   end
 
   def accept
