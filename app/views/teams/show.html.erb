@@ -1,5 +1,6 @@
 <%= javascript_tag do %>
 var data = [
+ 
   <% @team.students.each do |st| %>
   {
 classname: '<%= st.first_name %>',

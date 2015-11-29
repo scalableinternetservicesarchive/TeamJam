@@ -1,0 +1,17 @@
+var data = [
+  {
+    className: 'user',
+    axes: [
+      <% @user_skill_rating.each do |sk,rating| %>
+      <% if sk.name == "C++" %>
+{axis: "<%= "#{sk.name}(#{@user_skill_reviews[sk]})" %>", value: <%= rating %>, xOffset: 13 ,  yOffset: -1},
+<% else %>
+      {axis: "<%= "#{sk.name}(#{@user_skill_reviews[sk]})" %>", value: <%= rating %>},
+        <% end %>
+
+<% end %>
+    ]
+  }
+]
+
+RadarChart.draw(".chart-container-<%=@user.id%>", data);

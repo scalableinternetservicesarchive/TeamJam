@@ -1,6 +1,6 @@
 
 <% #cache("#{notification.id}-#{notification.updated_at}") do %>
-<div class="row "%>
+<div class="row" id="row-<%=notification.id%>"%>
   <div class= "col-md-5"%>
   <% if notification.notification_code.to_i == 5 %>
 <div class="panel panel-success">
@@ -45,7 +45,7 @@
      <%= button_to 'Reject', reject_notification_path(notification), class: "btn btn-danger" %>
      <% else %>
       <% if notification.notification_code.to_i != 10 %>
-     <%= link_to 'Mark as Read', mark_as_read_notification_path(notification), method: :delete, class: "btn btn-success btn-sm"%>
+     <%= link_to 'Mark as Read', mark_as_read_notification_path(notification), method: :delete, class: "btn btn-success btn-sm", remote: true%>
   <% end %>
      <% end %>
    </div>
