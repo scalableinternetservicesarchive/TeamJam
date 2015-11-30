@@ -1,4 +1,5 @@
 <h2>Check all the courses you wish to join</h2>
+<% if current_user != nil %>
 <%= form_for(:all_courses, url: {controller: :join_classes, action: :join_courses}, method: :post) do |f| %>
 <% @all_course.each do |course| %>
 <% if !current_user.courses.include?(course) %>
@@ -15,4 +16,5 @@
 <% end %>
 <% end %>
 <%= f.submit 'Join Courses' %>
+<% end %>
 <% end %>
