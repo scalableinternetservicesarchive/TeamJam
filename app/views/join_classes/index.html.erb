@@ -1,7 +1,18 @@
-<h2>Check all the courses you wish to join</h2>
+
 <%= form_for(:all_courses, url: {controller: :join_classes, action: :join_courses}, method: :post) do |f| %>
+<table class="table table-hover">
+  <tr>
+  <th>
+    <h2>Check all the courses you wish to join</h2>
+  </th>
+  <th>
+    <h2>Select</h2>
+    </th>
+  </tr>
 <% @all_course.each do |course| %>
 <% if !current_user.courses.include?(course) %>
+  <tr>
+    <td>
 <h3><%= link_to course.name, course_path(course) %></h3>
 
           <p><small><%= course.description %></small> </p>
@@ -10,9 +21,15 @@
       <% course.skills.each do |sk| %>
       <span class="label label-default"> <%= sk.name %> </span> &nbsp;
       <% end %>
+    </td>
+    <td>
 <h3><%= f.check_box course.name.to_sym, {}, course.id , false%> </h3>
-</br>
+    </td>
+<br>
+  </tr>
 <% end %>
 <% end %>
+</table>
 <%= f.submit 'Join Courses' %>
 <% end %>
+

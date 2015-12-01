@@ -30,7 +30,7 @@
     <% if team == user_course_team %>
       <%= link_to 'Leave Team', leave_course_team_path(team.course, team), method: :delete, data: {confirm: 'Are you sure'}, class: "btn btn-danger btn-sm" %>
       <% else %>
-      <%= link_to 'Express Interest', express_interest_course_team_path(team.course, team), method: :post, class: "btn btn-primary btn-sm", id: "express_interest", style: "display: none;" %>
+      <%= link_to 'Express Interest', express_interest_course_team_path(team.course, team), method: :post, class: "btn btn-primary btn-sm", id: "express_interest" %>
       <% end %>
 
       </div>

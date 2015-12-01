@@ -61,6 +61,7 @@ axes: [
   <% if @team.github %>
   <%= link_to 'Click for team Github ', @team.github  %>
   <% end %>
+  <% if @team.students.include?(current_user) %>
   <div class="row" %>
   <%= form_tag(add_github_course_team_path(@course, @team), class:"col-md-8 pull-left" ) do %>
   <%= url_field_tag(:github) %>
@@ -70,6 +71,7 @@ axes: [
   <%= submit_tag("Add Team Github URL") %>
   <% end %>
   <% end %>
+    <% end %>
   </div>
   </div>
   <div id="skills" class="tab-pane fade">
