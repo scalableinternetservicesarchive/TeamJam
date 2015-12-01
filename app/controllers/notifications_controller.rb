@@ -30,7 +30,7 @@ end
       end
     flash[:notice] = "#{@user.first_name}'s ratings were updated based on your feedback!"
     notif.destroy
-    redirect_to :back
+    redirect_to root_path
   end
 
   def mark_as_read
@@ -76,7 +76,7 @@ end
         end
     #notif.mark_as_deleted(current_user)
     notif.destroy
-     redirect_to :back
+     redirect_to root_path
   end
 
   def reject
@@ -94,6 +94,6 @@ end
     end
     #notif.mark_as_deleted(current_user)
     notif.destroy
-    redirect_to :back
+    redirect_to root_path
   end
 end

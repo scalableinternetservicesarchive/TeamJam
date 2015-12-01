@@ -62,7 +62,7 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     Enrollment.create(course_id: @course.id.to_i, user_id: current_user.id, time_commitment: 2)
     flash[:notice] = "You were successfully added to the course"
-    redirect_to :back
+    redirect_to root_path
   end
 
   def leave
