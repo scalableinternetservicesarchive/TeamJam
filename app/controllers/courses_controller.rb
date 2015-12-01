@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
 
   def rate_members
     course = Course.find(params[:id])
