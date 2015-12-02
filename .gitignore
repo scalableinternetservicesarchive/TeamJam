@@ -15,3 +15,5 @@
 /log/*
 !/log/.keep
 /tmp
+
+run_me_for_mac.sh
