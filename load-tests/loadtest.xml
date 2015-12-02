@@ -231,7 +231,7 @@
     <!-- 5. log out -->
     <!-- ================================================= -->
 
-    <session name="user_joincourse" probability="100" type="ts_http">
+    <session name="user_joincourse" probability="0" type="ts_http">
 
       <!-- start out at the dashboard. -->
       <request>
@@ -266,18 +266,17 @@
         <var name="random_courseid" />
       </setdynvars>
 
-      <!--
       <request>
         <http url='/join_classes/index' version='1.1' method='GET'></http>
       </request>
 
       <thinktime value="2" random="true"></thinktime>
 
-      <request>
+      <request subst="true">
         <http url='/courses/%%_random_courseid%%' version='1.1' method='GET'></http>
       </request>
 
-      <thinktime value="2" random="true"></thinktime>-->
+      <thinktime value="2" random="true"></thinktime>
 
       <!-- join course-->
       <request subst="true">
@@ -286,26 +285,23 @@
 
       <thinktime value="2" random="true"></thinktime>
 
-      <!-- 
-      <request>
-        <http url='/courses/%%_random_courseid%%#classmates' version='1.1' method='GET'></http>
-      </request>
-
-      <thinktime value="2" random="true"></thinktime>
-
-      <request>
+      <request subst="true">
         <http url='/courses/%%_random_courseid%%?order_skill=-1' version='1.1' method='GET'></http>
       </request>
 
-      <request>
-        <http url='/courses/%%_random_courseid%%?order_skill=-2' version='1.1' method='GET'></http>
+      <request subst="true">
+        <http url='/courses/%%_random_courseid%%?order_skill=7' version='1.1' method='GET'></http>
       </request>
 
-      <request>
-        <http url='/courses/%%_random_courseid%%#teams' version='1.1' method='GET'></http>
+      <request subst="true">
+        <http url='/courses/%%_random_courseid%%?order_skill=8' version='1.1' method='GET'></http>
       </request>
 
-      <thinktime value="2" random="true"></thinktime>-->
+      <request subst="true">
+        <http url='/courses/%%_random_courseid%%?order_skill=9' version='1.1' method='GET'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
 
       <request>
         <http url='/users/sign_out' version='1.1' method='DELETE'></http>
@@ -323,15 +319,13 @@
     <!-- 4. create team -->
     <!-- 5. log out -->
     <!-- ================================================= -->
-
+<!--
     <session name="user_createteam" probability="15" type="ts_http">
 
-      <!-- start out at the dashboard. -->
       <request>
         <http url='/' version='1.1' method='GET'></http>
       </request>
 
-      <!-- wait for up to 2 seconds, user is looking at posts -->
       <thinktime value="2" random="true"></thinktime>
 
       <setdynvars sourcetype="random_number" start="1000" end="9999999">
@@ -342,7 +336,6 @@
         <var name="random_user_id_update" />
       </setdynvars>
 
-      <!-- signin -->
       <request subst="true">
         <http
           url='/users/sign_in'
@@ -360,21 +353,18 @@
         <var name="random_courseid" />
       </setdynvars>
 
-      <!-- view all courses that can join-->
       <request>
         <http url='/join_classes/index' version='1.1' method='GET'></http>
       </request>
 
       <thinktime value="2" random="true"></thinktime>
 
-      <!-- go to course page-->
       <request>
         <http url='/courses/%%_random_courseid%%' version='1.1' method='GET'></http>
       </request>
 
       <thinktime value="2" random="true"></thinktime>
 
-      <!-- join course-->
       <request>
         <http url='/courses/%%_random_courseid%%/join' version='1.1' method='POST'></http>
       </request>
@@ -398,7 +388,7 @@
         <http url='/users/sign_out' version='1.1' method='GET'></http>
       </request>
 
-    </session>
+    </session>-->
 
     <!-- ================================================= -->
     <!--                      SESSION                      -->
