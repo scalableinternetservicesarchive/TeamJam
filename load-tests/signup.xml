@@ -9,20 +9,20 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="ec2-52-25-37-116.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-34-249-21.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
   <load>
-    <arrivalphase phase="1" duration="30" unit="second">
+    <arrivalphase phase="1" duration="1" unit="second">
       <users arrivalrate="1" unit="second"></users>
     </arrivalphase>
-    <arrivalphase phase="2" duration="30" unit="second">
+    <!-- <arrivalphase phase="2" duration="30" unit="second">
       <users arrivalrate="2" unit="second"></users>
-    </arrivalphase>
-    <arrivalphase phase="3" duration="30" unit="second">
+    </arrivalphase> -->
+    <!-- <arrivalphase phase="3" duration="30" unit="second">
       <users arrivalrate="4" unit="second"></users>
-    </arrivalphase>
+    </arrivalphase> -->
 <!--
    <arrivalphase phase="4" duration="30" unit="second">
      <users arrivalrate="8" unit="second"></users>
@@ -57,24 +57,6 @@
     </option>
   </options>
 
-  <!-- ================================================= -->
-  <!--                     Sessions Weight               -->
-  <!-- [login-logout]                 1                  -->
-  <!-- [visit-homepage]               10                 -->
-  <!-- [visit-recipe]                 20                 -->
-  <!-- [visit-masterpiece]            5                  -->
-  <!-- [visit-user-profile]           5                  -->
-  <!-- [visit-search-index]           1                  -->
-  <!-- [search-by-name]               5                  -->
-  <!-- [search-by-tag]                4                  -->
-  <!-- [search-by-user]               1                  -->
-  <!-- [create-delete-recipe]         1                  -->
-  <!-- [create-delete-masterpiece]    1                  -->
-  <!-- [like-recipe]                  2                  -->
-  <!-- [bookmark-recipe]              2                  -->
-  <!-- [like-masterpiece]             1                  -->
-  <!-- ================================================= -->
-
   <sessions>
     <!-- ================================================= -->
     <!--                      SESSION                      -->
@@ -84,66 +66,95 @@
     <!-- 2. login -->
     <!-- 3. log out -->
     <!-- ================================================= -->
-    <session name="login-logout" weight="1" type="ts_http">
+    <session name="loadtest" type="ts_http" probability="100">
 
-      <!-- 1. set up current user randomly -->
-      <!-- [sample value] - current_user_id: 1 -->
-      <setdynvars sourcetype="random_number" start="1" end="500">
-        <var name="current_user_id" />
+      <!-- start out at the dashboard. -->
+      <request>
+        <http url='/' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- get authenticity token from sign up page -->
+      <request>
+          <dyn_variable name="authenticity_token" ></dyn_variable>
+          <http url="/users/sign_up" version="1.1" method="GET"></http>
+      </request>
+
+      <setdynvars sourcetype="random_number" start="1" end="4">
+        <var name="random_year"/>
       </setdynvars>
 
-      <setdynvars sourcetype="random_number" start="1" end="9999999">
-        <var name="random_boundary_number" />
+      <setdynvars sourcetype="random_number" start="1000" end="9999999">
+        <var name="random_user" />
       </setdynvars>
 
-      <!-- Sign Up User -->
+      <!-- Sign Up -->
       <request subst="true">
         <http
           url='/users'
           version='1.1'
           method='POST'
-          contents='user%5bemail%5d=user%%_current_user_id%%%40gmail%2Ecom&amp;
-          user%5bpassword%5d=88888888&amp;
-          user%5bpassword_confirmation%5d=88888888&amp;
-          commit=Sign+up'>
+          contents='utf8=%E2%9C%93&amp;authenticity_token=%%_authenticity_token%%&amp;user%5bemail%5d=user%%_random_user%%%40gmail%2Ecom&amp;user%5bpassword%5d=88888888&amp;user%5bpassword_confirmation%5d=88888888&amp;user%5bfirst_name%5d=user%%_random_user%%&amp;user%5bsid%5d=%%_random_user%%&amp;user%5bmajor%5d=Computer+Science&amp;user%5byear%5d=%%_random_year%%&amp;commit=Sign+up'>
         </http>
-      </request>
-
-      <request>
-        <http url='/users/sign_out' version='1.1' method='DELETE'></http>
-      </request>
-
-      <!-- repeat step [2,3] 10 times -->
-      <for from="1" to="10" incr="1" var="counter">
-
-      <!-- 2. login -->
-      <!-- go to users/sign_in page -->
-      <!-- [sample value] - authenticity_token: ... -->
-      <request>
-        <dyn_variable name="authenticity_token" ></dyn_variable>
-        <http url="/users/sign_in" version="1.1" method="GET"></http>
       </request>
 
       <thinktime value="2" random="true"></thinktime>
 
-      <if var="authenticity_token" neq="">
+      <setdynvars sourcetype="random_number" start="1" end="10">
+        <var name="random_courseid" />
+      </setdynvars>
+
+      <!-- go to course page-->
+      <request>
+        <!-- <dyn_variable name="authenticity_token2" ></dyn_variable> -->
+        <http url='/courses/%%_random_courseid%%' version='1.1' method='GET'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- join course-->
+      <request subst="true">
+        <http url='/courses/%%_random_courseid%%/join' version='1.1' method='POST' contents='_method=post'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- Sign out -->
+      <request>
+        <http url='/users/sign_out' version='1.1' method='DELETE'></http>
+      </request>
+
+
+      <!-- 1. set up current user randomly -->
+      <!-- [sample value] - current_user_id: 1 -->
+      <!-- <setdynvars sourcetype="random_number" start="1" end="500">
+        <var name="current_user_id" />
+      </setdynvars> -->
+
+
+      <!-- 2. login -->
+      <!-- go to users/sign_in page -->
+      <!-- [sample value] - authenticity_token: ... -->
+      <!-- <request>
+        <dyn_variable name="authenticity_token" ></dyn_variable>
+        <http url="/users/sign_in" version="1.1" method="GET"></http>
+      </request> -->
+
+      <!-- <thinktime value="2" random="true"></thinktime> -->
+
+      <!-- <if var="authenticity_token" neq=""> -->
       <!-- log in using username and password -->
       <!-- [sample value] - login: user_1 -->
       <!-- [sample value] - password: 88888888 -->
       <!-- [sample value] - authenticity_token: ... -->
       <!-- [sample value] - remember_me: 0 -->
 
-
-      <request subst="true">
+      <!-- <request subst="true">
         <http url="/users/sign_in" method="POST" version="1.1"
           content_type="application/x-www-form-urlencoded"
           contents="utf8=%E2%9C%93&amp;authenticity_token=%%_authenticity_token%%&amp;user%5Blogin%5D=user_%%_current_user_id%%@gmail.com&amp;user%5Bpassword%5D=88888888&amp;user%5Bremember_me%5D=0&amp;commit=Log+in"/>
       </request>
 
-      <thinktime value="2" random="true"></thinktime>
-
-      </if>
-      </for>
+      </if> -->
 
     </session>
   </sessions>
