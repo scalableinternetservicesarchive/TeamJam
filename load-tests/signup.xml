@@ -97,10 +97,6 @@
 
       <thinktime value="2" random="true"></thinktime>
 
-      <setdynvars sourcetype="random_number" start="1" end="7">
-        <var name="random_courseid" />
-      </setdynvars>
-
       <!-- create course -->
       <!-- go to create course page -->
       <request>
@@ -129,28 +125,27 @@
 
       <!-- Get a list of available courses -->
       <request>
-        <dyn_variable name="first_available_course" re='input type=\"checkbox\" value=\"(.*)\"'/>
+        <dyn_variable name="first_available_course" re='input type=\"checkbox\" value=\"(.*)\" name'/>
         <http url='/join_classes/index' version='1.1' method='GET'></http>
       </request>
 
       <thinktime value="2" random="true"></thinktime>
 
+      <!-- Join the first available courses -->
       <request subst="true">
         <http url='/join_classes/join_courses' version='1.1' method='POST' contents='all_courses%5B1%5D=%%_first_available_course%%&amp;commit=Join+Courses'></http>
       </request>
 
-      <!-- go to course page-->
-      <!-- <request>
-        <http url='/courses/%%_random_courseid%%' version='1.1' method='GET'></http>
+      <!-- Go to the course page, get create team page -->
+      <request subst="true">
+        <http url='/courses/%%_first_available_course%%/teams/new' version='1.1' method='GET'></http>
       </request>
 
-      <thinktime value="2" random="true"></thinktime> -->
-
-      <!-- join course-->
-      <!-- <request subst="true">
-        <http url='/courses/%%_random_courseid%%/join' version='1.1' method='POST' contents='_method=post'></http>
+      <!-- Create a new team -->
+      <request subst="true">
+        <http url='/courses/%%_first_available_course%%/teams' version='1.1' method='POST' contents='team%5Bname%5D=team%%_random_user%%&amp;team%5Bdescription%5D=Team+created+by+user%%_random_user%%&amp;team%5Bpasscode%5D=88888888&amp;commit=Create+Team'></http>
       </request>
- -->
+
       <thinktime value="2" random="true"></thinktime>
 
       <!-- Sign out -->
