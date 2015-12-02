@@ -10,7 +10,7 @@
   <!-- Server side setup -->
   <!-- IMPORTANT: CHANGE HOST TO YOUR TSUNG HOST -->
   <servers>
-    <server host="ec2-52-33-250-16.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-25-81-247.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -18,13 +18,13 @@
     <arrivalphase phase="1" duration="30" unit="second">
       <users arrivalrate="1" unit="second"></users>
     </arrivalphase>
-    <arrivalphase phase="2" duration="30" unit="second">
+<!--    <arrivalphase phase="2" duration="30" unit="second">
       <users arrivalrate="2" unit="second"></users>
     </arrivalphase>
     <arrivalphase phase="3" duration="30" unit="second">
       <users arrivalrate="4" unit="second"></users>
     </arrivalphase>
-<!--
+
    <arrivalphase phase="4" duration="30" unit="second">
      <users arrivalrate="8" unit="second"></users>
    </arrivalphase>
@@ -60,96 +60,15 @@
 
   <!-- ================================================= -->
   <!--                     Sessions Weight               -->
-  <!-- [user_signup]                  3                  -->
-  <!-- [user_signin]                  40                 -->
+  <!-- [user_signup]                  0                  -->
+  <!-- [user_signin]                  43                 -->
   <!-- [user_createcourse]            1                  -->
   <!-- [user_joincourse]              30                 -->
   <!-- [user_creatteam]               15                 -->
-  <!-- [invite]                       10                 -->
+  <!-- [invite]                       11                 -->
   <!-- ================================================= -->
 
   <sessions>
-    <!-- ================================================= -->
-    <!--                      SESSION                      -->
-    <!--                    user_signup                    -->
-    <!-- ================================================= -->
-    <!-- 1. signup -->
-    <!-- 2. log out -->
-    <!-- ================================================= -->
-
-    <session name="user_signup" probability="3" type="ts_http">
-
-      <request>
-        <http url='/' version='1.1' method='GET'></http>
-      </request>
-
-      <thinktime value="2" random="true"></thinktime>
-
-      <request>
-        <http url='/users/sign_up' version='1.1' method='GET'></http>
-      </request>
-
-      <setdynvars sourcetype="eval"
-            code='fun({Pid,DynVars})-> [[13, 10]] end.'>
-        <var name="nl" />
-      </setdynvars>
-
-      <setdynvars sourcetype="random_number" start="1" end="9999999">
-        <var name="random_user_number" />
-      </setdynvars>
-
-      <setdynvars sourcetype="random_number" start="1" end="9999999">
-        <var name="random_boundary_number" />
-      </setdynvars>
-
-      <request subst="true">
-        <http
-          url='/users'
-          version='1.1'
-          method='POST'
-          content_type='multipart/form-data; boundary=----WebKitFormBoundary%%_random_boundary_number%%'
-          contents='------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%
-          Content-Disposition: form-data; name="user[email]"%%_nl%%
-          %%_nl%%
-          user%%_random_user_number%%@gmail.com%%_nl%%
-          ------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%
-          Content-Disposition: form-data; name="user[password]"%%_nl%%
-          %%_nl%%
-          11111111%%_nl%%
-          ------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%
-          Content-Disposition: form-data; name="user[password_confirmation]"%%_nl%%
-          %%_nl%%
-          11111111%%_nl%%
-          ------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%
-          Content-Disposition: form-data; name="user[first_name]"%%_nl%%
-          %%_nl%%
-          %%_random_user_number%%first%%_nl%%
-          ------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%
-          Content-Disposition: form-data; name="user[last_name]"%%_nl%%
-          %%_nl%%
-          %%_random_user_number%%last%%_nl%%
-          ------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%
-          Content-Disposition: form-data; name="user[github]"%%_nl%%
-          %%_nl%%
-          https://github.com/user%%_random_user_number%%%%_nl%%
-          ------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%
-          Content-Disposition: form-data; name="commit"%%_nl%%
-          %%_nl%%
-          Sign up%%_nl%%
-          ------WebKitFormBoundary%%_random_boundary_number%%%%_nl%%%%_nl%%
-          '
-          >
-        </http>
-      </request>
-
-      <thinktime value="2" random="true"></thinktime>
-
-      <request subst="true">
-        <http url='/users/sign_out' version='1.1' method='GET'></http>
-      </request>
-
-    </session>
-
     <!-- ================================================= -->
     <!--                      SESSION                      -->
     <!--                    user_signin                    -->
@@ -160,7 +79,7 @@
     <!-- ================================================= -->
 
     <!-- User signin and update profile -->
-    <session name="user_signin" probability="40" type="ts_http">
+    <session name="user_signin" probability="0" type="ts_http">
 
       <!-- start out at the dashboard. -->
       <request>
@@ -170,23 +89,26 @@
       <!-- wait for up to 2 seconds, user is looking at posts -->
       <thinktime value="2" random="true"></thinktime>
 
-      <setdynvars sourcetype="random_number" start="1000" end="9999999">
+      <setdynvars sourcetype="random_number" start="100000000" end="200000000">
         <var name="random_user_id" />
       </setdynvars>
 
-      <setdynvars sourcetype="random_number" start="100000000" end="999999999">
+      <setdynvars sourcetype="random_number" start="200000000" end="300000000">
         <var name="random_user_id_update" />
       </setdynvars>
 
+      <setdynvars sourcetype="random_number" start="1" end="4">
+        <var name="random_year"/>
+      </setdynvars>
+
       <!-- signin -->
+      <!-- Sign Up -->
       <request subst="true">
         <http
-          url='/users/sign_in'
+          url='/users'
           version='1.1'
           method='POST'
-          contents='user%5Bemail%5D=user%%_random_user_id%%%40email.com&amp;
-          user%5Bpassword%5D=password%%_random_user_id%%&amp;
-          user%5Bremember_me%5D=0&amp;commit=Log+in'>
+          contents='user%5bemail%5d=user%%_random_user_id%%%40gmail%2Ecom&amp;user%5bpassword%5d=88888888&amp;user%5bpassword_confirmation%5d=88888888&amp;user%5bfirst_name%5d=user%%_random_user_id%%&amp;user%5bsid%5d=%%_random_user_id%%&amp;user%5bmajor%5d=Computer+Science&amp;user%5byear%5d=%%_random_year%%&amp;commit=Sign+up'>
         </http>
       </request>
 
@@ -213,28 +135,18 @@
 
       <thinktime value="2" random="true"></thinktime>
 
-      <!-- edit profile: send form-->
       <request subst="true">
         <http
-          url='/users/edit'
+          url='/users'
           version='1.1'
           method='POST'
-          contents='user%5Bemail%5D=useremail%%_random_user_id_update%%%40email.com&amp;
-          user%5Bfirst_name%5D=userfirst%%_random_user_id_update%%&amp;
-          user%5Blast_name%5D=userlast%%_random_user_id_update%%&amp;
-          user%5Bgithub%5D=usergithub%%_random_user_id_update%%&amp;
-          user%5Bsid%5D=%%_random_user_id_update%%&amp;
-          user%5Bmajor%5D=usermajor%%_random_user_id_update%%&amp;
-          user%5Bpassword%5D=userpassword%%_random_user_id_update%%&amp;
-          user%5Bpassword_confirmation%5D=userpassword%%_random_user_id_update%%&amp;
-          user%5Bcurrent_password%5D=userpassword%%_random_user_id%%&amp;
-          commit=Update'></http>
+          contents='user%5Bemail%5D=useremail%%_random_user_id_update%%%40email.com&amp;user%5Bfirst_name%5D=userfirst%%_random_user_id_update%%&amp;user%5Blast_name%5D=userlast%%_random_user_id_update%%&amp;user%5Bgithub%5D=usergithub%%_random_user_id_update%%&amp;user%5Bsid%5D=%%_random_user_id_update%%&amp;user%5Bmajor%5D=usermajor%%_random_user_id_update%%&amp;user%5Bpassword%5D=&amp;user%5Bpassword_confirmation%5D=&amp;user%5Bcurrent_password%5D=88888888&amp;commit=Update'></http>
       </request>
 
       <thinktime value="2" random="true"></thinktime>
 
-      <request subst="true">
-        <http url='/users/sign_out' version='1.1' method='GET'></http>
+      <request>
+        <http url='/users/sign_out' version='1.1' method='DELETE'></http>
       </request>
 
     </session>
@@ -248,13 +160,11 @@
     <!-- 3. log out -->
     <!-- ================================================= -->
 
-    <session name="user_createcourse" probability="1" type="ts_http">
-      <!-- start out at the dashboard. -->
+    <!--<session name="user_createcourse" probability="1" type="ts_http">
       <request>
         <http url='/' version='1.1' method='GET'></http>
       </request>
 
-      <!-- wait for up to 2 seconds, user is looking at posts -->
       <thinktime value="2" random="true"></thinktime>
 
       <setdynvars sourcetype="random_number" start="1000" end="9999999">
@@ -269,7 +179,6 @@
         <var name="random_time_commitment" />
       </setdynvars>
 
-      <!-- signin -->
       <request subst="true">
         <http
           url='/users/sign_in'
@@ -309,7 +218,7 @@
         <http url='/users/sign_out' version='1.1' method='GET'></http>
       </request>
 
-    </session>
+    </session>-->
 
     <!-- ================================================= -->
     <!--                      SESSION                      -->
@@ -322,7 +231,7 @@
     <!-- 5. log out -->
     <!-- ================================================= -->
 
-    <session name="user_joincourse" probability="30" type="ts_http">
+    <session name="user_joincourse" probability="100" type="ts_http">
 
       <!-- start out at the dashboard. -->
       <request>
@@ -332,84 +241,74 @@
       <!-- wait for up to 2 seconds, user is looking at posts -->
       <thinktime value="2" random="true"></thinktime>
 
-      <setdynvars sourcetype="random_number" start="1000" end="9999999">
+      <setdynvars sourcetype="random_number" start="300000000" end="400000000">
         <var name="random_user_id" />
       </setdynvars>
 
-      <setdynvars sourcetype="random_number" start="1" end="10">
-        <var name="random_team_size" />
-      </setdynvars>
-
-      <setdynvars sourcetype="random_number" start="1" end="20">
-        <var name="random_time_commitment" />
+      <setdynvars sourcetype="random_number" start="1" end="4">
+        <var name="random_year"/>
       </setdynvars>
 
       <!-- signin -->
+      <!-- Sign Up -->
       <request subst="true">
         <http
-          url='/users/sign_in'
+          url='/users'
           version='1.1'
           method='POST'
-          contents='user%5Bemail%5D=user%%_random_user_id%%%40email.com&amp;
-          user%5Bpassword%5D=password%%_random_user_id%%&amp;
-          user%5Bremember_me%5D=0&amp;
-          commit=Log+in'>
+          contents='user%5bemail%5d=user%%_random_user_id%%%40gmail%2Ecom&amp;user%5bpassword%5d=88888888&amp;user%5bpassword_confirmation%5d=88888888&amp;user%5bfirst_name%5d=user%%_random_user_id%%&amp;user%5bsid%5d=%%_random_user_id%%&amp;user%5bmajor%5d=Computer+Science&amp;user%5byear%5d=%%_random_year%%&amp;commit=Sign+up'>
         </http>
       </request>
 
       <thinktime value="2" random="true"></thinktime>
 
-      <setdynvars sourcetype="random_number" start="1" end="15">
+      <setdynvars sourcetype="random_number" start="1" end="5">
         <var name="random_courseid" />
       </setdynvars>
 
-      <!-- view all courses that can join-->
+      <!--
       <request>
         <http url='/join_classes/index' version='1.1' method='GET'></http>
       </request>
 
       <thinktime value="2" random="true"></thinktime>
 
-      <!-- go to course page-->
       <request>
         <http url='/courses/%%_random_courseid%%' version='1.1' method='GET'></http>
       </request>
 
-      <thinktime value="2" random="true"></thinktime>
+      <thinktime value="2" random="true"></thinktime>-->
 
       <!-- join course-->
-      <request>
-        <http url='/courses/%%_random_courseid%%/join' version='1.1' method='POST'></http>
+      <request subst="true">
+        <http url='/courses/%%_random_courseid%%/join' version='1.1' method='POST' contents='_method=post'></http>
       </request>
 
       <thinktime value="2" random="true"></thinktime>
 
-      <!-- view classmates -->
+      <!-- 
       <request>
         <http url='/courses/%%_random_courseid%%#classmates' version='1.1' method='GET'></http>
       </request>
 
       <thinktime value="2" random="true"></thinktime>
 
-      <!-- sort teammate based on time -->
       <request>
         <http url='/courses/%%_random_courseid%%?order_skill=-1' version='1.1' method='GET'></http>
       </request>
 
-      <!-- sort teammate based on overall rating -->
       <request>
         <http url='/courses/%%_random_courseid%%?order_skill=-2' version='1.1' method='GET'></http>
       </request>
 
-      <!-- view teams -->
       <request>
         <http url='/courses/%%_random_courseid%%#teams' version='1.1' method='GET'></http>
       </request>
 
-      <thinktime value="2" random="true"></thinktime>
+      <thinktime value="2" random="true"></thinktime>-->
 
-      <request subst="true">
-        <http url='/users/sign_out' version='1.1' method='GET'></http>
+      <request>
+        <http url='/users/sign_out' version='1.1' method='DELETE'></http>
       </request>
 
     </session>
@@ -508,7 +407,7 @@
     <!-- 1. invite -->
     <!-- ================================================= -->
 
-    <session name="invite" probability="10" type="ts_http">
+    <session name="invite" probability="11" type="ts_http">
 
       <!-- start out at the dashboard. -->
       <request>
