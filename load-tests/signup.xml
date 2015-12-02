@@ -73,9 +73,7 @@
         <http url='/' version='1.1' method='GET'></http>
       </request>
 
-      <!-- get authenticity token from sign up page -->
       <request>
-          <!-- <dyn_variable name="authenticity_token" ></dyn_variable> -->
           <http url="/users/sign_up" version="1.1" method="GET"></http>
       </request>
 
@@ -120,19 +118,25 @@
         <http url='/courses' version='1.1' method='POST' contents='course%5Bname%5D=test+course+%%_random_create_course%%&amp;course%5Bdescription%5D=description&amp;course%5Bmax_members%5D=5&amp;course%5Bmin_time_commitment%5D=2&amp;course%5Bstart_date%281i%29%5D=2015&amp;course%5Bstart_date%282i%29%5D=12&amp;course%5Bstart_date%283i%29%5D=1&amp;course%5Bend_date%281i%29%5D=2015&amp;course%5Bend_date%282i%29%5D=12&amp;course%5Bend_date%283i%29%5D=1&amp;skillset%5B1%5D=0&amp;skillset%5B2%5D=0&amp;skillset%5B3%5D=0&amp;skillset%5B4%5D=0&amp;skillset%5B5%5D=0&amp;skillset%5B6%5D=0&amp;skillset%5B7%5D=0&amp;skillset%5B8%5D=0&amp;skillset%5B9%5D=0&amp;commit=Create'></http>
       </request>
 
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- join the created course -->
+      <request subst="true">
+        <http url='/courses/%%_created_course_id%%/join' version='1.1' method='POST' contents='_method=post'></http>
+      </request>
+
       <!-- go to course page-->
-      <request>
-        <!-- <dyn_variable name="authenticity_token2" ></dyn_variable> -->
+      <!-- <request>
         <http url='/courses/%%_random_courseid%%' version='1.1' method='GET'></http>
       </request>
 
-      <thinktime value="2" random="true"></thinktime>
+      <thinktime value="2" random="true"></thinktime> -->
 
       <!-- join course-->
-      <request subst="true">
+      <!-- <request subst="true">
         <http url='/courses/%%_random_courseid%%/join' version='1.1' method='POST' contents='_method=post'></http>
       </request>
-
+ -->
       <thinktime value="2" random="true"></thinktime>
 
       <!-- Sign out -->
