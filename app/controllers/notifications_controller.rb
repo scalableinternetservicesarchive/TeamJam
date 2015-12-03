@@ -30,13 +30,13 @@ end
       end
     flash[:notice] = "#{@user.first_name}'s ratings were updated based on your feedback!"
     notif.destroy
-    redirect_to :back
+    redirect_to root_path
   end
 
   def mark_as_read
     notif = current_user.mailbox.notifications.where(id: params[:id]).first
     notif.destroy
-    redirect_to :back
+    redirect_to root_path
   end
 
   def accept
@@ -63,7 +63,7 @@ end
            if (team.students.count < team.course.max_members) && (current_user.find_course_team(team.course) == false )
              team.students.each { |st|
              st.notify( "SUCCESS", "#{current_user.first_name} has accepted the invitation  to join team #{team.name}",nil,true,5,false,nil )
-             }           
+             }
         TeamMembership.create(team_id: team.id, user_id: current_user.id)
        # current_user.notify("SUCCESS","You were successfully added to the team #{team.name}",nil,true,5,false,nil)
          flash[:notice] ="You were successfully added to the team #{team.name}"
@@ -74,7 +74,7 @@ end
         end
     #notif.mark_as_deleted(current_user)
     notif.destroy
-     redirect_to :back
+     redirect_to root_path
   end
 
   def reject
@@ -92,6 +92,6 @@ end
     end
     #notif.mark_as_deleted(current_user)
     notif.destroy
-    redirect_to :back
+    redirect_to root_path
   end
 end
