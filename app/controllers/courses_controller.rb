@@ -5,7 +5,7 @@ class CoursesController < ApplicationController
     course = Course.find(params[:id])
     Team.where(course_id: course.id).each {|t| t.send_rating_notif}
     flash[:notice] = "All students were asked to rate their teammates"
-    redirect_to :back
+    redirect_to root_path
   end
 
   def new
@@ -55,21 +55,21 @@ class CoursesController < ApplicationController
     format.html
     format.js
   end
-   # redirect_to :back
+   # redirect_to root_path
   end
 
   def join
     @course = Course.find(params[:id])
     Enrollment.create(course_id: @course.id.to_i, user_id: current_user.id, time_commitment: 2)
     flash[:notice] = "You were successfully added to the course"
-    redirect_to :back
+    redirect_to root_path
   end
 
   def leave
     @course = Course.find(params[:id])
     Enrollment.where(course_id: @course.id.to_i, user_id: current_user.id).first.destroy
     flash[:notice] = "You were removed from the course"
-    redirect_to :back
+    redirect_to root_path
   end
 
   def invite
@@ -82,7 +82,7 @@ class CoursesController < ApplicationController
     notif.body =  "#{current_user.first_name} #{current_user.last_name} has invited you to join his team #{@team.name}!"
     notif.save
     flash[:notice] = "#{@user.first_name} was notified of your interest!"
-    redirect_to :back
+    redirect_to root_path
   end
 
   def show

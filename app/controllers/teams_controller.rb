@@ -41,7 +41,7 @@ class TeamsController < ApplicationController
         @team.save
       end
     end
-    redirect_to :back
+    redirect_to root_path
   end
 
   def create
@@ -78,7 +78,7 @@ class TeamsController < ApplicationController
     #end
 
     flash[:notice] = "The team owner was notified of your interest!"
-    redirect_to :back
+    redirect_to root_path
   end
 
   def join
