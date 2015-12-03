@@ -9,20 +9,20 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="ec2-52-25-81-247.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="team-up-multiple-medium-2144393871.us-west-2.elb.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
   <load>
-    <arrivalphase phase="1" duration="1" unit="second">
+    <arrivalphase phase="1" duration="30" unit="second">
       <users arrivalrate="1" unit="second"></users>
     </arrivalphase>
-    <!-- <arrivalphase phase="2" duration="30" unit="second">
+    <arrivalphase phase="2" duration="30" unit="second">
       <users arrivalrate="2" unit="second"></users>
-    </arrivalphase> -->
-    <!-- <arrivalphase phase="3" duration="30" unit="second">
+    </arrivalphase>
+    <arrivalphase phase="3" duration="30" unit="second">
       <users arrivalrate="4" unit="second"></users>
-    </arrivalphase> -->
+    </arrivalphase>
 <!--
    <arrivalphase phase="4" duration="30" unit="second">
      <users arrivalrate="8" unit="second"></users>
@@ -60,13 +60,16 @@
   <sessions>
     <!-- ================================================= -->
     <!--                      SESSION                      -->
-    <!--                    login-logout                   -->
+    <!--                    create course                  -->
     <!-- ================================================= -->
-    <!-- 1. set up current user randomly -->
-    <!-- 2. login -->
-    <!-- 3. log out -->
+    <!-- 1. sign up user -->
+    <!-- 2. create course -->
+    <!-- 3. join created course -->
+    <!-- 4. create team -->
+    <!-- 5. invite people -->
+    <!-- 6. sign out -->
     <!-- ================================================= -->
-    <session name="loadtest" type="ts_http" probability="100">
+    <session name="loadtest" type="ts_http" weight="100">
 
       <!-- start out at the dashboard. -->
       <request>
@@ -87,6 +90,7 @@
 
       <!-- Sign Up -->
       <request subst="true">
+        <dyn_variable name="user_id" re="[Ll]ocation: http://.*/(.*)\r"/>
         <http
           url='/users'
           version='1.1'
@@ -132,19 +136,31 @@
       <thinktime value="2" random="true"></thinktime>
 
       <!-- Join the first available courses -->
-      <request subst="true">
-        <http url='/join_classes/join_courses' version='1.1' method='POST' contents='all_courses%5B1%5D=%%_first_available_course%%&amp;commit=Join+Courses'></http>
-      </request>
+      <if var="first_available_course" neq="">
+        <request subst="true">
+          <http url='/join_classes/join_courses' version='1.1' method='POST' contents='all_courses%5B1%5D=%%_first_available_course%%&amp;commit=Join+Courses'></http>
+        </request>
 
-      <!-- Go to the course page, get create team page -->
-      <request subst="true">
-        <http url='/courses/%%_first_available_course%%/teams/new' version='1.1' method='GET'></http>
-      </request>
+        <!-- Go to the course page, get create team page -->
+        <request subst="true">
+          <http url='/courses/%%_first_available_course%%/teams/new' version='1.1' method='GET'></http>
+        </request>
 
-      <!-- Create a new team -->
-      <request subst="true">
-        <http url='/courses/%%_first_available_course%%/teams' version='1.1' method='POST' contents='team%5Bname%5D=team%%_random_user%%&amp;team%5Bdescription%5D=Team+created+by+user%%_random_user%%&amp;team%5Bpasscode%5D=88888888&amp;commit=Create+Team'></http>
-      </request>
+        <!-- Create a new team -->
+        <request subst="true">
+          <http url='/courses/%%_first_available_course%%/teams' version='1.1' method='POST' contents='team%5Bname%5D=team%%_random_user%%&amp;team%5Bdescription%5D=Team+created+by+user%%_random_user%%&amp;team%5Bpasscode%5D=88888888&amp;commit=Create+Team'></http>
+        </request>
+
+        <thinktime value="2" random="true"></thinktime>
+
+        <!-- Go back to course page, get a random classmates -->
+        <request subst="true">
+          <dyn_variable name="invite_url" re='href=\"/users/invite\?(.*)\"&lt;\r'/>
+          <http url='/courses/%%_first_available_course%%' version='1.1' method='GET'></http>
+        </request>
+
+      <!-- end of if   -->
+      </if>
 
       <thinktime value="2" random="true"></thinktime>
 
@@ -154,5 +170,18 @@
       </request>
 
     </session>
+
+    <!-- ================================================= -->
+    <!--                      SESSION                      -->
+    <!--                    join course                    -->
+    <!-- ================================================= -->
+    <!-- 1. sign up user  -->
+    <!-- 2. join a course    -->
+    <!-- 3. express interest  -->
+    <!-- 4. sign out -->
+    <!-- ================================================= -->
+    <!-- <session>
+
+    </session> -->
   </sessions>
 </tsung>
