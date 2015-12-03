@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     notif.body =  "#{current_user.first_name} #{current_user.last_name} has invited you to join his team #{@team.name}!"
     notif.save
     flash[:notice] = "#{@user.first_name} was notified of your interest!"
-    redirect_to :back
+    redirect_to root_path
   end
 
   def show
