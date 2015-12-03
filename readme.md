@@ -5,4 +5,9 @@
 ##Project Description
 TeamUp is an automatic team selector for students.
 
+
 ##Team Members
+| ![Akash](./res/akash_min.jpg) | ![Gezhi](./res/evan_min.jpg) | ![Yanzhe](./res/nick_min.jpg) | ![Yue](./res/leo_min.jpg) |
+| :------------: | :------------: | :------------: | :------------: |
+| Akash Malik | Gezhi Liu | Yanzhe Liu | Yue Luo |
+| [@tsleeve](https://github.com/tsleeve) | [@Evannnnn](https://github.com/Evannnnn) | [@nicklyz](https://github.com/nicklyz) | [@leoluo3](https://github.com/leoluo3) |
