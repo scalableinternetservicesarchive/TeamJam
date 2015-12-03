@@ -38,6 +38,16 @@ CREATE TABLE `course_skillsets` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `course_skillsets`
+--
+
+LOCK TABLES `course_skillsets` WRITE;
+/*!40000 ALTER TABLE `course_skillsets` DISABLE KEYS */;
+INSERT INTO `course_skillsets` VALUES (13,1,1,'2015-11-04 10:11:07','2015-11-04 10:11:07',2),(14,2,7,'2015-11-04 10:11:07','2015-11-04 10:11:07',1),(15,2,8,'2015-11-04 10:11:07','2015-11-04 10:11:07',1),(16,2,9,'2015-11-04 10:11:07','2015-11-04 10:11:07',1),(17,3,2,'2015-11-04 10:11:07','2015-11-04 10:11:07',2),(21,14,1,'2015-11-05 23:48:43','2015-11-05 23:48:43',2),(22,14,4,'2015-11-05 23:48:43','2015-11-05 23:48:43',1),(23,15,1,'2015-11-08 05:49:08','2015-11-08 05:49:08',2),(24,4,2,'2015-11-08 06:58:22','2015-11-08 06:58:22',3),(25,4,4,'2015-11-08 06:58:31','2015-11-08 06:58:31',3),(26,17,1,'2015-12-01 22:59:25','2015-12-01 22:59:25',1),(27,17,2,'2015-12-01 22:59:25','2015-12-01 22:59:25',1),(28,17,3,'2015-12-01 22:59:25','2015-12-01 22:59:25',1),(29,17,7,'2015-12-01 22:59:25','2015-12-01 22:59:25',1);
+/*!40000 ALTER TABLE `course_skillsets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `courses`
 --
 
@@ -58,6 +68,16 @@ CREATE TABLE `courses` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `courses`
+--
+
+LOCK TABLES `courses` WRITE;
+/*!40000 ALTER TABLE `courses` DISABLE KEYS */;
+INSERT INTO `courses` VALUES (1,'CS143','Database Systems',2,'2015-10-26 02:59:55','2015-12-01 23:13:57',6,1,'2015-10-01 00:00:00','2015-12-01 00:00:00'),(2,'CS188','Scalable Internet Services',4,'2015-10-26 02:59:55','2015-12-01 23:13:57',6,1,'2015-10-01 00:00:00','2015-12-01 00:00:00'),(3,'CS118','Networking',2,'2015-10-26 02:59:55','2015-12-01 23:13:57',6,1,'2015-10-01 00:00:00','2015-12-01 00:00:00'),(4,'CS174A','Computer Graphics',5,'2015-10-26 02:59:55','2015-12-01 23:13:57',6,1,'2015-10-01 00:00:00','2015-12-01 00:00:00'),(5,'CS130','Software Engineering',4,'2015-10-26 02:59:55','2015-12-01 23:13:57',6,1,'2015-10-01 00:00:00','2015-12-01 00:00:00'),(6,'CS 131','Hell on earth',3,'2015-11-03 22:47:09','2015-12-01 23:13:57',12,1,'2015-10-01 00:00:00','2015-12-01 00:00:00'),(7,'CS 132','Compiler Constuction',3,'2015-11-03 22:48:42','2015-12-01 23:13:57',14,1,'2015-10-01 00:00:00','2015-12-01 00:00:00'),(14,'cs101','basics',3,'2015-11-05 23:48:43','2015-12-01 23:13:57',8,1,'2015-10-01 00:00:00','2015-12-01 00:00:00'),(15,'CS145 ','Data Mining',3,'2015-11-08 05:49:08','2015-12-01 23:13:57',9,1,'2015-10-01 00:00:00','2015-11-08 05:53:02'),(16,'CS 181','Computing Theory',1,'2015-11-20 09:23:27','2015-12-01 23:13:57',12,1,'2015-11-20 00:00:00','2015-12-20 00:00:00'),(17,'CS137','Prototyping programming languages',2,'2015-12-01 22:59:25','2015-12-01 22:59:25',10,1,'2015-12-01 00:00:00','2016-01-01 00:00:00');
+/*!40000 ALTER TABLE `courses` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `enrollments`
@@ -85,6 +105,16 @@ CREATE TABLE `enrollments` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `enrollments`
+--
+
+LOCK TABLES `enrollments` WRITE;
+/*!40000 ALTER TABLE `enrollments` DISABLE KEYS */;
+INSERT INTO `enrollments` VALUES (1,1,2,NULL,NULL,NULL,'2015-10-26 03:01:13','2015-11-29 06:10:00',9),(2,3,2,NULL,NULL,NULL,'2015-10-26 03:01:13','2015-11-26 06:51:50',1),(3,4,2,NULL,NULL,NULL,'2015-10-26 03:01:13','2015-11-20 11:18:56',9),(6,3,1,NULL,NULL,NULL,'2015-10-26 03:02:01','2015-10-30 07:38:07',6),(7,1,3,NULL,NULL,NULL,'2015-10-26 06:20:36','2015-11-11 10:05:10',8),(8,4,3,NULL,NULL,NULL,'2015-10-26 06:20:36','2015-10-29 08:19:31',2),(9,5,3,NULL,NULL,NULL,'2015-10-26 06:20:36','2015-10-29 08:19:31',2),(11,2,4,NULL,NULL,NULL,'2015-10-29 04:51:09','2015-10-29 08:19:31',2),(12,4,4,NULL,NULL,NULL,'2015-10-29 04:51:09','2015-10-29 08:19:31',2),(13,5,4,NULL,NULL,NULL,'2015-10-29 04:51:09','2015-10-29 08:19:31',2),(14,2,5,NULL,NULL,NULL,'2015-10-29 05:17:27','2015-10-29 08:19:31',2),(15,3,5,NULL,NULL,NULL,'2015-10-29 05:17:27','2015-10-29 08:19:31',2),(16,4,5,NULL,NULL,NULL,'2015-10-29 05:17:27','2015-10-29 08:40:21',1),(19,5,1,NULL,NULL,NULL,'2015-11-05 23:39:40','2015-11-05 23:44:40',5),(20,14,4,NULL,NULL,NULL,'2015-11-05 23:48:47','2015-11-05 23:48:47',2),(21,14,3,NULL,NULL,NULL,'2015-11-19 06:13:40','2015-11-19 06:13:40',2),(22,15,3,NULL,NULL,NULL,'2015-11-19 06:13:40','2015-11-19 06:13:40',2),(23,1,1,NULL,NULL,NULL,'2015-11-19 08:26:55','2015-11-19 08:26:55',2),(24,2,1,NULL,NULL,NULL,'2015-11-19 08:26:55','2015-11-19 08:26:55',2),(25,4,1,NULL,NULL,NULL,'2015-11-20 09:21:32','2015-11-20 09:21:32',2),(27,2,3,NULL,NULL,NULL,'2015-12-01 21:23:26','2015-12-01 21:23:26',2),(28,17,1,NULL,NULL,NULL,'2015-12-01 22:59:30','2015-12-01 22:59:30',2),(29,17,3,NULL,NULL,NULL,'2015-12-01 23:00:02','2015-12-01 23:00:02',2),(30,17,4,NULL,NULL,NULL,'2015-12-01 23:04:56','2015-12-01 23:04:56',2);
+/*!40000 ALTER TABLE `enrollments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `mailboxer_conversation_opt_outs`
 --
 
@@ -104,6 +134,15 @@ CREATE TABLE `mailboxer_conversation_opt_outs` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `mailboxer_conversation_opt_outs`
+--
+
+LOCK TABLES `mailboxer_conversation_opt_outs` WRITE;
+/*!40000 ALTER TABLE `mailboxer_conversation_opt_outs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `mailboxer_conversation_opt_outs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `mailboxer_conversations`
 --
 
@@ -118,6 +157,16 @@ CREATE TABLE `mailboxer_conversations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `mailboxer_conversations`
+--
+
+LOCK TABLES `mailboxer_conversations` WRITE;
+/*!40000 ALTER TABLE `mailboxer_conversations` DISABLE KEYS */;
+INSERT INTO `mailboxer_conversations` VALUES (1,'welcome','2015-11-02 09:08:57','2015-11-02 09:12:30'),(2,'hi','2015-11-05 23:46:12','2015-11-05 23:46:12'),(3,'ff','2015-11-19 10:31:17','2015-11-20 09:32:01'),(4,'fffsfd','2015-11-20 09:18:01','2015-11-20 09:18:01');
+/*!40000 ALTER TABLE `mailboxer_conversations` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `mailboxer_notifications`
@@ -153,6 +202,16 @@ CREATE TABLE `mailboxer_notifications` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `mailboxer_notifications`
+--
+
+LOCK TABLES `mailboxer_notifications` WRITE;
+/*!40000 ALTER TABLE `mailboxer_notifications` DISABLE KEYS */;
+INSERT INTO `mailboxer_notifications` VALUES (3,NULL,'Mark Zuckerberg has invited you to join his team DashDash!','INVITE',3,'User',NULL,0,'3',NULL,NULL,'2','2015-10-29 04:52:38','2015-10-29 04:52:38',0,NULL),(4,NULL,'Itachi has accepted your invitation  to join team DashDash','SUCCESS',NULL,NULL,NULL,0,'5',NULL,NULL,NULL,'2015-10-29 05:14:12','2015-10-29 05:14:12',0,NULL),(5,NULL,'Sakura Haruno has invited you to join his team Losing Experience!','INVITE',5,'User',NULL,0,'3',NULL,NULL,'3','2015-10-29 05:19:13','2015-10-29 05:19:12',0,NULL),(7,NULL,'Bill has rejected your invitation  to join team Losing Experience','DENIED',NULL,NULL,NULL,0,'5',NULL,NULL,NULL,'2015-10-29 05:27:01','2015-10-29 05:27:01',0,NULL),(9,NULL,'Bill Gates has invited you to join his team Movie Browser!','INVITE',2,'User',NULL,0,'3',NULL,NULL,'4','2015-10-30 08:56:51','2015-10-30 08:56:51',0,NULL),(11,NULL,'Akash Malik has invited you to join his team P2P!','INVITE',1,'User',NULL,0,'3',NULL,NULL,'1','2015-10-30 21:46:06','2015-10-30 21:46:06',0,NULL),(14,NULL,'Bill has rejected your invitation  to join team Losing Experience','DENIED',NULL,NULL,NULL,0,'5',NULL,NULL,NULL,'2015-11-02 06:34:35','2015-11-02 06:34:35',0,NULL),(15,NULL,'Bill Gates has invited you to join his team Losing Experience!','INVITE',2,'User',NULL,0,'3',NULL,NULL,'3','2015-11-02 06:59:27','2015-11-02 06:59:27',0,NULL),(19,NULL,'Bill Gates has invited you to join his team Losing Experience!','INVITE',2,'User',NULL,0,'3',NULL,NULL,'3','2015-11-02 07:10:26','2015-11-02 07:10:26',0,NULL),(21,NULL,'Bill Gates has invited you to join his team P2P!','INVITE',2,'User',NULL,0,'3',NULL,NULL,'1','2015-11-02 07:18:00','2015-11-02 07:18:00',0,NULL),(24,NULL,'Bill has rejected your invitation  to join team Losing Experience','DENIED',NULL,NULL,NULL,0,'6',NULL,NULL,NULL,'2015-11-02 07:37:40','2015-11-02 07:37:40',0,NULL),(26,NULL,'Bill has rejected your invitation  to join team Losing Experience','DENIED',NULL,NULL,NULL,0,'6',NULL,NULL,NULL,'2015-11-02 07:42:59','2015-11-02 07:42:59',0,NULL),(27,NULL,'Mark Zuckerberg has expressed interest in joining your team Losing Experience !','OFFER',3,'User',NULL,0,'1',NULL,NULL,'3','2015-11-02 08:00:34','2015-11-02 08:00:34',0,NULL),(28,NULL,'Sakura Haruno has invited you to join his team Losing Experience!','INVITE',5,'User',NULL,0,'3',NULL,NULL,'3','2015-11-02 08:02:26','2015-11-02 08:02:26',0,NULL),(29,NULL,' You were accepted to the team Losing Experience','SUCCESS',NULL,NULL,NULL,0,'5',NULL,NULL,NULL,'2015-11-02 08:02:49','2015-11-02 08:02:49',0,NULL),(30,NULL,'Bill has accepted the invitation  to join team Losing Experience','SUCCESS',NULL,NULL,NULL,0,'5',NULL,NULL,NULL,'2015-11-02 08:03:44','2015-11-02 08:03:44',0,NULL),(31,NULL,'Bill has accepted the invitation  to join team Losing Experience','SUCCESS',NULL,NULL,NULL,0,'5',NULL,NULL,NULL,'2015-11-02 08:03:44','2015-11-02 08:03:44',0,NULL),(32,NULL,'Itachi has rejected your invitation  to join team Losing Experience','DENIED',NULL,NULL,NULL,0,'6',NULL,NULL,NULL,'2015-11-02 08:04:45','2015-11-02 08:04:45',0,NULL),(33,NULL,'Itachi has rejected your invitation  to join team DashDash','DENIED',NULL,NULL,NULL,0,'6',NULL,NULL,NULL,'2015-11-02 08:04:48','2015-11-02 08:04:48',0,NULL),(34,NULL,'Itachi Uchiha has expressed interest in joining your team Losing Experience !','OFFER',4,'User',NULL,0,'1',NULL,NULL,'3','2015-11-02 08:04:57','2015-11-02 08:04:57',0,NULL),(36,NULL,' Itachi was successfully added to your team Losing Experience','SUCCESS',NULL,NULL,NULL,0,'5',NULL,NULL,NULL,'2015-11-02 08:05:40','2015-11-02 08:05:40',0,NULL),(37,NULL,' You were accepted to the team Losing Experience','SUCCESS',NULL,NULL,NULL,0,'5',NULL,NULL,NULL,'2015-11-02 08:05:40','2015-11-02 08:05:40',0,NULL),(38,'Mailboxer::Message','welcome to the team. lets start discussing ideas.','welcome',3,'User',1,0,NULL,NULL,NULL,NULL,'2015-11-02 09:08:57','2015-11-02 09:08:57',0,NULL),(39,'Mailboxer::Message','sure. I\'d like that !','welcome',2,'User',1,0,NULL,NULL,NULL,NULL,'2015-11-02 09:10:44','2015-11-02 09:10:44',0,NULL),(40,'Mailboxer::Message','Me too. I like everything !','welcome',5,'User',1,0,NULL,NULL,NULL,NULL,'2015-11-02 09:11:39','2015-11-02 09:11:39',0,NULL),(41,'Mailboxer::Message','ahaha i know','welcome',2,'User',1,0,NULL,NULL,NULL,NULL,'2015-11-02 09:12:30','2015-11-02 09:12:30',0,NULL),(42,NULL,'Sakura Haruno has invited you to join his team Losing Experience!','INVITE',5,'User',NULL,0,'3',NULL,NULL,'3','2015-11-05 05:57:58','2015-11-05 05:57:58',0,NULL),(44,NULL,'Mark has accepted the invitation  to join team Losing Experience','SUCCESS',NULL,NULL,NULL,0,'5',NULL,NULL,NULL,'2015-11-05 05:58:08','2015-11-05 05:58:08',0,NULL),(45,NULL,'Mark has accepted the invitation  to join team Losing Experience','SUCCESS',NULL,NULL,NULL,0,'5',NULL,NULL,NULL,'2015-11-05 05:58:08','2015-11-05 05:58:08',0,NULL),(46,NULL,'Sakura Haruno has invited you to join his team Losing Experience!','INVITE',5,'User',NULL,0,'3',NULL,NULL,'3','2015-11-05 05:59:17','2015-11-05 05:59:17',0,NULL),(48,NULL,'Mark has accepted the invitation  to join team Losing Experience','SUCCESS',NULL,NULL,NULL,0,'5',NULL,NULL,NULL,'2015-11-05 05:59:31','2015-11-05 05:59:31',0,NULL),(49,NULL,'Mark has accepted the invitation  to join team Losing Experience','SUCCESS',NULL,NULL,NULL,0,'5',NULL,NULL,NULL,'2015-11-05 05:59:31','2015-11-05 05:59:31',0,NULL),(51,NULL,'Mark has left your team Losing Experience','TREACHERY',NULL,NULL,NULL,0,'7',NULL,NULL,NULL,'2015-11-05 05:59:38','2015-11-05 05:59:38',0,NULL),(52,NULL,'Mark has left your team Losing Experience','TREACHERY',NULL,NULL,NULL,0,'7',NULL,NULL,NULL,'2015-11-05 05:59:38','2015-11-05 05:59:38',0,NULL),(54,NULL,'Akash Malik has expressed interest in joining your team DashDash !','OFFER',1,'User',NULL,0,'1',NULL,NULL,'2','2015-11-05 23:40:11','2015-11-05 23:40:11',0,NULL),(55,NULL,' Akash was successfully added to your team DashDash','SUCCESS',NULL,NULL,NULL,0,'5',NULL,NULL,NULL,'2015-11-05 23:40:55','2015-11-05 23:40:55',0,NULL),(58,NULL,'Mark has left your team DashDash','TREACHERY',NULL,NULL,NULL,0,'7',NULL,NULL,NULL,'2015-11-05 23:41:55','2015-11-05 23:41:55',0,NULL),(60,NULL,' You were accepted to the team Movie Browser','SUCCESS',NULL,NULL,NULL,0,'5',NULL,NULL,NULL,'2015-11-05 23:43:08','2015-11-05 23:43:08',0,NULL),(62,'Mailboxer::Message','lets staert working','hi',1,'User',2,0,NULL,NULL,NULL,NULL,'2015-11-05 23:46:12','2015-11-05 23:46:12',0,NULL),(64,NULL,'Please rate Mark\'s skill performance in the team Losing Experience','RATING',3,'User',NULL,0,'10',NULL,NULL,'3','2015-11-08 06:49:43','2015-11-08 06:49:43',0,NULL),(65,NULL,'Please rate Itachi\'s skill performance in the team Losing Experience','RATING',4,'User',NULL,0,'10',NULL,NULL,'3','2015-11-08 06:49:43','2015-11-08 06:49:43',0,NULL),(66,NULL,'Please rate Sakura\'s skill performance in the team Losing Experience','RATING',5,'User',NULL,0,'10',NULL,NULL,'3','2015-11-08 06:49:43','2015-11-08 06:49:43',0,NULL),(67,NULL,'Please rate Bill\'s skill performance in the team Losing Experience','RATING',2,'User',NULL,0,'10',NULL,NULL,'3','2015-11-08 06:49:43','2015-11-08 06:49:43',0,NULL),(68,NULL,'Please rate Itachi\'s skill performance in the team Losing Experience','RATING',4,'User',NULL,0,'10',NULL,NULL,'3','2015-11-08 06:49:43','2015-11-08 06:49:43',0,NULL),(69,NULL,'Please rate Sakura\'s skill performance in the team Losing Experience','RATING',5,'User',NULL,0,'10',NULL,NULL,'3','2015-11-08 06:49:43','2015-11-08 06:49:43',0,NULL),(70,NULL,'Please rate Bill\'s skill performance in the team Losing Experience','RATING',2,'User',NULL,0,'10',NULL,NULL,'3','2015-11-08 06:49:43','2015-11-08 06:49:43',0,NULL),(71,NULL,'Please rate Mark\'s skill performance in the team Losing Experience','RATING',3,'User',NULL,0,'10',NULL,NULL,'3','2015-11-08 06:49:43','2015-11-08 06:49:43',0,NULL),(72,NULL,'Please rate Sakura\'s skill performance in the team Losing Experience','RATING',5,'User',NULL,0,'10',NULL,NULL,'3','2015-11-08 06:49:43','2015-11-08 06:49:43',0,NULL),(73,NULL,'Please rate Bill\'s skill performance in the team Losing Experience','RATING',2,'User',NULL,0,'10',NULL,NULL,'3','2015-11-08 06:49:43','2015-11-08 06:49:43',0,NULL),(74,NULL,'Please rate Mark\'s skill performance in the team Losing Experience','RATING',3,'User',NULL,0,'10',NULL,NULL,'3','2015-11-08 06:49:43','2015-11-08 06:49:43',0,NULL),(76,NULL,'Please rate Mark\'s skill performance in the team Losing Experience','RATING',3,'User',NULL,0,'10',NULL,NULL,'3','2015-11-11 10:34:21','2015-11-11 10:34:21',0,NULL),(77,NULL,'Please rate Itachi\'s skill performance in the team Losing Experience','RATING',4,'User',NULL,0,'10',NULL,NULL,'3','2015-11-11 10:34:21','2015-11-11 10:34:21',0,NULL),(78,NULL,'Please rate Sakura\'s skill performance in the team Losing Experience','RATING',5,'User',NULL,0,'10',NULL,NULL,'3','2015-11-11 10:34:21','2015-11-11 10:34:21',0,NULL),(79,NULL,'Please rate Bill\'s skill performance in the team Losing Experience','RATING',2,'User',NULL,0,'10',NULL,NULL,'3','2015-11-11 10:34:21','2015-11-11 10:34:21',0,NULL),(80,NULL,'Please rate Itachi\'s skill performance in the team Losing Experience','RATING',4,'User',NULL,0,'10',NULL,NULL,'3','2015-11-11 10:34:21','2015-11-11 10:34:21',0,NULL),(81,NULL,'Please rate Sakura\'s skill performance in the team Losing Experience','RATING',5,'User',NULL,0,'10',NULL,NULL,'3','2015-11-11 10:34:21','2015-11-11 10:34:21',0,NULL),(82,NULL,'Please rate Bill\'s skill performance in the team Losing Experience','RATING',2,'User',NULL,0,'10',NULL,NULL,'3','2015-11-11 10:34:21','2015-11-11 10:34:21',0,NULL),(83,NULL,'Please rate Mark\'s skill performance in the team Losing Experience','RATING',3,'User',NULL,0,'10',NULL,NULL,'3','2015-11-11 10:34:21','2015-11-11 10:34:21',0,NULL),(84,NULL,'Please rate Sakura\'s skill performance in the team Losing Experience','RATING',5,'User',NULL,0,'10',NULL,NULL,'3','2015-11-11 10:34:21','2015-11-11 10:34:21',0,NULL),(85,NULL,'Please rate Bill\'s skill performance in the team Losing Experience','RATING',2,'User',NULL,0,'10',NULL,NULL,'3','2015-11-11 10:34:21','2015-11-11 10:34:21',0,NULL),(86,NULL,'Please rate Mark\'s skill performance in the team Losing Experience','RATING',3,'User',NULL,0,'10',NULL,NULL,'3','2015-11-11 10:34:21','2015-11-11 10:34:21',0,NULL),(87,NULL,'Please rate Itachi\'s skill performance in the team Losing Experience','RATING',4,'User',NULL,0,'10',NULL,NULL,'3','2015-11-11 10:34:21','2015-11-11 10:34:21',0,NULL),(92,NULL,'Please rate Mark\'s skill performance in the team Losing Experience','RATING',3,'User',NULL,0,'10',NULL,NULL,'3','2015-11-19 09:14:10','2015-11-19 09:14:10',0,NULL),(93,NULL,'Please rate Itachi\'s skill performance in the team Losing Experience','RATING',4,'User',NULL,0,'10',NULL,NULL,'3','2015-11-19 09:14:10','2015-11-19 09:14:10',0,NULL),(94,NULL,'Please rate Sakura\'s skill performance in the team Losing Experience','RATING',5,'User',NULL,0,'10',NULL,NULL,'3','2015-11-19 09:14:10','2015-11-19 09:14:10',0,NULL),(95,NULL,'Please rate Bill\'s skill performance in the team Losing Experience','RATING',2,'User',NULL,0,'10',NULL,NULL,'3','2015-11-19 09:14:10','2015-11-19 09:14:10',0,NULL),(96,NULL,'Please rate Itachi\'s skill performance in the team Losing Experience','RATING',4,'User',NULL,0,'10',NULL,NULL,'3','2015-11-19 09:14:10','2015-11-19 09:14:10',0,NULL),(97,NULL,'Please rate Sakura\'s skill performance in the team Losing Experience','RATING',5,'User',NULL,0,'10',NULL,NULL,'3','2015-11-19 09:14:10','2015-11-19 09:14:10',0,NULL),(98,NULL,'Please rate Bill\'s skill performance in the team Losing Experience','RATING',2,'User',NULL,0,'10',NULL,NULL,'3','2015-11-19 09:14:11','2015-11-19 09:14:11',0,NULL),(99,NULL,'Please rate Mark\'s skill performance in the team Losing Experience','RATING',3,'User',NULL,0,'10',NULL,NULL,'3','2015-11-19 09:14:11','2015-11-19 09:14:11',0,NULL),(100,NULL,'Please rate Sakura\'s skill performance in the team Losing Experience','RATING',5,'User',NULL,0,'10',NULL,NULL,'3','2015-11-19 09:14:11','2015-11-19 09:14:11',0,NULL),(101,NULL,'Please rate Bill\'s skill performance in the team Losing Experience','RATING',2,'User',NULL,0,'10',NULL,NULL,'3','2015-11-19 09:14:11','2015-11-19 09:14:11',0,NULL),(102,NULL,'Please rate Mark\'s skill performance in the team Losing Experience','RATING',3,'User',NULL,0,'10',NULL,NULL,'3','2015-11-19 09:14:11','2015-11-19 09:14:11',0,NULL),(103,NULL,'Please rate Itachi\'s skill performance in the team Losing Experience','RATING',4,'User',NULL,0,'10',NULL,NULL,'3','2015-11-19 09:14:11','2015-11-19 09:14:11',0,NULL),(104,NULL,'Bill has left your team Losing Experience','TREACHERY',NULL,NULL,NULL,0,'7',NULL,NULL,NULL,'2015-11-19 09:19:23','2015-11-19 09:19:23',0,NULL),(105,NULL,'Bill has left your team Losing Experience','TREACHERY',NULL,NULL,NULL,0,'7',NULL,NULL,NULL,'2015-11-19 09:19:23','2015-11-19 09:19:23',0,NULL),(119,'Mailboxer::Message','ffffffffff','ff',2,'User',3,0,NULL,NULL,NULL,NULL,'2015-11-19 10:31:17','2015-11-19 10:31:17',0,NULL),(120,'Mailboxer::Message','fffffffffffffffff','ff',1,'User',3,0,NULL,NULL,NULL,NULL,'2015-11-19 10:31:47','2015-11-19 10:31:47',0,NULL),(121,'Mailboxer::Message','ffffffffffffffffffffffffffffff','ff',1,'User',3,0,NULL,NULL,NULL,NULL,'2015-11-19 10:32:22','2015-11-19 10:32:22',0,NULL),(122,'Mailboxer::Message','fuck you','ff',2,'User',3,0,NULL,NULL,NULL,NULL,'2015-11-20 09:16:40','2015-11-20 09:16:40',0,NULL),(123,'Mailboxer::Message','fuck you','fffsfd',1,'User',4,0,NULL,NULL,NULL,NULL,'2015-11-20 09:18:01','2015-11-20 09:18:01',0,NULL),(124,'Mailboxer::Message','you too','ff',1,'User',3,0,NULL,NULL,NULL,NULL,'2015-11-20 09:27:13','2015-11-20 09:27:13',0,NULL),(125,'Mailboxer::Message','fuck offf','ff',2,'User',3,0,NULL,NULL,NULL,NULL,'2015-11-20 09:29:27','2015-11-20 09:29:27',0,NULL),(126,'Mailboxer::Message','fucker','ff',2,'User',3,0,NULL,NULL,NULL,NULL,'2015-11-20 09:32:01','2015-11-20 09:32:01',0,NULL),(127,NULL,'Bill Gates has invited you to join his team ConnectUs!','INVITE',2,'User',NULL,0,'3',NULL,NULL,'6','2015-11-26 13:52:05','2015-11-26 13:52:05',0,NULL),(131,NULL,'Bill has rejected your invitation  to join team Losing Experience','DENIED',NULL,NULL,NULL,0,'6',NULL,NULL,NULL,'2015-11-29 09:17:46','2015-11-29 09:17:46',0,NULL),(133,NULL,'Akash has accepted the invitation  to join team Team1','SUCCESS',NULL,NULL,NULL,0,'5',NULL,NULL,NULL,'2015-12-01 23:01:28','2015-12-01 23:01:28',0,NULL);
+/*!40000 ALTER TABLE `mailboxer_notifications` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `mailboxer_receipts`
 --
 
@@ -178,6 +237,16 @@ CREATE TABLE `mailboxer_receipts` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `mailboxer_receipts`
+--
+
+LOCK TABLES `mailboxer_receipts` WRITE;
+/*!40000 ALTER TABLE `mailboxer_receipts` DISABLE KEYS */;
+INSERT INTO `mailboxer_receipts` VALUES (3,4,'User',3,0,0,1,NULL,'2015-10-29 04:52:38','2015-10-29 04:52:38'),(4,3,'User',4,0,0,1,NULL,'2015-10-29 05:14:12','2015-10-29 05:14:12'),(5,4,'User',5,0,0,1,NULL,'2015-10-29 05:19:12','2015-10-29 05:19:12'),(7,5,'User',7,0,0,1,NULL,'2015-10-29 05:27:01','2015-10-29 05:27:01'),(9,3,'User',9,0,0,1,NULL,'2015-10-30 08:56:51','2015-10-30 08:56:51'),(11,3,'User',11,0,0,1,NULL,'2015-10-30 21:46:06','2015-10-30 21:46:06'),(14,5,'User',14,0,0,1,NULL,'2015-11-02 06:34:35','2015-11-02 06:34:35'),(15,3,'User',15,0,0,1,NULL,'2015-11-02 06:59:27','2015-11-02 06:59:27'),(19,3,'User',19,0,0,1,NULL,'2015-11-02 07:10:26','2015-11-02 07:10:26'),(21,3,'User',21,0,0,1,NULL,'2015-11-02 07:18:00','2015-11-02 07:18:00'),(24,3,'User',24,0,0,1,NULL,'2015-11-02 07:37:40','2015-11-02 07:37:40'),(26,3,'User',26,0,0,1,NULL,'2015-11-02 07:42:59','2015-11-02 07:42:59'),(27,5,'User',27,0,0,1,NULL,'2015-11-02 08:00:34','2015-11-02 08:00:34'),(28,2,'User',28,0,0,1,NULL,'2015-11-02 08:02:26','2015-11-02 08:02:26'),(29,3,'User',29,0,0,1,NULL,'2015-11-02 08:02:49','2015-11-02 08:02:49'),(30,5,'User',30,0,0,1,NULL,'2015-11-02 08:03:44','2015-11-02 08:03:44'),(31,3,'User',31,0,0,1,NULL,'2015-11-02 08:03:44','2015-11-02 08:03:44'),(32,5,'User',32,0,0,1,NULL,'2015-11-02 08:04:45','2015-11-02 08:04:45'),(33,3,'User',33,0,0,1,NULL,'2015-11-02 08:04:48','2015-11-02 08:04:48'),(34,5,'User',34,0,0,1,NULL,'2015-11-02 08:04:57','2015-11-02 08:04:57'),(36,3,'User',36,0,0,1,NULL,'2015-11-02 08:05:40','2015-11-02 08:05:40'),(37,4,'User',37,0,0,1,NULL,'2015-11-02 08:05:40','2015-11-02 08:05:40'),(38,2,'User',38,1,0,0,'inbox','2015-11-02 09:08:57','2015-11-02 09:08:57'),(39,4,'User',38,0,0,0,'inbox','2015-11-02 09:08:57','2015-11-02 09:08:57'),(40,5,'User',38,1,0,0,'inbox','2015-11-02 09:08:57','2015-11-02 09:08:57'),(41,3,'User',38,1,0,0,'sentbox','2015-11-02 09:08:57','2015-11-02 09:08:57'),(42,4,'User',39,0,0,0,'inbox','2015-11-02 09:10:44','2015-11-02 09:10:44'),(43,5,'User',39,1,0,0,'inbox','2015-11-02 09:10:44','2015-11-02 09:10:44'),(44,3,'User',39,1,0,0,'inbox','2015-11-02 09:10:44','2015-11-02 09:10:44'),(45,2,'User',39,1,0,0,'sentbox','2015-11-02 09:10:44','2015-11-02 09:10:44'),(46,4,'User',40,0,0,0,'inbox','2015-11-02 09:11:39','2015-11-02 09:11:39'),(47,3,'User',40,1,0,0,'inbox','2015-11-02 09:11:39','2015-11-02 09:11:39'),(48,2,'User',40,1,0,0,'inbox','2015-11-02 09:11:39','2015-11-02 09:11:39'),(49,5,'User',40,1,0,0,'sentbox','2015-11-02 09:11:39','2015-11-02 09:11:39'),(50,4,'User',41,0,0,0,'inbox','2015-11-02 09:12:30','2015-11-02 09:12:30'),(51,3,'User',41,1,0,0,'inbox','2015-11-02 09:12:30','2015-11-02 09:12:30'),(52,5,'User',41,1,0,0,'inbox','2015-11-02 09:12:30','2015-11-02 09:12:30'),(53,2,'User',41,1,0,0,'sentbox','2015-11-02 09:12:30','2015-11-02 09:12:30'),(54,3,'User',42,0,0,1,NULL,'2015-11-05 05:57:58','2015-11-05 05:57:58'),(56,4,'User',44,0,0,1,NULL,'2015-11-05 05:58:08','2015-11-05 05:58:08'),(57,5,'User',45,0,0,1,NULL,'2015-11-05 05:58:08','2015-11-05 05:58:08'),(58,3,'User',46,0,0,1,NULL,'2015-11-05 05:59:17','2015-11-05 05:59:17'),(60,4,'User',48,0,0,1,NULL,'2015-11-05 05:59:31','2015-11-05 05:59:31'),(61,5,'User',49,0,0,1,NULL,'2015-11-05 05:59:31','2015-11-05 05:59:31'),(63,4,'User',51,0,0,1,NULL,'2015-11-05 05:59:38','2015-11-05 05:59:38'),(64,5,'User',52,0,0,1,NULL,'2015-11-05 05:59:38','2015-11-05 05:59:38'),(66,3,'User',54,0,0,1,NULL,'2015-11-05 23:40:11','2015-11-05 23:40:11'),(67,4,'User',55,0,0,1,NULL,'2015-11-05 23:40:55','2015-11-05 23:40:55'),(70,4,'User',58,0,0,1,NULL,'2015-11-05 23:41:55','2015-11-05 23:41:55'),(72,3,'User',60,0,0,1,NULL,'2015-11-05 23:43:08','2015-11-05 23:43:08'),(74,4,'User',62,1,0,0,'inbox','2015-11-05 23:46:12','2015-11-05 23:46:12'),(75,1,'User',62,1,0,0,'sentbox','2015-11-05 23:46:12','2015-11-05 23:46:12'),(77,2,'User',64,0,0,1,NULL,'2015-11-08 06:49:43','2015-11-08 06:49:43'),(78,2,'User',65,0,0,1,NULL,'2015-11-08 06:49:43','2015-11-08 06:49:43'),(79,2,'User',66,0,0,1,NULL,'2015-11-08 06:49:43','2015-11-08 06:49:43'),(80,3,'User',67,0,0,1,NULL,'2015-11-08 06:49:43','2015-11-08 06:49:43'),(81,3,'User',68,0,0,1,NULL,'2015-11-08 06:49:43','2015-11-08 06:49:43'),(82,3,'User',69,0,0,1,NULL,'2015-11-08 06:49:43','2015-11-08 06:49:43'),(83,4,'User',70,0,0,0,NULL,'2015-11-08 06:49:43','2015-11-08 06:49:43'),(84,4,'User',71,0,0,0,NULL,'2015-11-08 06:49:43','2015-11-08 06:49:43'),(85,4,'User',72,0,0,0,NULL,'2015-11-08 06:49:43','2015-11-08 06:49:43'),(86,5,'User',73,0,0,0,NULL,'2015-11-08 06:49:43','2015-11-08 06:49:43'),(87,5,'User',74,0,0,0,NULL,'2015-11-08 06:49:43','2015-11-08 06:49:43'),(89,2,'User',76,0,0,1,NULL,'2015-11-11 10:34:21','2015-11-11 10:34:21'),(90,2,'User',77,0,0,1,NULL,'2015-11-11 10:34:21','2015-11-11 10:34:21'),(91,2,'User',78,0,0,1,NULL,'2015-11-11 10:34:21','2015-11-11 10:34:21'),(92,3,'User',79,0,0,1,NULL,'2015-11-11 10:34:21','2015-11-11 10:34:21'),(93,3,'User',80,0,0,1,NULL,'2015-11-11 10:34:21','2015-11-11 10:34:21'),(94,3,'User',81,0,0,1,NULL,'2015-11-11 10:34:21','2015-11-11 10:34:21'),(95,4,'User',82,0,0,0,NULL,'2015-11-11 10:34:21','2015-11-11 10:34:21'),(96,4,'User',83,0,0,0,NULL,'2015-11-11 10:34:21','2015-11-11 10:34:21'),(97,4,'User',84,0,0,0,NULL,'2015-11-11 10:34:21','2015-11-11 10:34:21'),(98,5,'User',85,0,0,0,NULL,'2015-11-11 10:34:21','2015-11-11 10:34:21'),(99,5,'User',86,0,0,0,NULL,'2015-11-11 10:34:21','2015-11-11 10:34:21'),(100,5,'User',87,0,0,0,NULL,'2015-11-11 10:34:21','2015-11-11 10:34:21'),(105,2,'User',92,0,0,0,NULL,'2015-11-19 09:14:10','2015-11-19 09:14:10'),(106,2,'User',93,0,0,0,NULL,'2015-11-19 09:14:10','2015-11-19 09:14:10'),(107,2,'User',94,0,0,0,NULL,'2015-11-19 09:14:10','2015-11-19 09:14:10'),(108,3,'User',95,0,0,0,NULL,'2015-11-19 09:14:10','2015-11-19 09:14:10'),(109,3,'User',96,0,0,0,NULL,'2015-11-19 09:14:10','2015-11-19 09:14:10'),(110,3,'User',97,0,0,0,NULL,'2015-11-19 09:14:10','2015-11-19 09:14:10'),(111,4,'User',98,0,0,0,NULL,'2015-11-19 09:14:11','2015-11-19 09:14:11'),(112,4,'User',99,0,0,0,NULL,'2015-11-19 09:14:11','2015-11-19 09:14:11'),(113,4,'User',100,0,0,0,NULL,'2015-11-19 09:14:11','2015-11-19 09:14:11'),(114,5,'User',101,0,0,0,NULL,'2015-11-19 09:14:11','2015-11-19 09:14:11'),(115,5,'User',102,0,0,0,NULL,'2015-11-19 09:14:11','2015-11-19 09:14:11'),(116,5,'User',103,0,0,0,NULL,'2015-11-19 09:14:11','2015-11-19 09:14:11'),(117,3,'User',104,0,0,0,NULL,'2015-11-19 09:19:23','2015-11-19 09:19:23'),(118,4,'User',105,0,0,0,NULL,'2015-11-19 09:19:23','2015-11-19 09:19:23'),(132,1,'User',119,1,1,0,'inbox','2015-11-19 10:31:17','2015-11-19 10:31:17'),(133,2,'User',119,1,0,0,'sentbox','2015-11-19 10:31:17','2015-11-19 10:31:17'),(134,2,'User',120,1,0,0,'inbox','2015-11-19 10:31:47','2015-11-19 10:31:47'),(135,1,'User',120,1,1,0,'sentbox','2015-11-19 10:31:47','2015-11-19 10:31:47'),(136,2,'User',121,1,0,0,'inbox','2015-11-19 10:32:22','2015-11-19 10:32:22'),(137,1,'User',121,1,1,0,'sentbox','2015-11-19 10:32:22','2015-11-19 10:32:22'),(138,1,'User',122,1,1,0,'inbox','2015-11-20 09:16:40','2015-11-20 09:16:40'),(139,2,'User',122,1,0,0,'sentbox','2015-11-20 09:16:40','2015-11-20 09:16:40'),(140,2,'User',123,1,0,0,'inbox','2015-11-20 09:18:01','2015-11-20 09:18:01'),(141,1,'User',123,1,0,0,'sentbox','2015-11-20 09:18:01','2015-11-20 09:18:01'),(142,2,'User',124,1,0,0,'inbox','2015-11-20 09:27:13','2015-11-20 09:27:13'),(143,1,'User',124,1,1,0,'sentbox','2015-11-20 09:27:13','2015-11-20 09:27:13'),(144,1,'User',125,1,1,0,'inbox','2015-11-20 09:29:27','2015-11-20 09:29:27'),(145,2,'User',125,1,0,0,'sentbox','2015-11-20 09:29:27','2015-11-20 09:29:27'),(146,1,'User',126,1,1,0,'inbox','2015-11-20 09:32:01','2015-11-20 09:32:01'),(147,2,'User',126,1,0,0,'sentbox','2015-11-20 09:32:01','2015-11-20 09:32:01'),(148,5,'User',127,0,0,0,NULL,'2015-11-26 13:52:05','2015-11-26 13:52:05'),(152,5,'User',131,0,0,0,NULL,'2015-11-29 09:17:46','2015-11-29 09:17:46'),(154,3,'User',133,0,0,0,NULL,'2015-12-01 23:01:28','2015-12-01 23:01:28');
+/*!40000 ALTER TABLE `mailboxer_receipts` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `schema_migrations`
 --
 
@@ -189,6 +258,16 @@ CREATE TABLE `schema_migrations` (
   UNIQUE KEY `unique_schema_migrations` (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `schema_migrations`
+--
+
+LOCK TABLES `schema_migrations` WRITE;
+/*!40000 ALTER TABLE `schema_migrations` DISABLE KEYS */;
+INSERT INTO `schema_migrations` VALUES ('20151016215913'),('20151016220142'),('20151016220606'),('20151017042558'),('20151017063200'),('20151020070902'),('20151020070903'),('20151020070904'),('20151020095649'),('20151024035144'),('20151024035441'),('20151024035738'),('20151027095431'),('20151029061104'),('20151029061632'),('20151029062058'),('20151029062420'),('20151029062617'),('20151101220614'),('20151102052906'),('20151102053741'),('20151102054758'),('20151105060728'),('20151108053048'),('20151108053432'),('20151108054307'),('20151108055531'),('20151108083720'),('20151111105132'),('20151111105506'),('20151111110928');
+/*!40000 ALTER TABLE `schema_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `skill_ratings`
@@ -214,6 +293,16 @@ CREATE TABLE `skill_ratings` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `skill_ratings`
+--
+
+LOCK TABLES `skill_ratings` WRITE;
+/*!40000 ALTER TABLE `skill_ratings` DISABLE KEYS */;
+INSERT INTO `skill_ratings` VALUES (1,1,1,3,'2015-10-26 02:56:48','2015-10-26 03:02:53',0),(2,2,1,1.25,'2015-10-26 02:56:48','2015-11-19 09:06:13',1),(3,3,1,3,'2015-10-26 02:56:48','2015-11-05 23:45:31',0),(4,4,1,0,'2015-10-26 02:56:48','2015-10-26 02:56:48',0),(5,5,1,0,'2015-10-26 02:56:48','2015-10-26 02:56:48',0),(6,6,1,1,'2015-10-26 02:56:48','2015-10-26 03:02:53',0),(7,7,1,3,'2015-10-26 02:56:48','2015-11-05 23:45:31',0),(8,8,1,1,'2015-10-26 02:56:48','2015-10-26 03:02:53',0),(9,9,1,0,'2015-10-26 02:56:49','2015-10-26 02:56:49',0),(10,1,2,3,'2015-10-26 02:57:50','2015-10-26 06:22:49',0),(11,2,2,1.3125,'2015-10-26 02:57:50','2015-11-19 09:38:10',2),(12,3,2,3,'2015-10-26 02:57:50','2015-10-26 06:22:49',0),(13,4,2,3,'2015-10-26 02:57:50','2015-11-11 11:36:02',1),(14,5,2,0,'2015-10-26 02:57:50','2015-10-26 02:57:50',0),(15,6,2,0,'2015-10-26 02:57:50','2015-10-26 02:57:50',0),(16,7,2,0,'2015-10-26 02:57:50','2015-10-26 02:57:50',0),(17,8,2,0,'2015-10-26 02:57:50','2015-10-26 02:57:50',0),(18,9,2,0,'2015-10-26 02:57:50','2015-10-26 02:57:50',0),(19,1,3,3,'2015-10-26 06:20:28','2015-11-11 09:56:31',0),(20,2,3,0.25,'2015-10-26 06:20:28','2015-11-11 11:38:09',1),(21,3,3,0,'2015-10-26 06:20:28','2015-11-11 09:56:31',0),(22,4,3,0.75,'2015-10-26 06:20:28','2015-11-11 11:38:09',1),(23,5,3,0,'2015-10-26 06:20:28','2015-11-11 09:56:31',0),(24,6,3,0,'2015-10-26 06:20:28','2015-11-11 09:56:31',0),(25,7,3,0,'2015-10-26 06:20:28','2015-11-11 09:56:31',0),(26,8,3,0,'2015-10-26 06:20:28','2015-11-11 09:56:31',0),(27,9,3,0,'2015-10-26 06:20:28','2015-11-11 09:56:31',0),(28,1,4,3,'2015-10-29 04:50:35','2015-10-29 04:50:57',0),(29,2,4,2.390625,'2015-10-29 04:50:35','2015-11-19 09:20:15',3),(30,3,4,3,'2015-10-29 04:50:35','2015-10-29 04:50:57',0),(31,4,4,2.8125,'2015-10-29 04:50:35','2015-11-19 09:20:15',3),(32,5,4,0,'2015-10-29 04:50:35','2015-10-29 04:50:35',0),(33,6,4,3,'2015-10-29 04:50:35','2015-10-29 04:50:57',0),(34,7,4,1,'2015-10-29 04:50:35','2015-10-29 04:50:57',0),(35,8,4,0,'2015-10-29 04:50:35','2015-10-29 04:50:35',0),(36,9,4,0,'2015-10-29 04:50:35','2015-10-29 04:50:35',0),(37,1,5,0,'2015-10-29 05:15:39','2015-10-29 05:15:39',0),(38,2,5,0,'2015-10-29 05:15:39','2015-11-11 11:38:39',3),(39,3,5,0,'2015-10-29 05:15:39','2015-10-29 05:15:39',0),(40,4,5,0.328125,'2015-10-29 05:15:39','2015-11-11 11:38:39',3),(41,5,5,0,'2015-10-29 05:15:39','2015-10-29 05:15:39',0),(42,6,5,0,'2015-10-29 05:15:39','2015-10-29 05:15:39',0),(43,7,5,0,'2015-10-29 05:15:39','2015-10-29 05:15:39',0),(44,8,5,0,'2015-10-29 05:15:39','2015-10-29 05:15:39',0),(45,9,5,1,'2015-10-29 05:15:39','2015-10-29 05:17:13',0);
+/*!40000 ALTER TABLE `skill_ratings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `skills`
 --
 
@@ -228,6 +317,16 @@ CREATE TABLE `skills` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `skills`
+--
+
+LOCK TABLES `skills` WRITE;
+/*!40000 ALTER TABLE `skills` DISABLE KEYS */;
+INSERT INTO `skills` VALUES (1,'C++','2015-10-26 02:49:14','2015-10-26 02:49:14'),(2,'Python','2015-10-26 02:49:14','2015-10-26 02:49:14'),(3,'C','2015-10-26 02:49:14','2015-10-26 02:49:14'),(4,'Java','2015-10-26 02:49:14','2015-10-26 02:49:14'),(5,'iOS','2015-10-26 02:49:14','2015-10-26 02:49:14'),(6,'Android','2015-10-26 02:49:14','2015-10-26 02:49:14'),(7,'JavaScript','2015-10-26 02:49:14','2015-10-26 02:49:14'),(8,'Backend','2015-10-26 02:49:14','2015-10-26 02:49:14'),(9,'Frontend','2015-10-26 02:49:14','2015-10-26 02:49:14');
+/*!40000 ALTER TABLE `skills` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `teachings`
@@ -245,6 +344,15 @@ CREATE TABLE `teachings` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `teachings`
+--
+
+LOCK TABLES `teachings` WRITE;
+/*!40000 ALTER TABLE `teachings` DISABLE KEYS */;
+/*!40000 ALTER TABLE `teachings` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `team_memberships`
@@ -265,8 +373,18 @@ CREATE TABLE `team_memberships` (
   KEY `index_team_memberships_on_team_id` (`team_id`),
   CONSTRAINT `fk_rails_5aba9331a7` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   CONSTRAINT `fk_rails_61c29b529e` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `team_memberships`
+--
+
+LOCK TABLES `team_memberships` WRITE;
+/*!40000 ALTER TABLE `team_memberships` DISABLE KEYS */;
+INSERT INTO `team_memberships` VALUES (4,4,2,NULL,'2015-10-29 05:14:12','2015-10-29 05:14:12'),(5,5,3,NULL,'2015-10-29 05:18:59','2015-10-29 05:18:59'),(6,2,4,NULL,'2015-10-30 08:56:38','2015-10-30 08:56:38'),(12,4,3,NULL,'2015-11-02 08:05:40','2015-11-02 08:05:40'),(13,1,2,NULL,'2015-11-05 23:40:55','2015-11-05 23:40:55'),(14,3,3,NULL,'2015-11-08 06:47:22','2015-11-08 06:47:22'),(15,3,5,NULL,'2015-11-19 06:13:59','2015-11-19 06:13:59'),(19,1,1,NULL,'2015-11-19 10:12:49','2015-11-19 10:12:49'),(21,3,7,NULL,'2015-12-01 23:00:36','2015-12-01 23:00:36'),(22,1,7,NULL,'2015-12-01 23:01:28','2015-12-01 23:01:28'),(23,1,6,NULL,'2015-12-03 09:03:39','2015-12-03 09:03:39'),(25,1,4,NULL,'2015-12-03 09:18:32','2015-12-03 09:18:32');
+/*!40000 ALTER TABLE `team_memberships` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `teams`
@@ -290,6 +408,16 @@ CREATE TABLE `teams` (
   CONSTRAINT `fk_rails_360501fe0e` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `teams`
+--
+
+LOCK TABLES `teams` WRITE;
+/*!40000 ALTER TABLE `teams` DISABLE KEYS */;
+INSERT INTO `teams` VALUES (1,3,'P2P','Bittorrent clone','2015-10-26 07:06:45','2015-11-19 10:13:02','join or die',1,NULL),(2,5,'DashDash','Autocomplete parallized BASH','2015-10-26 07:39:06','2015-11-05 23:41:55','join or die',4,'https://github.com/tsleeve/teamup2'),(3,4,'Losing Experience','Join this team so you can lose definitely. Thats what I\'m best at.. being a loser','2015-10-29 05:18:59','2015-12-01 22:47:37','join or die',5,'https://github.com/tsleeve'),(4,1,'Movie Browser','MovieActor Database','2015-10-30 08:56:38','2015-10-30 08:56:38','join or die',2,NULL),(5,15,'some team','team','2015-11-19 06:13:59','2015-11-19 06:13:59','team',3,NULL),(6,4,'ConnectUs','dfgd','2015-11-26 12:14:30','2015-12-03 09:06:36','join or die',1,NULL),(7,17,'Team1','ehh','2015-12-01 23:00:36','2015-12-01 23:00:36','join or die',3,NULL);
+/*!40000 ALTER TABLE `teams` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `users`
@@ -330,6 +458,16 @@ CREATE TABLE `users` (
   UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'akash5malik@gmail.com','$2a$10$Ia0Op0tShf8q8jospAMK6OXdej/lecgDW3Y7qcZd6xhf4hqkPxsYO',NULL,NULL,NULL,17,'2015-12-01 23:12:00','2015-12-01 23:01:24','169.232.85.84','169.232.85.84','2015-10-26 02:46:14','2015-12-01 23:12:00','Akash','Malik',704332974,'Computer Science',3,NULL,NULL,NULL,NULL,NULL,0,10,1),(2,'billgates@hotmail.com','$2a$10$U.25YNugy9wWtoc0TVVMxOZ2gJbeR0ndccnzP3YWNadVB1JgXPtxa',NULL,NULL,NULL,27,'2015-12-03 08:40:29','2015-11-20 09:04:14','169.232.85.84','169.232.85.84','2015-10-26 02:57:50','2015-12-03 08:40:29','Bill','Gates',111222333,'Computer Science',4,'Young-Bill-Gates.jpg','image/jpeg',70394,'2015-10-27 10:16:55',NULL,0,10,3),(3,'zuckerberg@facebook.com','$2a$10$5p8JpkuN2glSBsm3sp5NGu3U/Oow7juSl5iYHCNAnRf0uQKKCGXaa',NULL,NULL,NULL,35,'2015-12-03 09:46:50','2015-12-01 23:05:30','169.232.85.84','169.232.85.84','2015-10-26 06:20:28','2015-12-03 09:46:50','Mark','Zuckerberg',555555555,'Computer Science',4,'mark.jpg','image/jpeg',43591,'2015-10-27 10:14:19',NULL,0,10,1),(4,'uchiha@naruto.com','$2a$10$H4hVnfGFeZ2emed9ItdMH.iOVaoPWS9ehqRvVN1fgxosnSaqU4raW',NULL,NULL,NULL,7,'2015-12-01 23:03:48','2015-11-11 11:43:19','169.232.85.84','169.232.85.84','2015-10-29 04:50:35','2015-12-01 23:03:48','Itachi','Uchiha',111111111,'Advanced Ninja Studies',3,NULL,NULL,NULL,NULL,NULL,0,10,3),(5,'sakura@naruto.com','$2a$10$./OfXSg2n2aLHdUbchU15.lidqATBm7pCO7WlXvErkPRL2jYELsPC',NULL,NULL,NULL,13,'2015-11-19 09:16:13','2015-11-05 06:00:11','169.232.85.84','169.232.85.84','2015-10-29 05:15:38','2015-11-19 09:16:13','Sakura','Haruno',123456789,'Sucking ',1,'Sakura_Haruno.PNG','image/png',89513,'2015-10-29 05:16:56',NULL,0,7,2);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -340,4 +478,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-02  5:31:21
+-- Dump completed on 2015-12-03 21:04:00
