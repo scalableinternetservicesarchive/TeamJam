@@ -75,7 +75,7 @@
     <!-- ================================================= -->
 
     <!-- User signin and update profile -->
-    <session name="user_editprofile" probability="100" type="ts_http">
+    <session name="user_editprofile" probability="50" type="ts_http">
 
       <!-- start out at the dashboard. -->
       <request>
@@ -108,7 +108,7 @@
         </http>
       </request>
 
-      <thinktime value="2" random="true"></thinktime>
+      <thinktime value="15" random="true"></thinktime>
 
       <!-- view notification -->
       <request>
@@ -160,7 +160,7 @@
     <!-- 7. log out -->
     <!-- ================================================= -->
 
-    <session name="user_joincourse" probability="0" type="ts_http">
+    <session name="user_joincourse" probability="50" type="ts_http">
 
       <!-- start out at the dashboard. -->
       <request>
