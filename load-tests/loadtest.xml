@@ -18,14 +18,14 @@
     <arrivalphase phase="1" duration="30" unit="second">
       <users arrivalrate="1" unit="second"></users>
     </arrivalphase>
-<!--    <arrivalphase phase="2" duration="30" unit="second">
+    <arrivalphase phase="2" duration="30" unit="second">
       <users arrivalrate="2" unit="second"></users>
     </arrivalphase>
     <arrivalphase phase="3" duration="30" unit="second">
       <users arrivalrate="4" unit="second"></users>
     </arrivalphase>
 
-   <arrivalphase phase="4" duration="30" unit="second">
+   <!--<arrivalphase phase="4" duration="30" unit="second">
      <users arrivalrate="8" unit="second"></users>
    </arrivalphase>
    <arrivalphase phase="5" duration="30" unit="second">
@@ -60,12 +60,8 @@
 
   <!-- ================================================= -->
   <!--                     Sessions Weight               -->
-  <!-- [user_signup]                  0                  -->
-  <!-- [user_signin]                  43                 -->
-  <!-- [user_createcourse]            1                  -->
-  <!-- [user_joincourse]              30                 -->
-  <!-- [user_creatteam]               15                 -->
-  <!-- [invite]                       11                 -->
+  <!-- [user_editprofile]             50                 -->
+  <!-- [user_joincourse]              50                 -->
   <!-- ================================================= -->
 
   <sessions>
@@ -79,7 +75,7 @@
     <!-- ================================================= -->
 
     <!-- User signin and update profile -->
-    <session name="user_signin" probability="0" type="ts_http">
+    <session name="user_editprofile" probability="100" type="ts_http">
 
       <!-- start out at the dashboard. -->
       <request>
@@ -153,85 +149,18 @@
 
     <!-- ================================================= -->
     <!--                      SESSION                      -->
-    <!--                    user_createcourse              -->
-    <!-- ================================================= -->
-    <!-- 1. signin -->
-    <!-- 2. create course -->
-    <!-- 3. log out -->
-    <!-- ================================================= -->
-
-    <!--<session name="user_createcourse" probability="1" type="ts_http">
-      <request>
-        <http url='/' version='1.1' method='GET'></http>
-      </request>
-
-      <thinktime value="2" random="true"></thinktime>
-
-      <setdynvars sourcetype="random_number" start="1000" end="9999999">
-        <var name="random_user_id" />
-      </setdynvars>
-
-      <setdynvars sourcetype="random_number" start="1" end="10">
-        <var name="random_team_size" />
-      </setdynvars>
-
-      <setdynvars sourcetype="random_number" start="1" end="20">
-        <var name="random_time_commitment" />
-      </setdynvars>
-
-      <request subst="true">
-        <http
-          url='/users/sign_in'
-          version='1.1'
-          method='POST'
-          contents='user%5Bemail%5D=user%%_random_user_id%%%40email.com&amp;
-          user%5Bpassword%5D=password%%_random_user_id%%&amp;
-          user%5Bremember_me%5D=0&amp;
-          commit=Log+in'>
-        </http>
-      </request>
-
-      <thinktime value="2" random="true"></thinktime>
-
-      <request subst="true">
-        <http
-          url='/courses'
-          version='1.1'
-          method='POST'
-          contents='course%5Bname%5D=course%%_random_user_id%%&amp;
-          course%5Bdescription%5D=coursedescription%%_random_user_id%%&amp;
-          course%5Bmax_members%5D=%%_random_team_size%%&amp;
-          course%5Bmin_time_commitment%5D=%%_random_time_commitment%%&amp;
-          course%5Bstart_date%281i%29%5D=2015&amp;
-          course%5Bstart_date%282i%29%5D=11&amp;
-          course%5Bstart_date%283i%29%5D=13&amp;
-          course%5Bend_date%281i%29%5D=2015&amp;
-          course%5Bend_date%282i%29%5D=11&amp;
-          course%5Bend_date%283i%29%5D=13&amp;
-          commit=Create'>
-        </http>
-      </request>
-
-      <thinktime value="2" random="true"></thinktime>
-
-      <request subst="true">
-        <http url='/users/sign_out' version='1.1' method='GET'></http>
-      </request>
-
-    </session>-->
-
-    <!-- ================================================= -->
-    <!--                      SESSION                      -->
     <!--                    user_joincourse                -->
     <!-- ================================================= -->
     <!-- 1. signin -->
-    <!-- 2. view course -->
+    <!-- 2. view courses -->
     <!-- 3. join course -->
-    <!-- 4. view course info -->
-    <!-- 5. log out -->
+    <!-- 4. sort student in course -->
+    <!-- 5. create team -->
+    <!-- 6. invite student -->
+    <!-- 7. log out -->
     <!-- ================================================= -->
 
-    <session name="user_joincourse" probability="100" type="ts_http">
+    <session name="user_joincourse" probability="0" type="ts_http">
 
       <!-- start out at the dashboard. -->
       <request>
@@ -310,151 +239,25 @@
       </request>
 
       <request subst="true">
-        <dyn_variable name="create_team_number" re='href=\"/courses/%%_random_courseid%%\"&gt;.*&lt;/a&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=\"/teams/(.*)\"&gt;'/>
-        <dyn_variable name="invite_user_id" re='&lt;tr class=\"st\"&gt;&lt;td&gt;&lt;a class=\"st-name\" href=\"/users/(.*)\"'/>
+        <dyn_variable name="create_team_number" re='&lt;li&gt;&lt;a href=\"/courses/.*\"&gt;.*&lt;/a&gt;\s*&lt;ul&gt;\s*&lt;li&gt;&lt;a href=\"/teams/(.*)\"&gt;.*&lt;/a&gt;\s*&lt;/ul&gt;'/>
+        <dyn_variable name="invite_user_id" re='class=\"st-name\" href=\"/users/(.*)\"'/>
         <http url='/courses/%%_random_courseid%%' version='1.1' method='GET'/>
       </request>
 
-      <request subst="true">
-         <http url='/users/invite?id=%%_invite_user_id%%&amp;team_id=%%_create_team_number%%' version='1.1' method='GET'></http>
-      </request>
+      <if var="create_team_number" neq="">
+        <if var="invite_user_id" neq="">
+          <transaction name="invite">
+            <request subst="true">
+              <http url='/users/invite?id=%%_invite_user_id%%&amp;team_id=%%_create_team_number%%' version='1.1' method='POST'></http>
+            </request>
+          </transaction>
+        </if>
+      </if>
 
       <request>
         <http url='/users/sign_out' version='1.1' method='DELETE'></http>
       </request>
 
     </session>
-
-    <!-- ================================================= -->
-    <!--                      SESSION                      -->
-    <!--                    user_createteam                -->
-    <!-- ================================================= -->
-    <!-- 1. signin -->
-    <!-- 2. view course -->
-    <!-- 3. join course -->
-    <!-- 4. create team -->
-    <!-- 5. log out -->
-    <!-- ================================================= -->
-<!--
-    <session name="user_createteam" probability="15" type="ts_http">
-
-      <request>
-        <http url='/' version='1.1' method='GET'></http>
-      </request>
-
-      <thinktime value="2" random="true"></thinktime>
-
-      <setdynvars sourcetype="random_number" start="1000" end="9999999">
-        <var name="random_user_id" />
-      </setdynvars>
-
-      <setdynvars sourcetype="random_number" start="100000000" end="999999999">
-        <var name="random_user_id_update" />
-      </setdynvars>
-
-      <request subst="true">
-        <http
-          url='/users/sign_in'
-          version='1.1'
-          method='POST'
-          contents='user%5Bemail%5D=user%%_random_user_id%%%40email.com&amp;
-          user%5Bpassword%5D=password%%_random_user_id%%&amp;
-          user%5Bremember_me%5D=0&amp;commit=Log+in'>
-        </http>
-      </request>
-
-      <thinktime value="2" random="true"></thinktime>
-
-      <setdynvars sourcetype="random_number" start="1" end="15">
-        <var name="random_courseid" />
-      </setdynvars>
-
-      <request>
-        <http url='/join_classes/index' version='1.1' method='GET'></http>
-      </request>
-
-      <thinktime value="2" random="true"></thinktime>
-
-      <request>
-        <http url='/courses/%%_random_courseid%%' version='1.1' method='GET'></http>
-      </request>
-
-      <thinktime value="2" random="true"></thinktime>
-
-      <request>
-        <http url='/courses/%%_random_courseid%%/join' version='1.1' method='POST'></http>
-      </request>
-
-      <thinktime value="2" random="true"></thinktime>
-
-      <request subst="true">
-        <http
-          url='/courses/%%_random_courseid%%/teams'
-          version='1.1'
-          method='POST'
-          contents='team%5Bname%5D=team%%_random_courseid%%by%%_random_user_id%%&amp;
-          team%5Bdescription%5D=course%%_random_courseid%%&amp;
-          team%5Bpasscode%5D=0&amp;commit=Create+Team'>
-        </http>
-      </request>
-
-      <thinktime value="2" random="true"></thinktime>
-
-      <request subst="true">
-        <http url='/users/sign_out' version='1.1' method='GET'></http>
-      </request>
-
-    </session>-->
-
-    <!-- ================================================= -->
-    <!--                      SESSION                      -->
-    <!--                       invite                      -->
-    <!-- ================================================= -->
-    <!-- 1. invite -->
-    <!-- ================================================= -->
-
-    <!--<session name="invite" probability="0" type="ts_http">
-
-      <request>
-        <http url='/' version='1.1' method='GET'></http>
-      </request>
-
-      <thinktime value="2" random="true"></thinktime>
-
-      <setdynvars sourcetype="random_number" start="800000000" end="900000000">
-        <var name="random_user_id" />
-      </setdynvars>
-
-      <setdynvars sourcetype="random_number" start="1" end="4">
-        <var name="random_year"/>
-      </setdynvars>
-
-      <request subst="true">
-        <http
-          url='/users'
-          version='1.1'
-          method='POST'
-          contents='user%5bemail%5d=user%%_random_user_id%%%40gmail%2Ecom&amp;user%5bpassword%5d=88888888&amp;user%5bpassword_confirmation%5d=88888888&amp;user%5bfirst_name%5d=user%%_random_user_id%%&amp;user%5bsid%5d=%%_random_user_id%%&amp;user%5bmajor%5d=Computer+Science&amp;user%5byear%5d=%%_random_year%%&amp;commit=Sign+up'>
-        </http>
-      </request>
-
-      <thinktime value="2" random="true"></thinktime>
-
-      <setdynvars sourcetype="random_number" start="1" end="5">
-        <var name="user_id" />
-      </setdynvars>
-
-      <setdynvars sourcetype="random_number" start="1" end="15">
-        <var name="team_id" />
-      </setdynvars>
-
-      <thinktime value="2" random="true"></thinktime>
-
-      <request subst="true">
-         <http url='/users/invite?id=%%_user_id%%&amp;team_id=%_team_id%' version='1.1' method='GET'></http>
-      </request>
-
-    </session>-->
-
   </sessions>
 </tsung>
