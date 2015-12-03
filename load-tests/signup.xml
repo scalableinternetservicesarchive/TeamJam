@@ -9,7 +9,7 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="team-up-multiple-medium-2144393871.us-west-2.elb.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-34-163-97.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
@@ -23,29 +23,27 @@
     <arrivalphase phase="3" duration="30" unit="second">
       <users arrivalrate="4" unit="second"></users>
     </arrivalphase>
-<!--
-   <arrivalphase phase="4" duration="30" unit="second">
+    <arrivalphase phase="4" duration="30" unit="second">
      <users arrivalrate="8" unit="second"></users>
-   </arrivalphase>
-   <arrivalphase phase="5" duration="30" unit="second">
+    </arrivalphase>
+    <arrivalphase phase="5" duration="30" unit="second">
      <users arrivalrate="16" unit="second"></users>
-   </arrivalphase>
-   <arrivalphase phase="6" duration="30" unit="second">
+    </arrivalphase>
+    <arrivalphase phase="6" duration="30" unit="second">
      <users arrivalrate="32" unit="second"></users>
-   </arrivalphase>
-   <arrivalphase phase="7" duration="30" unit="second">
+    </arrivalphase>
+    <arrivalphase phase="7" duration="30" unit="second">
      <users arrivalrate="64" unit="second"></users>
-   </arrivalphase>
-   <arrivalphase phase="8" duration="30" unit="second">
+    </arrivalphase>
+    <arrivalphase phase="8" duration="30" unit="second">
      <users arrivalrate="128" unit="second"></users>
-   </arrivalphase>
-   <arrivalphase phase="9" duration="30" unit="second">
+    </arrivalphase>
+    <arrivalphase phase="9" duration="30" unit="second">
      <users arrivalrate="256" unit="second"></users>
-   </arrivalphase>
-   <arrivalphase phase="10" duration="30" unit="second">
+    </arrivalphase>
+    <arrivalphase phase="10" duration="30" unit="second">
      <users arrivalrate="512" unit="second"></users>
-   </arrivalphase>
--->
+    </arrivalphase>
   </load>
 
   <options>
@@ -60,6 +58,88 @@
   <sessions>
     <!-- ================================================= -->
     <!--                      SESSION                      -->
+    <!--                   edit profile                    -->
+    <!-- ================================================= -->
+    <!-- 1. signin -->
+    <!-- 2. update forfile -->
+    <!-- 3. log out -->
+    <!-- ================================================= -->
+
+    <!-- User signin and update profile -->
+    <session name="user_editprofile" weight="50" type="ts_http">
+
+      <!-- start out at the dashboard. -->
+      <request>
+        <http url='/' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait for up to 2 seconds, user is looking at posts -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <setdynvars sourcetype="random_number" start="100000000" end="200000000">
+        <var name="random_user_id" />
+      </setdynvars>
+
+      <setdynvars sourcetype="random_number" start="200000000" end="300000000">
+        <var name="random_user_id_update" />
+      </setdynvars>
+
+      <setdynvars sourcetype="random_number" start="1" end="4">
+        <var name="random_year"/>
+      </setdynvars>
+
+      <!-- signin -->
+      <!-- Sign Up -->
+      <request subst="true">
+        <http
+          url='/users'
+          version='1.1'
+          method='POST'
+          contents='user%5bemail%5d=user%%_random_user_id%%%40gmail%2Ecom&amp;user%5bpassword%5d=88888888&amp;user%5bpassword_confirmation%5d=88888888&amp;user%5bfirst_name%5d=user%%_random_user_id%%&amp;user%5bsid%5d=%%_random_user_id%%&amp;user%5bmajor%5d=Computer+Science&amp;user%5byear%5d=%%_random_year%%&amp;commit=Sign+up'>
+        </http>
+      </request>
+
+      <thinktime value="15" random="true"></thinktime>
+
+      <!-- view notification -->
+      <request>
+        <http url='/notifications' version='1.1' method='GET'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- view message -->
+      <request>
+        <http url='/mailbox/inbox' version='1.1' method='GET'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- edit profile: get form-->
+      <request>
+        <http url='/users/edit' version='1.1' method='GET'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request subst="true">
+        <http
+          url='/users'
+          version='1.1'
+          method='POST'
+          contents='user%5Bemail%5D=useremail%%_random_user_id_update%%%40email.com&amp;user%5Bfirst_name%5D=userfirst%%_random_user_id_update%%&amp;user%5Blast_name%5D=userlast%%_random_user_id_update%%&amp;user%5Bgithub%5D=usergithub%%_random_user_id_update%%&amp;user%5Bsid%5D=%%_random_user_id_update%%&amp;user%5Bmajor%5D=usermajor%%_random_user_id_update%%&amp;user%5Bpassword%5D=&amp;user%5Bpassword_confirmation%5D=&amp;user%5Bcurrent_password%5D=88888888&amp;commit=Update'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <request>
+        <http url='/users/sign_out' version='1.1' method='DELETE'></http>
+      </request>
+
+    </session>
+
+    <!-- ================================================= -->
+    <!--                      SESSION                      -->
     <!--                    create course                  -->
     <!-- ================================================= -->
     <!-- 1. sign up user -->
@@ -69,7 +149,7 @@
     <!-- 5. invite people -->
     <!-- 6. sign out -->
     <!-- ================================================= -->
-    <session name="loadtest" type="ts_http" weight="100">
+    <session name="user_create_course" type="ts_http" weight="100">
 
       <!-- start out at the dashboard. -->
       <request>
@@ -84,7 +164,7 @@
         <var name="random_year"/>
       </setdynvars>
 
-      <setdynvars sourcetype="random_number" start="1000" end="9999999">
+      <setdynvars sourcetype="random_number" start="400000000" end="500000000">
         <var name="random_user" />
       </setdynvars>
 
@@ -127,40 +207,32 @@
 
       <thinktime value="2" random="true"></thinktime>
 
-      <!-- Get a list of available courses -->
-      <request>
-        <dyn_variable name="first_available_course" re='input type=\"checkbox\" value=\"(.*)\" name'/>
-        <http url='/join_classes/index' version='1.1' method='GET'></http>
-      </request>
-
-      <thinktime value="2" random="true"></thinktime>
-
       <!-- Join the first available courses -->
-      <if var="first_available_course" neq="">
+      <!-- <if var="first_available_course" neq="">
         <request subst="true">
           <http url='/join_classes/join_courses' version='1.1' method='POST' contents='all_courses%5B1%5D=%%_first_available_course%%&amp;commit=Join+Courses'></http>
-        </request>
+        </request> -->
 
         <!-- Go to the course page, get create team page -->
-        <request subst="true">
+        <!-- <request subst="true">
           <http url='/courses/%%_first_available_course%%/teams/new' version='1.1' method='GET'></http>
-        </request>
+        </request> -->
 
         <!-- Create a new team -->
-        <request subst="true">
+        <!-- <request subst="true">
           <http url='/courses/%%_first_available_course%%/teams' version='1.1' method='POST' contents='team%5Bname%5D=team%%_random_user%%&amp;team%5Bdescription%5D=Team+created+by+user%%_random_user%%&amp;team%5Bpasscode%5D=88888888&amp;commit=Create+Team'></http>
         </request>
 
-        <thinktime value="2" random="true"></thinktime>
+        <thinktime value="2" random="true"></thinktime> -->
 
         <!-- Go back to course page, get a random classmates -->
-        <request subst="true">
+        <!-- <request subst="true">
           <dyn_variable name="invite_url" re='href=\"/users/invite\?(.*)\"&lt;\r'/>
           <http url='/courses/%%_first_available_course%%' version='1.1' method='GET'></http>
-        </request>
+        </request> -->
 
       <!-- end of if   -->
-      </if>
+      <!-- </if> -->
 
       <thinktime value="2" random="true"></thinktime>
 
@@ -173,15 +245,121 @@
 
     <!-- ================================================= -->
     <!--                      SESSION                      -->
-    <!--                    join course                    -->
+    <!--                    user_joincourse                -->
     <!-- ================================================= -->
-    <!-- 1. sign up user  -->
-    <!-- 2. join a course    -->
-    <!-- 3. express interest  -->
-    <!-- 4. sign out -->
+    <!-- 1. signin -->
+    <!-- 2. view courses -->
+    <!-- 3. join course -->
+    <!-- 4. sort student in course -->
+    <!-- 5. create team -->
+    <!-- 6. invite student -->
+    <!-- 7. log out -->
     <!-- ================================================= -->
-    <!-- <session>
 
-    </session> -->
+    <session name="user_joincourse" weight="50" type="ts_http">
+
+      <!-- start out at the dashboard. -->
+      <request>
+        <http url='/' version='1.1' method='GET'></http>
+      </request>
+
+      <!-- wait for up to 2 seconds, user is looking at posts -->
+      <thinktime value="2" random="true"></thinktime>
+
+      <setdynvars sourcetype="random_number" start="300000000" end="400000000">
+        <var name="random_user_id" />
+      </setdynvars>
+
+      <setdynvars sourcetype="random_number" start="1" end="4">
+        <var name="random_year"/>
+      </setdynvars>
+
+      <!-- signin -->
+      <!-- Sign Up -->
+      <request subst="true">
+        <http
+          url='/users'
+          version='1.1'
+          method='POST'
+          contents='user%5bemail%5d=user%%_random_user_id%%%40gmail%2Ecom&amp;user%5bpassword%5d=88888888&amp;user%5bpassword_confirmation%5d=88888888&amp;user%5bfirst_name%5d=user%%_random_user_id%%&amp;user%5bsid%5d=%%_random_user_id%%&amp;user%5bmajor%5d=Computer+Science&amp;user%5byear%5d=%%_random_year%%&amp;commit=Sign+up'>
+        </http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- <setdynvars sourcetype="random_number" start="1" end="5">
+        <var name="random_courseid" />
+      </setdynvars> -->
+
+      <!-- Get a list of available courses -->
+      <request>
+        <dyn_variable name="random_courseid" re='input type=\"checkbox\" value=\"(.*)\" name'/>
+        <http url='/join_classes/index' version='1.1' method='GET'></http>
+      </request>
+
+      <thinktime value="2" random="true"></thinktime>
+
+      <if var="random_courseid" neq="">
+
+        <request subst="true">
+          <http url='/courses/%%_random_courseid%%' version='1.1' method='GET'></http>
+        </request>
+
+        <thinktime value="2" random="true"></thinktime>
+
+        <!-- join course-->
+        <request subst="true">
+          <http url='/courses/%%_random_courseid%%/join' version='1.1' method='POST' contents='_method=post'></http>
+        </request>
+
+        <thinktime value="2" random="true"></thinktime>
+
+        <request subst="true">
+          <dyn_variable name="order_skill_id" re='class=\"btn btn-sm btn-default\" href=\"/courses/%%_random_courseid%%?order_skill=(.*)\"'/>
+          <dyn_variable name="order_skill_id2" re='&lt;a class=\"btn btn-sm btn-default\" href=\"/courses/%%_random_courseid%%?order_skill=(.*)\"&gt;.*&lt;/a&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;'/>
+          <http url='/courses/%%_random_courseid%%' version='1.1' method='GET'/>
+        </request>
+
+        <thinktime value="2" random="true"></thinktime>
+
+        <request subst="true">
+          <http url='/courses/%%_random_courseid%%?order_skill=%%_order_skill_id%%' version='1.1' method='GET'></http>
+        </request>
+
+        <thinktime value="2" random="true"></thinktime>
+
+        <request subst="true">
+          <http url='/courses/%%_random_courseid%%?order_skill=%%_order_skill_id2%%' version='1.1' method='GET'></http>
+        </request>
+
+        <thinktime value="2" random="true"></thinktime>
+
+        <request subst="true">
+          <http url='/courses/%%_random_courseid%%/teams' version='1.1' method='POST' contents='team%5Bname%5D=team%%_random_user_id%%&amp;team%5Bdescription%5D=Team+created+by+user%%_random_user_id%%+for+course%%_random_courseid%%&amp;team%5Bpasscode%5D=88888888&amp;commit=Create+Team'></http>
+        </request>
+
+        <request subst="true">
+          <dyn_variable name="create_team_number" re='&lt;li&gt;&lt;a href=\"/courses/.*\"&gt;.*&lt;/a&gt;\s*&lt;ul&gt;\s*&lt;li&gt;&lt;a href=\"/teams/(.*)\"&gt;.*&lt;/a&gt;\s*&lt;/ul&gt;'/>
+          <dyn_variable name="invite_user_id" re='class=\"st-name\" href=\"/users/(.*)\"'/>
+          <http url='/courses/%%_random_courseid%%' version='1.1' method='GET'/>
+        </request>
+
+        <if var="create_team_number" neq="">
+          <if var="invite_user_id" neq="">
+            <transaction name="invite">
+              <request subst="true">
+                <http url='/users/invite?id=%%_invite_user_id%%&amp;team_id=%%_create_team_number%%' version='1.1' method='POST'></http>
+              </request>
+            </transaction>
+          </if>
+        </if>
+      </if>
+
+
+      <request>
+        <http url='/users/sign_out' version='1.1' method='DELETE'></http>
+      </request>
+
+    </session>
   </sessions>
 </tsung>
