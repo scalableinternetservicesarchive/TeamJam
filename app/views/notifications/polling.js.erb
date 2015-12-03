@@ -1,0 +1,6 @@
+$("#notif-count").html("<%= @num_notif %>");
+<% if(@num_notif > 0) %>
+$("#notif-count").show();
+<% else %>
+$("#notif-count").hide();
+<% end %>

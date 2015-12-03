@@ -18,13 +18,24 @@
         </div>
         <nav class="collapse navbar-collapse navbar-ex1-collapse">
         	<% if user_signed_in? %>
+          <script>
+            $(document).ready(function() {
+
+    setInterval(function () {
+      $.ajax({
+  url: '/notifications/polling',
+  data: { },
+  async: true,
+  dataType: 'script'
+});
+    } , 5000);
+});
+          </script>
 						<ul class="nav navbar-nav navbar-right">
               <% num_notif = current_user.mailbox.notifications.count %>
               <li><%= link_to(notifications_path) do %>
                 Notifications
-               <% if num_notif > 0 %>
-               <span class="label label-danger"><%= num_notif %></span>
-              <% end %>
+               <span class="label label-danger" id="notif-count" style="display: none;"><%= num_notif %></span>
                 <% end %>
                </li>
               <li><%= link_to mailbox_inbox_path do %>

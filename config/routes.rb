@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get 'join_classes/index'
   post 'join_classes/join_courses'
-
+  get 'notifications/polling', as: :notif_poll
 
   get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox
   get "mailbox/sent" => "mailbox#sent", as: :mailbox_sent

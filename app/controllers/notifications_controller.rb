@@ -2,6 +2,14 @@ class NotificationsController < ApplicationController
   def index
     @notifications = current_user.mailbox.notifications.paginate(:page => params[:page], :per_page => 10)
   end
+  
+  def polling
+   @num_notif = current_user.mailbox.notifications.count
+     respond_to do |format|
+   # format.html
+    format.js
+     end
+  end
 
   def is_number? string
   true if Float(string) rescue false
