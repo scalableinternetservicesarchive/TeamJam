@@ -118,7 +118,8 @@ $('.popover-markup > .trigger').popover({
       <%= render partial: "student", collection: @ordered_students, locals: {current_course: @course, show_team: true, current_team_owner_id: false , current_team: @user_course_team} %>
 
     </table>
-    <%= will_paginate @ordered_students %>
+    <%= paginate @ordered_students %>
+
 <% else %>
         <h3> Enroll to view students </h3>
       <% end %>
@@ -127,7 +128,8 @@ $('.popover-markup > .trigger').popover({
   <div id="teams" class="tab-pane fade">
     <% if @enrolled %>
     <%= render :partial => "teams/team", :collection => @teams, locals: {current_course: @course, user_course_team: @user_course_team} %>
-    <%= will_paginate @teams %>
+    <%= paginate @teams %>
+
     <% if @user_course_team == false %>
     <div class="pull-left">
     <%= link_to 'Create a Team', new_course_team_path(@course) , class: "btn btn-primary"%>

@@ -87,7 +87,7 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-    @teams = @course.teams.paginate(:page => params[:page], :per_page => 10)
+    @teams = @course.teams.page params[:page]  #.paginate(:page => params[:page], :per_page => 10)
     @enrolled = false
     @instr = false
     inst = User.find_by_id(@course.instructor_id.to_i)
@@ -101,7 +101,7 @@ class CoursesController < ApplicationController
     @user_course_team = current_user.find_course_team(@course)
     @time = current_user.enrollments.where(course_id: @course.id).first.time_commitment
     end
-    @ordered_students = @course.students.paginate(:page => params[:page], :per_page => 30)
+    @ordered_students = @course.students #.page params[:page]   #.paginate(:page => params[:page], :per_page => 30)
     if(params[:order_skill].present?)
       students_ids = @ordered_students.collect{ |st| st.id }
       id = params[:order_skill]
@@ -111,11 +111,12 @@ class CoursesController < ApplicationController
           ratings = SkillRating.where(skill_id: id).where("user_id IN (?)", students_ids).order(rating: :desc) #order by individual skills
       end
       if id.to_i == -2
-        @ordered_students = @course.students.sort_by{|obj| obj.overall_rating(params[:id])}.reverse!.paginate(:page => params[:page], :per_page => 30)
+        @ordered_students = @course.students.sort_by{|obj| obj.overall_rating(params[:id])}.reverse! #.page params[:page]    #.paginate(:page => params[:page], :per_page => 30)
       else
-          @ordered_students = ratings.collect{|r| User.find(r.user_id)}.paginate(:page => params[:page], :per_page => 30)
+          @ordered_students = ratings.collect{|r| User.find(r.user_id)} #.page params[:page]   #.paginate(:page => params[:page], :per_page => 30)
       end
     end
+    @ordered_students = Kaminari.paginate_array(@ordered_students).page(params[:page]).per(1)
   end
 
   def course_params

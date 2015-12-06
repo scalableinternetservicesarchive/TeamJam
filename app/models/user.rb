@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   require 'matrix'
+  paginates_per 10
+  max_paginates_per 50
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

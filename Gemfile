@@ -23,8 +23,10 @@ gem 'paperclip', '~> 4.3', '>= 4.3.1'
 gem 'd3-rails', '~> 3.5', '>= 3.5.6'
 # db transfer
 gem 'yaml_db', github: 'jetthoughts/yaml_db', ref: 'fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba'
-gem 'will_paginate', '~> 3.0', '>= 3.0.7'
+#gem 'will_paginate', '~> 3.0', '>= 3.0.7'
 #gem 'rails-erd', '~> 1.4', '>= 1.4.4'
+
+gem 'kaminari'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
