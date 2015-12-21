@@ -1,0 +1,2 @@
+module PreviousCourseHelper
+end

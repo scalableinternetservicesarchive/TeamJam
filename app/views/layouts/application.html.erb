@@ -48,6 +48,7 @@
               <li> <%= link_to 'My Profile', user_path(current_user) %> </li>
               <li> <%= link_to 'Create Course', new_course_path %> </li>
               <li> <%= link_to 'Join Course', {:controller => '/join_classes', :action => 'index'} %> </li>
+              <li> <%= link_to 'Previous Course', {:controller => '/previous_course', :action => 'show'} %> </li>
               <li> <%= link_to 'Edit Account', edit_user_registration_path %></li>
                <li> <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
 						</ul>

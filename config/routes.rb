@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  get 'previous_course/show'
+
   post 'users/invite'
 
   get 'skills/edit', as: :edit_skills
@@ -15,6 +17,7 @@ Rails.application.routes.draw do
   get "mailbox/sent" => "mailbox#sent", as: :mailbox_sent
   get "mailbox/trash" => "mailbox#trash", as: :mailbox_trash
 
+  get 'previous_course/show'
   resources :conversations do
     member do
       post :reply
