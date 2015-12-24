@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TeamUp</title>
+  <title>TeamJam</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -11,6 +11,12 @@
   <header class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-inner">
       <div class="container">
+        <style>
+        .navbar { min-height:49px;   }
+        .navbar .navbar-brand{ padding: 0 12px;font-size: 18px;line-height: 49px;height: 49px; }
+        .navbar .navbar-nav > li > a {  padding-top: 0px; padding-bottom: 0px; line-height: 49px;}
+        </style>
+
         <div id="logo" class="navbar-brand">
           <%= link_to(root_path) do %>
           <span style="color:white">Team<span style="color:red">JAM </span></span>
@@ -31,7 +37,7 @@
     } , 5000);
 });
           </script>
-						<ul class="nav navbar-nav navbar-right">
+						<ul class="nav navbar-nav navbar-right" style="white-space: nowrap;">
               <% num_notif = current_user.mailbox.notifications.count %>
               <li><%= link_to(notifications_path) do %>
                 Notifications
