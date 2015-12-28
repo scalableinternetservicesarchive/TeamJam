@@ -1,2 +1,25 @@
-<h1>PreviousCourse#show</h1>
-<p>Find me in app/views/previous_course/show.html.erb</p>
+<ul>
+        <% courses_app = @prev_courses %>
+        <% teams_app = current_user.teams %>
+        <% course_team_app = Hash.new %>
+        <% courses_app.each do |course| %>
+        	<% teams_app.each do |team|  %>
+            	<%  if team.course == course  %>
+            		<%  course_team_app[course] =  team  %>
+              	<%  end  %>
+        	<%  end  %>
+        <% end  %>
+        <% courses_app.each do |course| %>
+        	<% if course_team_app.has_key?(course) %>
+            	<% team = course_team_app[course] %>
+                <li><%= link_to course.name, course %>
+                <ul>
+                	<li><%= link_to team.name, team %>
+                </ul>
+                </li>
+            <% else %>
+            	<li> <%= link_to course.name, course %></li>
+            <% end  %>
+        <% end  %>
+</ul>
+

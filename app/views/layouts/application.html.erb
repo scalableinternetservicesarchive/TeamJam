@@ -13,7 +13,7 @@
       <div class="container">
         <style>
         .navbar { min-height:49px;   }
-        .navbar .navbar-brand{ padding: 0 12px;font-size: 18px;line-height: 49px;height: 49px; }
+        .navbar .navbar-brand{ margin-left: -40px !important ;padding: 0 12px;font-size: 18px;line-height: 49px;height: 49px; }
         .navbar .navbar-nav > li > a {  padding-top: 0px; padding-bottom: 0px; line-height: 49px;}
         </style>
 
@@ -39,12 +39,14 @@
           </script>
 						<ul class="nav navbar-nav navbar-right" style="white-space: nowrap;">
               <% num_notif = current_user.mailbox.notifications.count %>
-              <li><%= link_to(notifications_path) do %>
+              <% if num_notif > 0 %>
+                <li><%= link_to(notifications_path) do %>
                 Notifications
-               <span class="label label-danger" id="notif-count" style="display: none;"><%= num_notif %></span>
+                <span class="label label-danger" id="notif-count" style="display: none;"><%= num_notif %></span>
                 <% end %>
+              <% end %>
                </li>
-              <li><%= link_to mailbox_inbox_path do %>
+              <li id="notif"><%= link_to mailbox_inbox_path do %>
                 Messages
                 <% if unread_messages_count > 0 %>
                 <span class="label label-danger"><%=unread_messages_count%></span>
@@ -72,7 +74,7 @@
                <li class="sidebar-brand">
                         Your Classes
                 </li>
-              <% courses_app = current_user.courses %>
+              <% courses_app = current_user.courses.where("end_date > ?", DateTime.now) %>
              <% teams_app = current_user.teams %>
              <% course_team_app = Hash.new %>
              <% courses_app.each do |course| %>
@@ -107,8 +109,6 @@
 		                    <% flash.each do |name, msg| %>
 			                    <%= content_tag(:div, msg, class: "alert alert-info") %>
 		                        <% end %>
-
-
 				                      <%= yield %>
                       </div>
                 </div>
