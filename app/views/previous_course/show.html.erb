@@ -1,25 +1,17 @@
-<ul>
-        <% courses_app = @prev_courses %>
-        <% teams_app = current_user.teams %>
-        <% course_team_app = Hash.new %>
-        <% courses_app.each do |course| %>
-        	<% teams_app.each do |team|  %>
-            	<%  if team.course == course  %>
-            		<%  course_team_app[course] =  team  %>
-              	<%  end  %>
-        	<%  end  %>
-        <% end  %>
-        <% courses_app.each do |course| %>
-        	<% if course_team_app.has_key?(course) %>
-            	<% team = course_team_app[course] %>
-                <li><%= link_to course.name, course %>
-                <ul>
-                	<li><%= link_to team.name, team %>
-                </ul>
-                </li>
-            <% else %>
-            	<li> <%= link_to course.name, course %></li>
-            <% end  %>
-        <% end  %>
-</ul>
+<table class="table table-hover">
+	<% @prev_courses.each do |course| %>
+  	<tr>
+    <td>
+	<h3><%= link_to course.name, course_path(course) %></h3>
+       	<p><small><%= course.description %></small> </p>
+       	<span class="label label-default"> <%= course.max_members %> per team </span> &nbsp;
+      	<span class="label label-default"> <%= course.min_time_commitment %> hrs/wk </span> &nbsp;
+    <% course.skills.each do |sk| %>
+      	<span class="label label-default"> <%= sk.name %> </span> &nbsp;
+    <% end %>
+    </td>
+  	</tr>
+	<% end %>
+</table>
+
 
