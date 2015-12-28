@@ -87,7 +87,7 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-    @teams = @course.teams.page(params[:team_tab_page]).per(1)  
+    @teams = @course.teams.page(params[:team_tab_page]).per(5)  
     @enrolled = false
     @instr = false
     inst = User.find_by_id(@course.instructor_id.to_i)
@@ -116,7 +116,7 @@ class CoursesController < ApplicationController
           @ordered_students = ratings.collect{|r| User.find(r.user_id)} 
       end
     end
-    @ordered_students = Kaminari.paginate_array(@ordered_students).page(params[:classmate_tab_page]).per(1)
+    @ordered_students = Kaminari.paginate_array(@ordered_students).page(params[:classmate_tab_page]).per(15)
   end
 
   def course_params
