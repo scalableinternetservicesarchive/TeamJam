@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TeamUp</title>
+  <title>TeamJam</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -11,6 +11,12 @@
   <header class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
     <div class="navbar-inner">
       <div class="container">
+        <style>
+        .navbar { min-height:49px;   }
+        .navbar .navbar-brand{ margin-left: -40px !important ;padding: 0 12px;font-size: 18px;line-height: 49px;height: 49px; }
+        .navbar .navbar-nav > li > a {  padding-top: 0px; padding-bottom: 0px; line-height: 49px;}
+        </style>
+
         <div id="logo" class="navbar-brand">
           <%= link_to(root_path) do %>
           <span style="color:white">Team<span style="color:red">JAM </span></span>
@@ -31,14 +37,16 @@
     } , 5000);
 });
           </script>
-						<ul class="nav navbar-nav navbar-right">
+						<ul class="nav navbar-nav navbar-right" style="white-space: nowrap;">
               <% num_notif = current_user.mailbox.notifications.count %>
-              <li><%= link_to(notifications_path) do %>
+              <% if num_notif > 0 %>
+                <li><%= link_to(notifications_path) do %>
                 Notifications
-               <span class="label label-danger" id="notif-count" style="display: none;"><%= num_notif %></span>
+                <span class="label label-danger" id="notif-count" style="display: none;"><%= num_notif %></span>
                 <% end %>
+              <% end %>
                </li>
-              <li><%= link_to mailbox_inbox_path do %>
+              <li id="notif"><%= link_to mailbox_inbox_path do %>
                 Messages
                 <% if unread_messages_count > 0 %>
                 <span class="label label-danger"><%=unread_messages_count%></span>
@@ -48,6 +56,7 @@
               <li> <%= link_to 'My Profile', user_path(current_user) %> </li>
               <li> <%= link_to 'Create Course', new_course_path %> </li>
               <li> <%= link_to 'Join Course', {:controller => '/join_classes', :action => 'index'} %> </li>
+              <li> <%= link_to 'Previous Course', {:controller => '/previous_course', :action => 'show'} %> </li>
               <li> <%= link_to 'Edit Account', edit_user_registration_path %></li>
                <li> <%= link_to 'Sign Out', destroy_user_session_path, :method => :delete %></li>
 						</ul>
@@ -65,7 +74,7 @@
                <li class="sidebar-brand">
                         Your Classes
                 </li>
-              <% courses_app = current_user.courses %>
+              <% courses_app = current_user.courses.where("end_date > ?", DateTime.now) %>
              <% teams_app = current_user.teams %>
              <% course_team_app = Hash.new %>
              <% courses_app.each do |course| %>
@@ -100,8 +109,6 @@
 		                    <% flash.each do |name, msg| %>
 			                    <%= content_tag(:div, msg, class: "alert alert-info") %>
 		                        <% end %>
-
-
 				                      <%= yield %>
                       </div>
                 </div>

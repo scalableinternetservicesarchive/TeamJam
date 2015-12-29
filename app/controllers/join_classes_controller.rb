@@ -1,6 +1,6 @@
 class JoinClassesController < ApplicationController
   def index
-    @all_course = Course.all
+    @all_course = Course.all.where("end_date > ?", DateTime.now)
   end
 
   def join_courses

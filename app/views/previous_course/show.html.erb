@@ -1,0 +1,17 @@
+<table class="table table-hover">
+	<% @prev_courses.each do |course| %>
+  	<tr>
+    <td>
+	<h3><%= link_to course.name, course_path(course) %></h3>
+       	<p><small><%= course.description %></small> </p>
+       	<span class="label label-default"> <%= course.max_members %> per team </span> &nbsp;
+      	<span class="label label-default"> <%= course.min_time_commitment %> hrs/wk </span> &nbsp;
+    <% course.skills.each do |sk| %>
+      	<span class="label label-default"> <%= sk.name %> </span> &nbsp;
+    <% end %>
+    </td>
+  	</tr>
+	<% end %>
+</table>
+
+
